@@ -1,0 +1,55 @@
+.post-page {
+    max-width: 70%;
+    margin: auto;
+}
+
+h3 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: tomato;
+}
+
+.postpage-image img{
+    width: 100%;
+    height: 100%;
+}
+
+.post-title {
+    padding-bottom: 1.3rem;
+    padding-top: 1.2rem;
+}
+
+.post-title h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.post-title h4 {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.post-title span {
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.post-content {
+    line-height: 25px;
+    max-width: 80%;
+    font-size: large;
+    font-weight: 300;
+}
+
+
+
+@media screen and (max-width:960px) {
+    .post-page {
+        max-width: 90%;
+    }
+    
+    .postpage-image img {
+        width: 100%;
+        height: 100%;
+    }
+}

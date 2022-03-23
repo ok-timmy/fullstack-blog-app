@@ -1,0 +1,37 @@
+.publish {
+    width: 80%;
+    margin: auto;
+    padding: 1rem 1rem;
+    position: relative;
+}
+
+.publish-form {
+    width: 100%;
+    display: block;
+}
+
+textarea {
+    height: 250px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    font-weight: 300;
+    padding: 0.3rem 0.3rem;
+    margin-top: 1rem;
+}
+
+button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: rgb(88, 13, 117);
+    color: rgb(255, 255, 255);
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px 5px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:960px) {
+    button{
+        position: unset;
+    }
+}

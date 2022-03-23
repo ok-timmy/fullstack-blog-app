@@ -1,0 +1,30 @@
+main {
+    background-color: wheat;
+    color: rgb(46, 45, 45);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main div {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+main div p {
+    font-size: medium;
+    font-weight: 600;
+}
+
+main div button {
+    background-color: lightseagreen;
+    color: white;
+    padding: 0.8rem 1rem;
+    margin-top: 20px;
+    border-radius: 20px 10px;
+    cursor: pointer;
+}

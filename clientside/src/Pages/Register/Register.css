@@ -1,0 +1,33 @@
+label {
+    font-size: 20px;
+}
+
+form {
+    margin: 0 20px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+
+form div input {
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    font-size: large;
+}
+
+form div input:focus {
+    border-bottom: rgb(78, 78, 78) 1px solid;
+}
+
+.submitBtn {
+    cursor: pointer;
+    width: 100%;
+    margin: 1rem auto;
+    align-content: center;
+    padding: 10px 0;
+}

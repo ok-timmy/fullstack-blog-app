@@ -1,0 +1,99 @@
+.blog-section {
+    padding: 1rem 0.8rem;
+   display: inline-flex;
+}
+
+.blogs {
+    columns: 3 250px;
+    gap: 15px;
+    width: 72%;
+    height: 100%;
+}
+
+.card {
+    width: auto;
+    height: 100%;
+    display: block;
+    border: 2px solid rgb(252, 244, 244);
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px 0px rgba(161,153,153,0.6);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(161,153,153,0.6);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(161,153,153,0.6);;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+}
+
+.card-image {
+    width: inherit;
+    height: inherit;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+}
+
+.category {
+    margin: 10px 10px;
+}
+
+.category button {
+    background-color: crimson;
+    color: white;
+    padding: 5px 10px;
+    outline: none;
+    border-radius: 5px 10px;
+}
+.card-details .class-header {
+    font-size: large;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+.card-details p {
+    font-size: small;
+    padding: 10px 10px;
+}
+
+.card-details h5 {
+    font-size: small;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+}
+
+.card-details  span {
+    font-size: small;
+    justify-content: center;
+    padding: 5px 10px;
+}
+
+.categories {
+    width: auto;
+    margin: 0 auto;
+}
+
+.more-btn button{
+    background-color: lightcoral;
+    color: white;
+    justify-content: center;
+    padding: 10px 10px;
+    border-radius: 10px 5px;
+    cursor: pointer;
+}
+
+.more-btn button:hover {
+    background-color: rgb(207, 60, 60);
+}
+
+@media screen and (max-width: 600px){
+    .blog-section {
+        padding: 1rem 0.8rem;
+       display: block;
+    }
+
+    .blogs {
+        columns: 3;
+        width: 100%;
+    }
+}
