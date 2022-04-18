@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Blogs.css"
+import imageOne from "../../assets/asset-1.webp"
 
 function Blogs() {
   return (
@@ -7,7 +8,7 @@ function Blogs() {
     <div className="blogs">
         <div className="card">
             <div className="card-image">
-            <img src={require("../Images/luxury-purple-color-cylinder-pedestal-podium-product-presentation-3d-rendering_41470-4246.webp")} alt={"Image"}/>
+            <img src={imageOne} alt={"post-img"}/>
             </div>
             <div className="category"><button>Sports</button></div>
             <div className="card-details">
@@ -23,7 +24,7 @@ function Blogs() {
         </div>
         <div className="card">
             <div className="card-image">
-            <img src={require("../Images/luxury-purple-color-cylinder-pedestal-podium-product-presentation-3d-rendering_41470-4246.webp")} alt={"Image"}/>
+            <img src={imageOne} alt={"post-img"}/>
             </div>
             <div className="category"><button>Sports</button></div>
             <div className="card-details">
@@ -39,7 +40,7 @@ function Blogs() {
         </div>
         <div className="card">
             <div className="card-image">
-                <img src={require("../Images/luxury-purple-color-cylinder-pedestal-podium-product-presentation-3d-rendering_41470-4246.webp")} alt={"Image"}/>
+                <img src={imageOne} alt={"post-img"}/>
             </div>
             <div className="category"><button>Sports</button></div>
             <div className="card-details">

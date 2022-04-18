@@ -4,7 +4,7 @@ import "./Login.css";
 
 const Loginbox = styled.div`
 	width: 25rem;
-	height: 100%;
+	height: 40rem;
     background-color: rgb(247, 239, 239);
 	margin: 50px auto;
 	border-radius: 10px;
@@ -21,14 +21,17 @@ const Heading = styled.h2`
 `;
 
 function Login() {
-	useEffect( function fetchData() {
-		const response =  fetch("http://localhost:8000/post/allposts");
-		const data = response.json();
 
-		console.log(data);
-		
-	}, []);
-
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await fetch("http://localhost:8000/post/allposts");
+			const data = response.json();
+	
+			console.log(data);}
+			fetchData();
+	},
+	[])
+	
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const handleInput = (e) => {

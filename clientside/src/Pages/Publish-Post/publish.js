@@ -9,7 +9,7 @@ function Publish() {
         <div><input type="text" id="title" placeholder="Type Your Article Title" /></div>
         <div><textarea placeholder="Type your article content Here...." /></div>
 
-        <button type="submit">Publish</button>
+        <button type="submit" className='submit-btn'>Publish</button>
       </form>
     </div>
   )

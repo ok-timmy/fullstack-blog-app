@@ -7,8 +7,8 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import Blogpage from '../Pages/Blogs Page/Blogpage';
-import Home from '../Pages/Home/Home';
+import Blogpage from '../../Pages/Blogs Page/Blogpage';
+import Home from '../../Pages/Home/Home';
 
 const WholeHead = styled.div`
 display: flex;
@@ -43,17 +43,17 @@ function Header() {
                 </ul>
             </nav>
 
-            <Routes>
-          {/* <Route path="/about">
+            {/* <Routes>
+          <Route path="/about">
             <About />
-          </Route> */}
+          </Route>
           <Route path="/blog">
             <Blogpage />
           </Route>
           <Route exact path="/">
             <Home/>
           </Route>
-        </Routes>
+        </Routes> */}
         </HeaderCenter>
         </Router>
         <HeaderRight>
