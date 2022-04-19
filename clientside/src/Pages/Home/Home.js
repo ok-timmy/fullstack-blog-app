@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "../../Components/Header/Header";
-import Publish from "../Publish-Post/publish";
+// import Content from "../Content Page/Content";
+// import Publish from "../Publish-Post/publish";
 // import Blogs from '../../Components/Blogs/Blogs';
-// import Blogpage from "../Blogs Page/Blogpage";
+import Blogpage from "../Blogs Page/Blogpage";
 // import Newsletter from "../../Components/Newletter/Newsletter";
 // import Register from "../Register/Register";
 import "./Home.css";
@@ -22,7 +23,9 @@ function Home() {
           <button className="start">Start Now</button>
         </div>
       </main>
-	  <Publish/>
+	  <Blogpage/>
+	  {/* <Content/> */}
+	  {/* <Publish/> */}
 	  {/* <Register/> */}
 	  {/* <Login/> */}
       {/* <Blogs/>
