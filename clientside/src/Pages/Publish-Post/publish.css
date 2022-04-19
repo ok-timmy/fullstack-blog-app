@@ -1,22 +1,56 @@
 .publish {
-    width: 80%;
-    margin: auto;
-    padding: 1rem 1rem;
     position: relative;
+    margin: 2rem auto;
 }
 
 .publish-form {
     width: 100%;
-    display: block;
+    display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+}
+
+div label {
+    font-size: large;
+    font-weight: 200;
+    padding-bottom: 10px;
+}
+
+.author, .title {
+    width: 100%;
+    padding: 10px 10px;
+    font-size: large;
+    font-weight: 200;
+    margin-bottom: 10px;
+}
+
+select {
+    margin-bottom: 20px;
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+option{
+    color: rgb(8, 8, 8);
+}
+
+.post-img {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 textarea {
-    height: 250px;
+    height: 200px;
+    width: 40rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: large;
     font-weight: 300;
     padding: 0.3rem 0.3rem;
-    margin-top: 1rem;
 }
 
 .submit-btn {
@@ -33,5 +67,9 @@ textarea {
 @media screen and (max-width:960px) {
     .submit-btn{
         position: unset;
+        margin-top: 1rem;
+    }
+    textarea{
+        width: 100%;
     }
 }

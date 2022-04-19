@@ -1,9 +1,8 @@
-label {
-    font-size: 20px;
-}
+
 
 form {
     margin: 0 20px;
+    padding: 0.2rem 0;
 }
 
 form div {
@@ -12,14 +11,24 @@ form div {
     margin-bottom: 10px;
 }
 
+form div label {
+    padding-bottom: 5px;
+    font-size: large;
+    font-weight: 300
+}
 
 form div input {
     border: none;
     outline: none;
     padding: 5px 10px;
     font-size: large;
-    font-weight: 400;
+    font-weight: 200;
     padding: 10px 10px;
+}
+
+form div input::placeholder{
+    font-size: medium;
+    color: rgb(201, 201, 202);
 }
 
 form div input:focus {
@@ -29,7 +38,26 @@ form div input:focus {
 .submitBtn {
     cursor: pointer;
     width: 100%;
-    margin: 1rem auto;
+    margin: 1rem auto 0.5rem;
     align-content: center;
     padding: 10px 0;
+    background-color: green;
+    color: white;
+}
+.submitBtn:hover {
+    background-color: rgb(7, 159, 7);
+}
+
+p{
+    font-size: medium;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.login-btn {
+    color: blue;
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    font-size: large;
 }

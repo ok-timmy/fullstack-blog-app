@@ -7,8 +7,8 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import Blogpage from '../../Pages/Blogs Page/Blogpage';
-import Home from '../../Pages/Home/Home';
+// import Blogpage from '../../Pages/Blogs Page/Blogpage';
+// import Home from '../../Pages/Home/Home';
 
 const WholeHead = styled.div`
 display: flex;

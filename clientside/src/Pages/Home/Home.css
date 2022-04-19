@@ -1,29 +1,30 @@
 main {
-    background-color: rgba(253, 249, 243, 0.7);
-    color: rgb(46, 45, 45);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  background-image: url("../../assets/asset-3.jpeg");
+  background-blend-mode: darken;
+  color: rgb(46, 45, 45);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 main div {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 main div p {
-    font-size: medium;
-    font-weight: 600;
+  font-size: medium;
+  font-weight: 600;
 }
 
 .start {
-    background-color: lightseagreen;
-    color: white;
-    padding: 0.8rem 1rem;
-    border-radius: 20px 10px;
-    cursor: pointer;
+  background-color: lightseagreen;
+  color: white;
+  padding: 0.8rem 1rem;
+  border-radius: 20px 10px;
+  cursor: pointer;
 }

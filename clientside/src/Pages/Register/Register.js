@@ -6,18 +6,22 @@ const Registerbox = styled.div`
 	width: 25rem;
 	height: 100%;
     background-color: rgb(247, 239, 239);
-	margin: 2rem auto;
+	margin: 4rem auto;
 	border-radius: 10px;
 	box-shadow: 4px 7px 10px 3px rgba(138,131,131,0.91);
 -webkit-box-shadow: 4px 7px 10px 3px rgba(138,131,131,0.91);
 -moz-box-shadow: 4px 7px 10px 3px rgba(138,131,131,0.91);
+@media (max-width: 400px) {
+    width: 90%;
+  }
 `;
 
 const Heading = styled.h2`
 	display: flex;
 	justify-content: center;
 	align-content: center;
-	font-size: 2rem;
+	font-size: xx-large;
+	font-weight: 300;
 	margin: 1rem auto 2rem
 `;
 
@@ -70,6 +74,7 @@ fetchData();
 							type="text"
 							name="firstName"
 							autoComplete="off"
+							placeholder="John"
 							value={firstName}
 							onChange={(e) => {
 								setFirstName(e.target.value);
@@ -82,6 +87,7 @@ fetchData();
 							type="text"
 							name="secondName"
 							autoComplete="none"
+							placeholder="Doe"
 							value={secondName}
 							onChange={(e) => {
 								setSecondName(e.target.value);
@@ -94,6 +100,7 @@ fetchData();
 							type="text"
 							name="userName"
 							autoComplete="none"
+							placeholder="John_Doe"
 							value={userName}
 							onChange={(e) => {
 								setUserName(e.target.value);
@@ -107,6 +114,7 @@ fetchData();
 							type="text"
 							name="email"
 							autoComplete="none"
+							placeholder="johndoe@gmail.com"
 							value={email}
 							onChange={(e) => {
 								setEmail(e.target.value);
@@ -117,7 +125,7 @@ fetchData();
 					<div>
 						<label>Password:</label>
 						<input
-							type="text"
+							type="password"
 							name="password"
 							autoComplete="none"
 							value={password}
@@ -128,6 +136,7 @@ fetchData();
 					</div>
 
 					<input className="submitBtn" type="submit" value="Submit" onClick={handleInput} />
+					<p>Have An Account Already? <button className="login-btn">Login</button></p>
 				</form>
 			</Registerbox>
 		</div>
