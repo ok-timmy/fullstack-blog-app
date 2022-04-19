@@ -3,8 +3,10 @@ import Header from "../../Components/Header/Header";
 // import Content from "../Content Page/Content";
 // import Publish from "../Publish-Post/publish";
 // import Blogs from '../../Components/Blogs/Blogs';
-import Blogpage from "../Blogs Page/Blogpage";
-import Profile from "../Profile Page/Profile";
+// import Blogpage from "../Blogs Page/Blogpage";
+import EditProfile from "../Edit-Profile/EditProfile";
+// import EditPost from "../EditPost/EditPost";
+// import Profile from "../Profile Page/Profile";
 // import Newsletter from "../../Components/Newletter/Newsletter";
 // import Register from "../Register/Register";
 import "./Home.css";
@@ -24,7 +26,9 @@ function Home() {
           <button className="start">Start Now</button>
         </div>
       </main>
-	  <Profile/>
+      {/* <EditPost/> */}
+      <EditProfile/>
+	  {/* <Profile/> */}
 	  {/* <Blogpage/> */}
 	  {/* <Content/> */}
 	  {/* <Publish/> */}

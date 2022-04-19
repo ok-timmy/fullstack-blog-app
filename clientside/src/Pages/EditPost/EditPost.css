@@ -1,0 +1,79 @@
+.editpost {
+    position: relative;
+    margin: 2rem auto;
+}
+
+h2 {
+    align-self: center;
+    margin-bottom: 4rem;
+}
+.editpost-form {
+    width: 100%;
+    display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+}
+
+div label {
+    font-size: large;
+    font-weight: 200;
+    padding-bottom: 10px;
+}
+
+.author, .title {
+    width: 100%;
+    padding: 10px 10px;
+    font-size: large;
+    font-weight: 200;
+    margin-bottom: 10px;
+}
+
+select {
+    margin-bottom: 20px;
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+option{
+    color: rgb(8, 8, 8);
+}
+
+.post-img {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+textarea {
+    height: 200px;
+    width: 40rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    font-weight: 300;
+    padding: 0.3rem 0.3rem;
+}
+
+.submit-btn {
+    position: absolute;
+    top: 3rem;
+    right: 20px;
+    background-color: rgb(88, 13, 117);
+    color: rgb(255, 255, 255);
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px 5px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:960px) {
+    .submit-btn{
+        position: unset;
+        margin-top: 1rem;
+    }
+    textarea{
+        width: 100%;
+    }
+}
