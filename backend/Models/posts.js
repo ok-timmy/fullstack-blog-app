@@ -14,6 +14,10 @@ const postSchema= new Schema({
         author : {
             type: String,
             required: true
+        },
+        category : {
+            type: String,
+            required: true
         }
 
 }, {

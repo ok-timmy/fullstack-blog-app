@@ -6,7 +6,7 @@ const Registerbox = styled.div`
 	width: 25rem;
 	height: 100%;
     background-color: rgb(247, 239, 239);
-	margin: auto auto;
+	margin: 2rem auto;
 	border-radius: 10px;
 	box-shadow: 4px 7px 10px 3px rgba(138,131,131,0.91);
 -webkit-box-shadow: 4px 7px 10px 3px rgba(138,131,131,0.91);
@@ -18,14 +18,16 @@ const Heading = styled.h2`
 	justify-content: center;
 	align-content: center;
 	font-size: 2rem;
+	margin: 1rem auto 2rem
 `;
 
 function Register() {
-	useEffect( function fetchData() {
-		const response =  fetch("http://localhost:8000/post/allposts");
+	useEffect( () =>{ const fetchData = async() => {
+		const response = await  fetch("http://localhost:8000/post/allposts");
 		const data =  response.json();
 
-		console.log(data);
+		console.log(data);}
+fetchData();
 		
 	}, []);
 
@@ -63,7 +65,7 @@ function Register() {
 			<Heading> Sign Up </Heading>
 				<form>
 					<div>
-						<label>firstname:</label>
+						<label>First Name:</label>
 						<input
 							type="text"
 							name="firstName"
@@ -75,7 +77,7 @@ function Register() {
 						/>
 					</div>
 					<div>
-						<label>secondname:</label>
+						<label>Last Name:</label>
 						<input
 							type="text"
 							name="secondName"
@@ -87,7 +89,7 @@ function Register() {
 						/>
 					</div>
 					<div>
-						<label>username:</label>
+						<label>Username:</label>
 						<input
 							type="text"
 							name="userName"

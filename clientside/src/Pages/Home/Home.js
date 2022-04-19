@@ -1,9 +1,11 @@
 import React from "react";
 import Header from "../../Components/Header/Header";
-import Blogs from '../../Components/Blogs/Blogs';
-import Blogpage from "../Blogs Page/Blogpage";
-// import Newsletter from "../../Components/Newsletter";
+// import Blogs from '../../Components/Blogs/Blogs';
+// import Blogpage from "../Blogs Page/Blogpage";
+// import Newsletter from "../../Components/Newletter/Newsletter";
+import Register from "../Register/Register";
 import "./Home.css";
+import Login from "../Login/Login";
 
 function Home() {
   return (
@@ -19,8 +21,10 @@ function Home() {
           <button className="start">Start Now</button>
         </div>
       </main>
-      <Blogs/>
-      {/* <Newsletter/> */}
+	  <Register/>
+	  {/* <Login/> */}
+      {/* <Blogs/>
+      <Newsletter/> */}
     </>
   );
 }

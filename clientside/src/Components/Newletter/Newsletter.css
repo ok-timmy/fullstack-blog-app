@@ -2,18 +2,19 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: rgb(51, 46, 46);
+    background-color: rgba(21, 20, 20, 0.8);
     color: white;
-    padding: 2rem 1rem;
+    padding: 4rem 1rem;
 }
 
 .newsletter .desc{
     font-size: larger;
-    margin-right: 2.5rem;
+    margin: auto auto;
     justify-content: center;
 }
 
 .newsletter .inputDiv {
+    margin: auto auto;
     justify-content: center;
     align-items: center;
 }
@@ -26,4 +27,13 @@
     border-radius: 10px;
     font-size: 1rem;
     margin-top: 15px;
+}
+
+@media screen and (max-width:500px){
+    .newsletter{
+        display: block;
+        padding : 4rem auto ;
+        justify-content: center;
+        align-items: center;
+    }
 }

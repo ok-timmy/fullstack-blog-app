@@ -18,6 +18,8 @@ form div input {
     outline: none;
     padding: 5px 10px;
     font-size: large;
+    font-weight: 400;
+    padding: 10px 10px;
 }
 
 form div input:focus {

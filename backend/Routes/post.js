@@ -7,7 +7,8 @@ router.post("/", async function(req, res) {
     const newPost = await new Post( {
         title : req.body.title,
         content : req.body.content,
-        author : req.body.author
+        author : req.body.author,
+        category: req.body.category
       } )
 
       const post = await newPost.save();

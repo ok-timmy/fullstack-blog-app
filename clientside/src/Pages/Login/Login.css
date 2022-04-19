@@ -1,0 +1,64 @@
+.form {
+    padding: 4rem 1rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+}
+
+.input label {
+    font-size: x-large;
+    font-weight: 300;
+}
+
+.input input {
+    padding: 7px 10px;
+    border: none;
+    outline: none;
+    font-size: large;
+    font-weight: 400;   
+    margin-bottom: 1rem;
+}
+
+.input input:focus {
+    border-bottom: rgba(67, 67, 67, 0.5) 2px solid;
+}
+
+.buttons {
+ display: flex;
+ margin: 10px auto;
+ justify-content: space-between;
+}
+
+.buttons input {
+    padding: 1rem 3.8rem;
+    cursor: pointer;
+    border-radius: 10px;
+    outline: none;
+    font-size: medium;
+    font-weight: 400;
+    color: aliceblue;
+}
+.buttons input:first-child{
+    background-color: green;
+    margin-right: 10px;
+}
+
+.buttons input:first-child:hover {
+background-color: rgb(61, 144, 61);
+}
+
+.buttons input:last-child{
+    background-color: rgb(135, 98, 98);
+}
+
+.buttons input:last-child:hover {
+    background-color: rgb(74, 72, 72);
+}
+
+@media screen and (max-width: 400px) {
+    .buttons input{
+        padding: 1rem 2.5rem;
+    }
+}
