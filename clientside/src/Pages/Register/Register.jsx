@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./Register.css";
 
@@ -136,7 +137,7 @@ fetchData();
 					</div>
 
 					<input className="submitBtn" type="submit" value="Submit" onClick={handleInput} />
-					<p>Have An Account Already? <button className="login-btn">Login</button></p>
+					<p>Have An Account Already? <Link to={'/login'}><button className="login-btn">Login</button></Link></p>
 				</form>
 			</Registerbox>
 		</div>

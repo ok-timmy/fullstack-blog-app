@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./Login.css";
 
 const Loginbox = styled.div`
   width: 25rem;
-  height: 30rem;
+  height: 25rem;
   background-color: rgb(247, 239, 239);
   margin: 50px auto;
   border-radius: 10px;
@@ -21,6 +22,8 @@ const Heading = styled.h2`
   justify-content: center;
   align-content: center;
   font-size: 2rem;
+  font-size: xx-large;
+  font-weight: 300;
 `;
 
 function Login() {
@@ -86,20 +89,14 @@ function Login() {
               }}
             />
           </div>
-          <div className="buttons">
             <input
               className="submitBtn"
               type="submit"
               value="Login"
               onClick={handleInput}
             />
-            <input
-              className="signup-btn"
-              type="button"
-              value="Sign Up"
-              onClick={""}
-            />
-          </div>
+
+           <p>Don't Have An Account? <Link to={'/register'}><button className="signup-btn">Sign Up</button></Link></p>
         </form>
       </Loginbox>
     </div>
