@@ -4,6 +4,7 @@ import Header from "../../Components/Header/Header";
 // import Publish from "../Publish-Post/publish";
 // import Blogs from '../../Components/Blogs/Blogs';
 import Blogpage from "../Blogs Page/Blogpage";
+import Profile from "../Profile Page/Profile";
 // import Newsletter from "../../Components/Newletter/Newsletter";
 // import Register from "../Register/Register";
 import "./Home.css";
@@ -23,7 +24,8 @@ function Home() {
           <button className="start">Start Now</button>
         </div>
       </main>
-	  <Blogpage/>
+	  <Profile/>
+	  {/* <Blogpage/> */}
 	  {/* <Content/> */}
 	  {/* <Publish/> */}
 	  {/* <Register/> */}

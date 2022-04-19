@@ -5,7 +5,7 @@ function Blogpage() {
   return (
     <div className="blogpage">
         <h2 className="heading">Latest Posts</h2>
-        <p>All Categories</p>
+        <p className='blog-category'>All Categories</p>
 
         <div className="post">
             <div className="post-image">
