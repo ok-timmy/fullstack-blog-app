@@ -3,7 +3,7 @@
     margin: 2rem auto;
 }
 
-h2 {
+.editpost h2 {
     align-self: center;
     margin-bottom: 4rem;
 }
@@ -14,7 +14,7 @@ h2 {
   align-items: flex-start;
 }
 
-div {
+.editpost-form  div {
     display: flex;
     flex-direction: column;
 }
@@ -48,13 +48,14 @@ option{
     margin-bottom: 20px;
 }
 
-textarea {
+.quill {
     height: 200px;
     width: 40rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: large;
     font-weight: 300;
     padding: 0.3rem 0.3rem;
+    margin-bottom: 3rem;
 }
 
 .submit-btn {
@@ -73,7 +74,7 @@ textarea {
         position: unset;
         margin-top: 1rem;
     }
-    textarea{
+    .quill{
         width: 100%;
     }
 }

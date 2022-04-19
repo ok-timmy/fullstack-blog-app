@@ -1,6 +1,6 @@
 .blogpage{
     max-width: 70%;
-    margin: auto;
+    margin:0 auto;
     background-color: rgb(247, 242, 247);
     padding-left: 1rem;
 }
@@ -44,10 +44,10 @@
     padding-top: 0.5rem;
 }
 
-@media screen and (max-width:960px) {
+@media screen and (max-width:40px) {
     .blogpage{
         max-width: 100%;
-        margin: auto;
+        margin: 0 auto;
         border: none;
     }
 

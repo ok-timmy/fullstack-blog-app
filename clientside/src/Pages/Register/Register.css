@@ -1,23 +1,23 @@
 
 
-form {
+.sign-up-form {
     margin: 0 20px;
     padding: 0.2rem 0;
 }
 
-form div {
+.sign-up-form div {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-form div label {
+.sign-up-form div label {
     padding-bottom: 5px;
     font-size: large;
     font-weight: 300
 }
 
-form div input {
+.sign-up-form div input {
     border: none;
     outline: none;
     padding: 5px 10px;
@@ -26,16 +26,16 @@ form div input {
     padding: 10px 10px;
 }
 
-form div input::placeholder{
+.sign-up-form div input::placeholder{
     font-size: medium;
     color: rgb(201, 201, 202);
 }
 
-form div input:focus {
+.sign-up-form div input:focus {
     border-bottom: rgb(78, 78, 78) 1px solid;
 }
 
-.submitBtn {
+.sign-up-form .submitBtn {
     cursor: pointer;
     width: 100%;
     margin: 1rem auto 0.5rem;
@@ -44,17 +44,17 @@ form div input:focus {
     background-color: green;
     color: white;
 }
-.submitBtn:hover {
+.sign-up-form .submitBtn:hover {
     background-color: rgb(7, 159, 7);
 }
 
-p{
+.sign-up-form p{
     font-size: medium;
     font-weight: 300;
     margin-bottom: 1rem;
 }
 
-.login-btn {
+.sign-up-form .login-btn {
     color: blue;
     border: none;
     outline: none;

@@ -2,9 +2,6 @@ import React from 'react'
 import styled, { StyledComponent } from 'styled-components'
 import "./Header.css"
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
     Link
   } from "react-router-dom";
 // import Blogpage from '../../Pages/Blogs Page/Blogpage';
@@ -33,12 +30,13 @@ function Header() {
   return (
     <WholeHead>
         <HeaderLeft>Blog Project</HeaderLeft>
-        <Router>
+        {/* <Router> */}
         <HeaderCenter>
             <nav>
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/blog"> Blogs</Link></li>
+                    <li><Link to="/publish"> Publish</Link></li>
                     {/* <li><Link to="/Contact">Contact</Link></li> */}
                 </ul>
             </nav>
@@ -55,12 +53,12 @@ function Header() {
           </Route>
         </Routes> */}
         </HeaderCenter>
-        </Router>
+        {/* </Router> */}
         <HeaderRight>
         <nav>
                 <ul>
-                    <li><a>Login</a></li>
-                    <li><a>Sign Up</a></li>
+                    <li><Link to={'/login'}>Login</Link></li>
+                    <li><Link to={'/register'}>Sign Up</Link></li>
                 </ul>
             </nav>
         </HeaderRight>

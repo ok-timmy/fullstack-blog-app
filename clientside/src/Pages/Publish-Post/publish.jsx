@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import "./publish.css";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+
+
+const  modules  = {
+  toolbar: [
+    [{ font: [] }],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ script:  "sub" }, { script:  "super" }],
+      ["blockquote", "code-block"],
+      [{ list:  "ordered" }, { list:  "bullet" }],
+      [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
+      ["link", "image", "video"],
+      ["clean"],
+    ],
+};
+
+
 
 function Publish() {
+  const [value, setValue] = useState("");
+  console.log(value)
+
+  // setValue()
   return (
     <div className="publish">
+      <h2>Publish Your Article</h2>
       <form className="publish-form">
         <div>
           <label>Author</label>
@@ -14,7 +40,7 @@ function Publish() {
             value={"Timilehin Okunola"}
           />
         </div>
-        <div>
+        <div className="category">
           <label>Category</label>
           <select>
             <option>Sport</option>
@@ -42,7 +68,7 @@ function Publish() {
         </div>
         <div>
           <label>Article Content</label>
-          <textarea placeholder="Type your article content Here...." />
+          <ReactQuill className="quill" theme="snow" onChange={setValue} modules={modules} placeholder="Content goes here..."/>
         </div>
 
         <button type="submit" className="submit-btn">

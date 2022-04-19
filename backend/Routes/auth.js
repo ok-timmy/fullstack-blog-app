@@ -51,6 +51,14 @@ router.post('/login', async function(req, res) {
     }
 })
 
+// UPDATE USER
+
+router.put('/:id', async function (req, res) {
+    var user = {id: req.params.id};
+   const updatedUser = await User.findByIdAndUpdate(user, {$set: req.body}, {new:true});
+   res.status(200).json(updatedUser);
+} )
+
 
 
 function verifyToken (req, res, next) {

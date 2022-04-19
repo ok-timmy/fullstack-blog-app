@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "../../Components/Header/Header";
+// import Header from "../../Components/Header/Header";
 // import Content from "../Content Page/Content";
-// import Publish from "../Publish-Post/publish";
+import Publish from "../Publish-Post/publish";
 // import Blogs from '../../Components/Blogs/Blogs';
-// import Blogpage from "../Blogs Page/Blogpage";
-import EditProfile from "../Edit-Profile/EditProfile";
+import Blogpage from "../Blogs Page/Blogpage";
+// import EditProfile from "../Edit-Profile/EditProfile";
 // import EditPost from "../EditPost/EditPost";
 // import Profile from "../Profile Page/Profile";
 // import Newsletter from "../../Components/Newletter/Newsletter";
@@ -15,7 +15,7 @@ import "./Home.css";
 function Home() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main>
         <div>
           <p>
@@ -27,7 +27,7 @@ function Home() {
         </div>
       </main>
       {/* <EditPost/> */}
-      <EditProfile/>
+      {/* <EditProfile/> */}
 	  {/* <Profile/> */}
 	  {/* <Blogpage/> */}
 	  {/* <Content/> */}

@@ -1,75 +1,89 @@
 .publish {
-    position: relative;
-    margin: 2rem auto;
+  position: relative;
+  margin: 2rem auto;
+  width: 70%;
+}
+
+.publish h2 {
+  margin: 3rem auto;
+  font-size: xx-large;
+  font-weight: 400;
 }
 
 .publish-form {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-div {
-    display: flex;
-    flex-direction: column;
+/* .publish-form div {
+  /* display: flex;
+  flex-direction: column; 
+} */
+
+.publish-form div label {
+  font-size: x-large;
+  font-weight: 200;
+  padding-bottom: 10px;
 }
 
-div label {
-    font-size: large;
-    font-weight: 200;
-    padding-bottom: 10px;
+.author,
+.title {
+  width: 100%;
+  padding: 10px 10px;
+  font-size: large;
+  font-weight: 200;
+  margin-bottom: 10px;
 }
 
-.author, .title {
-    width: 100%;
-    padding: 10px 10px;
-    font-size: large;
-    font-weight: 200;
-    margin-bottom: 10px;
+.publish-form .category{
+  display: flex;
+  flex-direction: column; 
 }
 
 select {
-    margin-bottom: 20px;
-    padding: 5px 5px;
-    cursor: pointer;
+  margin-bottom: 20px;
+  padding: 5px 5px;
+  cursor: pointer;
 }
 
-option{
-    color: rgb(8, 8, 8);
+option {
+  color: rgb(8, 8, 8);
 }
 
 .post-img {
-    width: 100%;
-    margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-textarea {
-    height: 200px;
-    width: 40rem;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: large;
-    font-weight: 300;
-    padding: 0.3rem 0.3rem;
+.quill {
+  height: 400px;
+  width: 40rem;
+  margin-bottom: 4rem;
 }
 
 .submit-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    background-color: rgb(88, 13, 117);
-    color: rgb(255, 255, 255);
-    padding: 0.5rem 0.8rem;
-    border-radius: 10px 5px;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background-color: rgb(88, 13, 117);
+  color: rgb(255, 255, 255);
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px 5px;
+  cursor: pointer;
 }
 
-@media screen and (max-width:960px) {
-    .submit-btn{
-        position: unset;
-        margin-top: 1rem;
-    }
-    textarea{
-        width: 100%;
-    }
+@media screen and (max-width: 960px) {
+  .submit-btn {
+    position: unset;
+    /* margin-top: 1rem; */
+  }
+  .publish {
+    width: 95%;
+  }
+  .quill {
+    width: 20rem;
+    margin-bottom: 1rem;
+  }
 }

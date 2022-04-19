@@ -67,7 +67,7 @@ fetchData();
 		<div>
 			<Registerbox>
 			<Heading> Sign Up </Heading>
-				<form>
+				<form className="sign-up-form">
 					<div>
 						<label>First Name:</label>
 						<input

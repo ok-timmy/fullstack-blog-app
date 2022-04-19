@@ -60,7 +60,7 @@ function Login() {
     <div>
       <Loginbox>
         <Heading> Sign In </Heading>
-        <form className="form">
+        <form className="login-form">
           <div className="input">
             <label>Email:</label>
             <input
