@@ -8,10 +8,12 @@ router.post("/", async function(req, res) {
         title : req.body.title,
         content : req.body.content,
         author : req.body.author,
-        category: req.body.category
+        category: req.body.category,
+        excerpt: req.body.excerpt
       } )
 
       const post = await newPost.save();
+      console.log("Post was Created Successfully!!")
       res.status(200).json(post);
       
     } catch (error) {

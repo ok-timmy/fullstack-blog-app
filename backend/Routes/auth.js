@@ -45,6 +45,7 @@ router.post('/login', async function(req, res) {
             res.status(200).json({others, token}); 
         }else {
             console.log("User Was not found")
+            res.status(401).send({message: "User does not exist"})
         }
     } catch (error) {
         console.log(error)

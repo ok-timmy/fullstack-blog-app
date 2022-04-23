@@ -1,5 +1,6 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./Register.css";
 
@@ -27,42 +28,33 @@ const Heading = styled.h2`
 `;
 
 function Register() {
-	useEffect( () =>{ const fetchData = async() => {
-		const response = await  fetch("http://localhost:8000/post/allposts");
-		const data =  response.json();
 
-		console.log(data);}
-fetchData();
-		
-	}, []);
+	const navigation = useNavigate();
 
 	const [firstName, setFirstName] = useState("");
 	const [secondName, setSecondName] = useState("");
 	const [userName, setUserName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const handleInput = (e) => {
+	const handleInput = async(e) => {
 		e.preventDefault();
 		const user = { firstName, secondName, email, password, userName };
 		console.log(user);
 
-		fetch("http://localhost:8000/auth/register/", {
-			method: "POST",
-			headers: { "Content-type": "application/json" },
-			body: JSON.stringify(user),
-		})
-			.then(() => {
-				console.log("User added successfully!");
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-
-			setFirstName("");
+		try{
+			const res = await axios.post('http://localhost:8000/api/auth/register', user)
+			console.log(res.data);
+		}
+		catch(error) {
+			console.log(error.message);
+		};
+		
+		setFirstName("");
 		setSecondName("");
 		setUserName("");
 		setEmail("");
 		setPassword("");
+		navigation('/login')
 	};
 	return (
 		<div>

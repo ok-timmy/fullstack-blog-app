@@ -18,6 +18,14 @@ const postSchema= new Schema({
         category : {
             type: String,
             required: true
+        },
+        excerpt : {
+            type: String,
+            required : true
+        },
+        likes : {
+            type: Number,
+            default: 0
         }
 
 }, {

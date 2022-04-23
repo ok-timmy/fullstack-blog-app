@@ -1,5 +1,6 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./Login.css";
 
@@ -27,34 +28,37 @@ const Heading = styled.h2`
 `;
 
 function Login() {
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("http://localhost:8000/post/allposts");
-      const data = response.json();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch("http://localhost:8000/post/allposts");
+  //     const data = response.json();
 
-      console.log(data);
-    };
-    fetchData();
-  }, []);
+  //     console.log(data);
+  //   };
+  //   fetchData();
+  // }, []);
+
+  const navigation = useNavigate();
+  const [error, setError] = useState(false)
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleInput = (e) => {
+  const handleInput = async(e) => {
     e.preventDefault();
     const user = { email, password };
     console.log(user);
-
-    fetch("http://localhost:8000/auth/login/", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(user),
+try{
+    const res = await axios.post("http://localhost:8000/api/auth/login/", {
+      email, password
     })
-      .then(() => {
-        console.log("User Found successfully!");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  console.log(res.data);
+}
+catch(error) {
+  console.log(error.message);
+  setError(true);
+};
+navigation('/')
 
     setEmail("");
     setPassword("");
@@ -80,7 +84,7 @@ function Login() {
           <div className="input">
             <label>Password:</label>
             <input
-              type="text"
+              type="password"
               name="password"
               autoComplete="none"
               value={password}

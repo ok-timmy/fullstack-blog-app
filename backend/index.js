@@ -17,8 +17,8 @@ mongoose.connect(process.env.MONGO_DB_URL, {useNewUrlParser : true, useUnifiedTo
     console.log('connected to my database')
 ).catch((err) => console.log(err));
 
-app.use('/auth', authRoute);
-app.use('/post', postRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/post', postRoute);
 
 app.get('/', function (req, res) {
     res.send("This is my first Express line!!")

@@ -5,9 +5,12 @@
 }
 
 .blogs {
-    flex: 7;
-    columns: 3 250px;
-    gap: 15px;
+    flex: 8;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    /* columns: 3 250px;
+    gap: 15px; */
     width: 72%;
     height: 100%;
     padding: 10px 0 40px;
@@ -16,6 +19,7 @@
 .card {
     width: auto;
     height: 100%;
+    margin: 0 5px;
     display: block;
     border: 2px solid rgb(252, 244, 244);
     border-radius: 10px;
@@ -79,6 +83,11 @@
 
 }
 
+.categories div ul{
+    display: flex;
+    flex-direction: column;
+}
+
 .more-btn{
     background-color: lightcoral;
     color: white;
@@ -91,6 +100,20 @@
     left: 20px;
 }
 
+.read-more{
+    border: none;
+    outline: none;
+    background-color: rgb(232, 230, 230);
+    border-radius: 3px;
+    padding: 5px 7px;
+    cursor: pointer;
+    margin: 5px 7px;
+}
+
+.read-more:hover{
+    background-color: aliceblue;
+}
+
 .more-btn:hover {
     background-color: rgb(207, 60, 60);
 }
@@ -98,7 +121,9 @@
 @media screen and (max-width: 600px){
     .blog-section {
         padding: 1rem 0.8rem;
-       display: block;
+       /* display: block; */
+       display: flex;
+       flex-direction: column-reverse;
     }
 
     .blogs {
@@ -108,7 +133,12 @@
       margin-bottom: 20px;
     }
 
+    /* .categories div  ul{
+        display: inline-flex;
+        /* flex-direction: row;
+    } */
+
     .more-btn {
-        margin-bottom: 40px;
+        margin-bottom: 0;
     }
 }
