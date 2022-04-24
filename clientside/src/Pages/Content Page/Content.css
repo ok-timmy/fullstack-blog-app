@@ -17,6 +17,37 @@
   height: 100%;
 }
 
+.space {
+ display: flex;
+ justify-content: space-between;
+}
+
+
+.bi-pencil{
+ color: blue;
+ font-size: x-large;
+ font-weight: 400;
+ cursor: pointer;
+ padding: 0.2rem;
+}
+
+.bi-trash{
+color: red;
+font-size: x-large;
+font-weight: 400;
+cursor: pointer;
+margin-left: 0.5rem;
+padding: 0.2rem;
+}
+
+.bi-trash:hover{
+  color: rgb(219, 72, 72);
+}
+
+.bi-pencil:hover{
+  color: rgb(89, 89, 249);
+}
+
 .content-details {
   margin: 1rem 0;
   display: flex;

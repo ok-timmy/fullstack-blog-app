@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Context } from "../../Context/Context";
 import "./Login.css";
 
 const Loginbox = styled.div`
@@ -28,41 +29,43 @@ const Heading = styled.h2`
 `;
 
 function Login() {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch("http://localhost:8000/post/allposts");
-  //     const data = response.json();
-
-  //     console.log(data);
-  //   };
-  //   fetchData();
-  // }, []);
-
+ 
   const navigation = useNavigate();
-  const [error, setError] = useState(false)
+  // const [error, setError] = useState(false)
 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {user, dispatch, isFetching} = useContext(Context);
+
+
   const handleInput = async(e) => {
     e.preventDefault();
-    const user = { email, password };
-    console.log(user);
+    const userCredentials = { email, password };
+    console.log(userCredentials);
+    dispatch({type:"LOGIN_START"})
 try{
     const res = await axios.post("http://localhost:8000/api/auth/login/", {
       email, password
     })
+    dispatch({type:"LOGIN_SUCCESS", payload: res.data.others})
+
   console.log(res.data);
+
 }
 catch(error) {
+  dispatch({type:"LOGIN_FAILURE"})
   console.log(error.message);
-  setError(true);
+  // setError(true);
 };
 navigation('/')
 
     setEmail("");
     setPassword("");
   };
+
+  console.log(isFetching);
+  console.log(user);
   return (
     <div>
       <Loginbox>
@@ -105,6 +108,6 @@ navigation('/')
       </Loginbox>
     </div>
   );
-}
+            }
 
 export default Login;

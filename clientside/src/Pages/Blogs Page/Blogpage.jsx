@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import "./Blogpage.css"
 
 function Blogpage({hpBlogs}) {
@@ -16,7 +17,7 @@ function Blogpage({hpBlogs}) {
             <div className="post-main">
                 <h3>{hpBlog.title}</h3>
                 <p>{hpBlog.excerpt} </p>
-                <button className='more'>Read More</button>
+                <button className='more'><Link to={`/blog/:${hpBlog._id}`} state={{ blogContent: hpBlog}}>Read More</Link></button>
                 <p className='post-time'>10 Days Ago</p>
             </div>
         </div>

@@ -6,8 +6,10 @@ import Blogpage from './Pages/Blogs Page/Blogpage';
 import Home from "./Pages/Home/Home";
 import Login from './Pages/Login/Login';
 import Publish from './Pages/Publish-Post/publish';
-// import Post from './Pages/Post Page/Post';
+import Content from './Pages/Content Page/Content';
 import Register from './Pages/Register/Register'
+import Profile from "./Pages/Profile Page/Profile";
+import EditProfile from "./Pages/Edit-Profile/EditProfile";
 
 function App() {
 
@@ -40,6 +42,9 @@ const hpBlogs = allblogs.slice(0, 3)
           <Route path="/register" element={<Register/>}/>
           <Route path="/blog" element={<Blogpage hpBlogs={allblogs}/>}/>
           <Route path="/publish" element={<Publish/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/edit-profile" element={<EditProfile/>}/>
+          <Route path="/blog/:id" element={<Content/>}/>
         </Routes>
         {/* <Home/> */}
         </>

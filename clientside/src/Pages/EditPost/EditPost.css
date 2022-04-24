@@ -1,6 +1,6 @@
 .editpost {
     position: relative;
-    margin: 2rem auto;
+    margin: 2rem 8rem;
 }
 
 .editpost h2 {
@@ -14,10 +14,10 @@
   align-items: flex-start;
 }
 
-.editpost-form  div {
+/* .editpost-form  div {
     display: flex;
     flex-direction: column;
-}
+} */
 
 div label {
     font-size: large;
@@ -69,10 +69,13 @@ option{
     cursor: pointer;
 }
 
-@media screen and (max-width:960px) {
+@media screen and (max-width:400px) {
+    .editpost{
+        margin: 2rem 0.6rem;
+    }
     .submit-btn{
         position: unset;
-        margin-top: 1rem;
+        margin-top: 4rem;
     }
     .quill{
         width: 100%;

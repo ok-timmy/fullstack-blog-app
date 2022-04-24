@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Profile.css";
 import image3 from "../../assets/asset-3.jpeg";
+import { Context } from "../../Context/Context";
+import { Link } from "react-router-dom";
 
 function Profile() {
+
+  const {user} = useContext(Context);
+
   return (
     <div className="profile">
       <div className="profile-pic">
@@ -11,34 +16,29 @@ function Profile() {
       <div className="profile-details">
         <div>
           <label>First Name: </label>
-          <span>Timilehin</span>
+          <span>{user.firstName}</span>
         </div>
         <div>
           <label>Last Name: </label>
-          <span>Okunola</span>
+          <span>{user.secondName}</span>
         </div>
         <div>
           <label>Username: </label>
-          <span>Oktimmy</span>
+          <span>{user.userName}</span>
         </div>
         <div>
           <label>Email Address: </label>
-          <span>oktimmy45@gmail.com</span>
+          <span>{user.email}</span>
         </div>
         <div>
-          <label>Short Bio</label>
+          <label>Short Bio:</label>
           <span>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
+           {user.bio || `No Bio Yet......`}
           </span>
         </div>
       </div>
 
-      <button className="edit-btn">Edit Profile</button>
+      <button className="edit-btn"><Link to={'/edit-profile'}>Edit Profile</Link></button>
       <div>
         <h3>Some of your Works</h3>
         {/* <div></div> */}

@@ -52,12 +52,21 @@ router.post('/login', async function(req, res) {
     }
 })
 
+//GET USER
+
 // UPDATE USER
 
 router.put('/:id', async function (req, res) {
-    var user = {id: req.params.id};
-   const updatedUser = await User.findByIdAndUpdate(user, {$set: req.body}, {new:true});
-   res.status(200).json(updatedUser);
+    try {
+        var userId = {_id: req.params.id};
+        console.log(userId)
+       const updatedUser = await User.findByIdAndUpdate(userId,  req.body, {new:true});
+       console.log("User Updated Successfully!")
+       res.status(200).json(updatedUser);
+    } catch (error) {
+        console.log(error)
+        res.status(403).send(error)
+    }
 } )
 
 

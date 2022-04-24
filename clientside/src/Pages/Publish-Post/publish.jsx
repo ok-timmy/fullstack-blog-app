@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./publish.css";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../../Context/Context";
 
 
 
@@ -25,11 +26,14 @@ const  modules  = {
 
 
 function Publish() {
+  const {user} = useContext(Context);
+
 const navigation = useNavigate();
 
 
-  const [error, setError] = useState(false)
-  const [author, setValue] = useState("Okunola Timilehin");
+  // const [error, setError] = useState(false)
+  // const [author, setValue] = useState();
+  const author = `${user.firstName} ${user.secondName}`;
   const [title, setTitle]= useState("")
   const [content, setContent]= useState("")
   const [category, setCategory]= useState()
@@ -46,7 +50,7 @@ try{
 }
 catch(error) {
   console.log(error.message);
-  setError(true);
+  // setError(true);
 };
 
 setTitle("");
@@ -54,7 +58,7 @@ setContent("");
 setCategory("");
 setExcerpt("");
 
-navigation('/blogs')
+navigation('/blog')
   };
 
   // setValue()
@@ -62,16 +66,16 @@ navigation('/blogs')
     <div className="publish">
       <h2>Publish Your Article</h2>
       <form className="publish-form">
-        <div>
+        {/* <div>
           <label>Author</label>
           <input
             type="text"
             className="author"
             id="author"
-            value={author}
+            defaultValue={`${user.firstName} ${user.secondName}`}
             
           />
-        </div>
+        </div> */}
         <div className="category">
           <label>Category</label>
           <select onChange={(e)=> {setCategory(e.target.value); console.log(category)}}>

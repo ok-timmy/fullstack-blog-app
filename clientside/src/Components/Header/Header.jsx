@@ -1,12 +1,11 @@
-import React from 'react'
-import styled, { StyledComponent } from 'styled-components'
+import React, { useContext } from 'react'
+import styled from 'styled-components'
 import "./Header.css"
 import {
     Link
   } from "react-router-dom";
-// import Blogpage from '../../Pages/Blogs Page/Blogpage';
-// import Home from '../../Pages/Home/Home';
-
+import { Context } from '../../Context/Context';
+ 
 const WholeHead = styled.div`
 display: flex;
 flex-wrap: wrap;
@@ -27,39 +26,32 @@ flex: 1;
 `
 
 function Header() {
+
+  const {user} = useContext(Context);
+
   return (
     <WholeHead>
         <HeaderLeft>Blog Project</HeaderLeft>
-        {/* <Router> */}
         <HeaderCenter>
             <nav>
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/blog"> Blogs</Link></li>
-                    <li><Link to="/publish"> Publish</Link></li>
-                    {/* <li><Link to="/Contact">Contact</Link></li> */}
+                   {user && <li><Link to="/publish"> Publish</Link></li>}
                 </ul>
             </nav>
-
-            {/* <Routes>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/blog">
-            <Blogpage />
-          </Route>
-          <Route exact path="/">
-            <Home/>
-          </Route>
-        </Routes> */}
         </HeaderCenter>
-        {/* </Router> */}
         <HeaderRight>
-        <nav>
+        <nav>{ user? <ul>
+
+         <li> <Link to={'/profile'}>{user.userName}</Link></li>
+         <li> <Link to={'/'}>Logout</Link></li>
+        
+        </ul>:
                 <ul>
                     <li><Link to={'/login'}>Login</Link></li>
                     <li><Link to={'/register'}>Sign Up</Link></li>
-                </ul>
+                </ul>}
             </nav>
         </HeaderRight>
     </WholeHead>
