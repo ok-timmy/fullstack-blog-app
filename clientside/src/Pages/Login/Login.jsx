@@ -31,7 +31,6 @@ const Heading = styled.h2`
 function Login() {
  
   const navigation = useNavigate();
-  // const [error, setError] = useState(false)
 
 
   const [email, setEmail] = useState("");

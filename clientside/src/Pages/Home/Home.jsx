@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Blogs from '../../Components/Blogs/Blogs';
 import Newsletter from "../../Components/Newletter/Newsletter";
 import "./Home.css";
@@ -14,7 +15,7 @@ function Home({hpBlogs}) {
             down.
           </p>
           <p>Start Your Journey to Becoming a Writer</p>
-          <button className="start">Start Now</button>
+          <button className="start"><Link to={'/register'}>Start Now</Link></button>
         </div>
       </main>
       <Blogs hpBlogs={hpBlogs}/>

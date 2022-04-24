@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import "./Header.css"
 import {
-    Link
+    Link, useNavigate
   } from "react-router-dom";
 import { Context } from '../../Context/Context';
  
@@ -26,8 +26,13 @@ flex: 1;
 `
 
 function Header() {
+  const {user, dispatch} = useContext(Context);
+  const navigation = useNavigate()
 
-  const {user} = useContext(Context);
+  const handleLogOut = () => {
+    dispatch({type:"LOGOUT"})
+    navigation('/')
+  }
 
   return (
     <WholeHead>
@@ -45,7 +50,7 @@ function Header() {
         <nav>{ user? <ul>
 
          <li> <Link to={'/profile'}>{user.userName}</Link></li>
-         <li> <Link to={'/'}>Logout</Link></li>
+         <li> <button onClick={handleLogOut}>Logout </button></li>
         
         </ul>:
                 <ul>
