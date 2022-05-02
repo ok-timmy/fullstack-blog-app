@@ -29,12 +29,12 @@ return <EditPost blogContent={blogContent} setEditMode={setEditMode} />
           <p className="content-author">Published by {blogContent.author}</p>
           <p className="content-timestamp">Published 3 days ago</p>
         </div>
-        {(blogContent.author === `${user.firstName} ${user.secondName}`) &&
+        { user ? (blogContent.author === `${user.firstName} ${user.secondName}`) &&
         <div>
           <i onClick={()=>setEditMode(true)} className="bi bi-pencil"></i>
 
           <i className="bi bi-trash"></i>
-        </div>
+        </div> : <div></div>
 }
       </div>
       <div

@@ -13,4 +13,17 @@ a {
     border: solid white 1px;
     padding: 5px 10px;
     border-radius: 5px;
+    text-decoration: none;
+}
+
+a:hover{
+    color: rgb(39, 39, 39);
+}
+
+button{
+    outline: none;
+    background-color: transparent;
+    border: none;
+    font-size: medium;
+    cursor: pointer;
 }
