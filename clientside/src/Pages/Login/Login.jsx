@@ -29,35 +29,31 @@ const Heading = styled.h2`
 `;
 
 function Login() {
- 
   const navigation = useNavigate();
-
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {user, dispatch, isFetching} = useContext(Context);
+  const { user, dispatch, isFetching } = useContext(Context);
 
-
-  const handleInput = async(e) => {
+  const handleInput = async (e) => {
     e.preventDefault();
     const userCredentials = { email, password };
     console.log(userCredentials);
-    dispatch({type:"LOGIN_START"})
-try{
-    const res = await axios.post("http://localhost:8000/api/auth/login/", {
-      email, password
-    })
-    dispatch({type:"LOGIN_SUCCESS", payload: res.data.others})
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("http://localhost:8000/api/auth/login/", {
+        email,
+        password,
+      });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.others });
 
-  console.log(res.data);
-
-}
-catch(error) {
-  dispatch({type:"LOGIN_FAILURE"})
-  console.log(error.message);
-  // setError(true);
-};
-navigation('/')
+      console.log(res.data);
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE" });
+      console.log(error.message);
+      // setError(true);
+    }
+    navigation("/");
 
     setEmail("");
     setPassword("");
@@ -95,18 +91,23 @@ navigation('/')
               }}
             />
           </div>
-            <input
-              className="submitBtn"
-              type="submit"
-              value="Login"
-              onClick={handleInput}
-            />
+          <input
+            className="submitBtn"
+            type="submit"
+            value="Login"
+            onClick={handleInput}
+          />
 
-           <p>Don't Have An Account? <Link to={'/register'}><button className="signup-btn">Sign Up</button></Link></p>
+          <p>
+            Don't Have An Account?{" "}
+            <Link to={"/register"}>
+              <button className="signup-btn">Sign Up</button>
+            </Link>
+          </p>
         </form>
       </Loginbox>
     </div>
   );
-            }
+}
 
 export default Login;

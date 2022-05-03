@@ -7,11 +7,14 @@ import { Link } from "react-router-dom";
 function Profile() {
 
   const {user} = useContext(Context);
+  console.log(user);
+
+  const pf = "http://localhost:8000/public/";
 
   return (
     <div className="profile">
       <div className="profile-pic">
-        <img src={image3} alt="profile-pic" />
+       { user.image ?  <img src={pf + user.image} alt="profile-pic" /> : <img src={image3} alt="profile-pic" /> }
       </div>
       <div className="profile-details">
         <div>
