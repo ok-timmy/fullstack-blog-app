@@ -74,9 +74,9 @@ function Publish() {
     <div className="publish">
       <h2>Publish Your Article</h2>
       <form className="publish-form">
-        <div>
-          {file && <img src={URL.createObjectURL(file)} alt={"FileImg"} />}
-        </div>
+       {  file &&  <div className="post-image-div">
+         <img src={URL.createObjectURL(file)} alt={"FileImg"} className="post-image"/>
+        </div>}
         <div className="category">
           <label>Category</label>
           <select

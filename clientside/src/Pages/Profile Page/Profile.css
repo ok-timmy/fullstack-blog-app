@@ -55,9 +55,9 @@
 }
 
 
-@media screen and (max-width:400px) {
+@media screen and (max-width:480px) {
     .profile{
-        width: 90%;
+        width: 95%;
     }
     .profile-details {
         display: block;

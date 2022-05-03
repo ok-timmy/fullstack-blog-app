@@ -12,7 +12,26 @@ function Content() {
 
   const pf = "http://localhost:8000/public/";
 
-  console.log(blogContent);
+  // console.log(blogContent);
+
+  function calcTime(pubTime) {
+    const currentTime = Date.now();
+    const blogPubTime = new Date(pubTime);
+    const seconds = blogPubTime.getTime();
+
+    const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
+
+    console.log(timeDiff);
+
+    //Check if time is greater than or less a day
+    if (timeDiff <= 23) {
+      return `${Math.ceil(timeDiff)} Hours Ago`;
+    } else {
+      return `${Math.floor(timeDiff / 24)} Days Ago`;
+    }
+
+    // console.log(pubTime);
+  }
 
   if (editMode) {
     return <EditPost blogContent={blogContent} setEditMode={setEditMode} />;
@@ -26,7 +45,9 @@ function Content() {
           <div className="content-details">
             <p className="content-category">{blogContent.category}</p>
             <p className="content-author">Published by {blogContent.author}</p>
-            <p className="content-timestamp">Published 3 days ago</p>
+            <p className="content-timestamp">
+              Published {calcTime(blogContent.updatedAt)}
+            </p>
           </div>
           {user ? (
             blogContent.author === `${user.firstName} ${user.secondName}` && (

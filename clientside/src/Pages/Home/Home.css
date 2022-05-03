@@ -23,8 +23,17 @@ main div p {
 
 .start {
   background-color: lightseagreen;
+  border: none;
+  outline: none !important;
   color: white;
   padding: 0.8rem 1rem;
   border-radius: 20px 10px;
   cursor: pointer;
+}
+
+.start a {
+  outline: none !important;
+  text-decoration: none;
+  color: white;
+  border: none !important;
 }

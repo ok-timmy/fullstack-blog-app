@@ -39,7 +39,7 @@ function App() {
           <Route exact path="/" element={<Home hpBlogs={hpBlogs} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/blog" element={<Blogpage hpBlogs={allblogs} />} />
+          <Route path="/blog" element={<Blogpage/>} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/edit-profile" element={<EditProfile />} />

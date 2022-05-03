@@ -1,9 +1,51 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Blogpage.css";
 
-function Blogpage({ hpBlogs }) {
+function Blogpage() {
   const pf = "http://localhost:8000/public/";
+
+  const [hpBlogs, setHpBlogs] = useState([]);
+
+  function calcTime (pubTime){
+    const currentTime =  Date.now();
+    // console.log(currentTime);
+    const blogPubTime = new Date(pubTime);
+    const seconds = blogPubTime.getTime()
+    // console.log(seconds);
+
+    const timeDiff =(currentTime - blogPubTime)/(60*60*1000);
+
+console.log(timeDiff);
+
+    //Check if time is greater than a day 
+if (timeDiff<=23){
+  return `${Math.ceil(timeDiff)} Hours Ago`
+}
+else {
+  return `${Math.floor(timeDiff/24)} Days Ago`
+}
+
+
+    // console.log(pubTime);
+  }
+
+  // calcTime(Date.now());
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/post/allposts"
+      );
+      // const blogs = await response.data
+      setHpBlogs(data);
+      // console.log(data);
+    };
+
+    fetchBlogs();
+  }, []);
 
   return (
     <div className="blogpage">
@@ -27,47 +69,11 @@ function Blogpage({ hpBlogs }) {
                   Read More
                 </Link>
               </button>
-              <p className="post-time">10 Days Ago</p>
+              <p className="post-time">{calcTime(hpBlog.updatedAt)}</p>
             </div>
           </div>
         );
       })}
-      {/* <div className="post">
-            <div className="post-image">
-                <img src={require("../../Images/luxury-purple-color-cylinder-pedestal-podium-product-presentation-3d-rendering_41470-4246.webp")} alt={"blog"} />
-            </div>
-            <div className="post-main">
-                <h3>This is a Sample Post in the Posts Page</h3>
-                <span>10 Days Ago</span>
-            </div>
-        </div>
-        <div className="post">
-            <div className="post-image">
-                <img src={require("../../Images/luxury-purple-color-cylinder-pedestal-podium-product-presentation-3d-rendering_41470-4246.webp")} alt={"blog"} />
-            </div>
-            <div className="post-main">
-                <h3>This is a Sample Post in the Posts Page</h3>
-                <span>10 Days Ago</span>
-            </div>
-        </div>
-        <div className="post">
-            <div className="post-image">
-                <img src={require("../../Images/luxury-purple-color-cylinder-pedestal-podium-product-presentation-3d-rendering_41470-4246.webp")} alt={"blog"} />
-            </div>
-            <div className="post-main">
-                <h3>This is a Sample Post in the Posts Page</h3>
-                <span>10 Days Ago</span>
-            </div>
-        </div>
-        <div className="post">
-            <div className="post-image">
-                <img src={require("../../Images/luxury-purple-color-cylinder-pedestal-podium-product-presentation-3d-rendering_41470-4246.webp")} alt={"blog"} />
-            </div>
-            <div className="post-main">
-                <h3>This is a Sample Post in the Posts Page</h3>
-                <span>10 Days Ago</span>
-            </div>
-        </div> */}
     </div>
   );
 }

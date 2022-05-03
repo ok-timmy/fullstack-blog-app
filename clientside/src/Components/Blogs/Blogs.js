@@ -4,6 +4,26 @@ import imageOne from "../../assets/asset-1.webp";
 import { Link } from "react-router-dom";
 
 function Blogs({ hpBlogs }) {
+
+  function calcTime(pubTime) {
+    const currentTime = Date.now();
+    const blogPubTime = new Date(pubTime);
+    const seconds = blogPubTime.getTime();
+
+    const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
+
+    console.log(timeDiff);
+
+    //Check if time is greater than or less a day
+    if (timeDiff <= 23) {
+      return `${Math.ceil(timeDiff)} Hours Ago`;
+    } else {
+      return `${Math.floor(timeDiff / 24)} Days Ago`;
+    }
+
+    // console.log(pubTime);
+  }
+
   return (
     <div className="blog-section">
       <div className="blogs">
@@ -24,9 +44,16 @@ function Blogs({ hpBlogs }) {
                   <p>{hpBlog.excerpt}</p>
                 </div>
                 <h5>{hpBlog.author}</h5>
-                <span>5 Days ago</span>
+                <span>{calcTime(hpBlog.updatedAt)}</span>
                 <div>
-                  <button className="read-more"><Link to={`/blog/:${hpBlog._id}`} state={{blogContent: hpBlog}}>Read More</Link></button>
+                  <button className="read-more">
+                    <Link
+                      to={`/blog/:${hpBlog._id}`}
+                      state={{ blogContent: hpBlog }}
+                    >
+                      Read More
+                    </Link>
+                  </button>
                 </div>
               </div>
             </div>
