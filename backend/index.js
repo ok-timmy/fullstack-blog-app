@@ -4,12 +4,16 @@ const dotenv = require('dotenv')
 const authRoute = require('./Routes/auth')
 const postRoute = require('./Routes/post')
 var cors = require('cors')
+const multer = require('multer')
+const path = require('path')
 
 const app = express();
 
 app.use(cors());
 dotenv.config();
 app.use(express.json());
+app.use("/public", express.static(path.join(__dirname, "/public")))
+
 const PORT = 8000 || process.env.PORT
 
 mongoose.connect(process.env.MONGO_DB_URL, {useNewUrlParser : true, useUnifiedTopology : true})
@@ -28,6 +32,17 @@ app.get('/', function (req, res) {
 
 app.listen(PORT, () => {
     console.log(`My app is listening on port ${PORT} and has listened to Database successfully!`);
+})
+
+const storage = multer.diskStorage({destination:(req, file, cb) => {
+    cb(null, 'public');
+}, filename: (req, file,cb)=>{
+    cb(null, req.body.name)
+}})
+
+const upload = multer({storage: storage});
+app.post('/api/upload', upload.single("file"), (req, res)=> {
+    res.status(200).json("file has been uploaded")
 })
 
 

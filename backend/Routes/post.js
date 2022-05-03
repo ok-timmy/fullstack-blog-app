@@ -10,6 +10,7 @@ router.post("/", async function (req, res) {
       author: req.body.author,
       category: req.body.category,
       excerpt: req.body.excerpt,
+      image: req.body.image
     });
 
     const post = await newPost.save();
