@@ -18,12 +18,13 @@ function EditProfile() {
   const [bio, setBio] = useState(user.bio);
   const [file, setFile] = useState(null);
   const profilepic = user.image;
+ 
 
   const pf = "http://localhost:8000/public/";
+  let image = user.image;
 
   const handleInput = async (e) => {
     e.preventDefault();
-    let image = "";
     const updatedUser = {
       firstName,
       secondName,
@@ -79,7 +80,8 @@ function EditProfile() {
         ) : profilepic ? (
           <img src={pf + profilepic} alt="profile-pic" />
         ) : (
-          <img src={image3} alt="profile-pic" />
+          // <img src={image3} alt="profile-pic" />
+          null
         )}
       </div>
       <div className="profile-pic">

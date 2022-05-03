@@ -52,6 +52,11 @@
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 12px 25px;
+    text-decoration: none;
+}
+
+.edit-link {
+    text-decoration: none;
 }
 
 

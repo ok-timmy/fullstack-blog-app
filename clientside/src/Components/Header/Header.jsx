@@ -40,14 +40,14 @@ function Header() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" className="link">Home</Link>
             </li>
             <li>
-              <Link to="/blog"> Blogs</Link>
+              <Link to="/blog" className="link"> Blogs</Link>
             </li>
             {user && (
               <li>
-                <Link to="/publish"> Publish</Link>
+                <Link to="/publish" className="link"> Publish</Link>
               </li>
             )}
           </ul>
@@ -59,7 +59,7 @@ function Header() {
             <ul>
               <li>
                 {" "}
-                <Link to={"/profile"} style={{border:"none", textDecoration:"none"}}>{user.userName} </Link>
+                <Link to={"/profile"} className='link' style={{border:"none", textDecoration:"none"}}>{user.userName} </Link>
               </li>
               <li>
                 {" "}
@@ -69,10 +69,10 @@ function Header() {
           ) : (
             <ul>
               <li>
-                <Link to={"/login"}>Login</Link>
+                <Link to={"/login"} className='link'>Login</Link>
               </li>
               <li>
-                <Link to={"/register"}>Sign Up</Link>
+                <Link to={"/register"} className='link'>Sign Up</Link>
               </li>
             </ul>
           )}

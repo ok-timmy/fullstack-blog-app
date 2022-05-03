@@ -41,7 +41,7 @@ function Profile() {
         </div>
       </div>
 
-      <button className="edit-btn"><Link to={'/edit-profile'}>Edit Profile</Link></button>
+      <button className="edit-btn"><Link to={'/edit-profile'} className='edit-link'>Edit Profile</Link></button>
       <div>
         <h3>Some of your Works</h3>
         {/* <div></div> */}
