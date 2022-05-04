@@ -34,13 +34,17 @@ function Content() {
   function calcTime(pubTime) {
     const currentTime = Date.now();
     const blogPubTime = new Date(pubTime);
+const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
 
-    const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
+    // console.log(timeDiff);
 
-    console.log(timeDiff);
-
-    //Check if time is greater than or less a day
-    if (timeDiff <= 23) {
+    //Check if time is greater than or less a day or an hour
+    if(timeDiff <1 ) {
+      const minTime = Math.ceil(timeDiff*60)
+      // console.log(minTime)
+     return `${ minTime} Minute${minTime>1? 's' : ''} Ago`;
+    }
+    else if (timeDiff <= 23 && timeDiff > 1) {
       return `${Math.ceil(timeDiff)} Hours Ago`;
     } else {
       return `${Math.floor(timeDiff / 24)} Days Ago`;
