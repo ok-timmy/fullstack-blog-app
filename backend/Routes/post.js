@@ -33,6 +33,7 @@ router.get("/allposts", async (req, res) => {
   }
 });
 
+
 //GET SPECIFIC POST
 router.get("/:id", async (req, res) => {
   try { 

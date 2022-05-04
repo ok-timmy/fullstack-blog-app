@@ -25,13 +25,13 @@
   box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
   -webkit-box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
   -moz-box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
-  padding: 10px 5px;
+  padding: 10px 5px 2px;
   margin-bottom: 20px;
 }
 
 .card-image {
-  width: inherit;
-  height: inherit;
+  width: 100%;
+  height: 300px;
 }
 
 .card-image img {
@@ -77,13 +77,20 @@
 .categories {
   flex: 2;
   width: auto;
-  margin: 0 auto;
+  margin: 0;
   padding-left: 40px;
 }
 
-.categories div ul {
-  display: flex;
-  flex-direction: column;
+.recent-post-div{
+  padding-top: 10px;
+}
+
+.each-recent-post{
+  padding: 1rem 0;
+}
+
+.each-recent-post h2 {
+  font-weight: 400;
 }
 
 .more-btn {
@@ -117,7 +124,7 @@
   .blog-section {
     padding: 1rem 0.8rem;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .blogs {
@@ -129,6 +136,6 @@
 
 
   .more-btn {
-    margin-bottom: 0;
+    margin: 0 0 1.5rem 2rem;
   }
 }

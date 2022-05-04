@@ -30,14 +30,14 @@ function App() {
 
   console.log(allblogs);
 
-  const hpBlogs = allblogs.slice(0, 3);
+  // const hpBlogs = allblogs.slice(0, 3);
 
   return (
     <Router>
       <>
         <Header />
         <Routes>
-          <Route exact path="/" element={<Home hpBlogs={hpBlogs} />} />
+          <Route exact path="/" element={<Home hpBlogs={allblogs} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/blog" element={<Blogpage/>} />

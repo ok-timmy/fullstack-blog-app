@@ -33,7 +33,7 @@ function EditProfile() {
       file,
       image,
     };
-    console.log(updatedUser);
+    // console.log(updatedUser);
 
     if (file) {
       const data = new FormData();
@@ -50,13 +50,11 @@ function EditProfile() {
     }
 
     try {
-      const res = await axios.put(
+       await axios.put(
         `http://localhost:8000/api/auth/${id}`,
         updatedUser
       );
-      console.log(res.data);
-
-     
+      // console.log(res.data);   
 
     } catch (error) {
       console.log(error);
@@ -65,7 +63,7 @@ function EditProfile() {
       `http://localhost:8000/api/auth/${email}`
     );
     dispatch({ type: "LOGIN_SUCCESS", payload: user.data });
-    console.log(user.data);
+    // console.log(user.data);
 
     navigation("/profile");
   };

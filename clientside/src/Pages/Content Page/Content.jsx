@@ -14,7 +14,8 @@ function Content() {
   const navigation = useNavigate();
 
   const pf = "http://localhost:8000/public/";
-  const [content, setContent] = useState(blogContent);
+  // console.log(blogContent);
+  const [postcontent, setPostcontent] = useState(blogContent);
 
   useEffect(() => {
     const fetchSinglePost = async (id) => {
@@ -22,7 +23,7 @@ function Content() {
         const { data } = await axios.get(
           `http://localhost:8000/api/post/${id}`
         );
-        setContent(data);
+        setPostcontent(data);
         console.log(data);
       } catch (error) {
         console.log(error);
@@ -31,26 +32,24 @@ function Content() {
     fetchSinglePost(blogContent._id);
   }, [editMode]);
 
+  console.log(postcontent);
+
   function calcTime(pubTime) {
     const currentTime = Date.now();
     const blogPubTime = new Date(pubTime);
-const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
-
-    // console.log(timeDiff);
+    const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
 
     //Check if time is greater than or less a day or an hour
-    if(timeDiff <1 ) {
-      const minTime = Math.ceil(timeDiff*60)
-      // console.log(minTime)
-     return `${ minTime} Minute${minTime>1? 's' : ''} Ago`;
+    if (timeDiff < 1) {
+      const minTime = Math.ceil(timeDiff * 60);
+      return `${minTime} Minute${minTime > 1 ? "s" : ""} Ago`;
     }
+    // Check if time is less than a day but greater than one hour.
     else if (timeDiff <= 23 && timeDiff > 1) {
       return `${Math.ceil(timeDiff)} Hours Ago`;
     } else {
       return `${Math.floor(timeDiff / 24)} Days Ago`;
     }
-
-    // console.log(pubTime);
   }
 
   //DELETE POST
@@ -72,24 +71,25 @@ const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
     }
   };
 
+  const { _id, content, image, title, category, author, updatedAt } =
+    postcontent;
+
   if (editMode) {
     return <EditPost blogContent={content} setEditMode={setEditMode} />;
   } else
     return (
       <div className="content">
-        <h3 className="content-header">{content.title}</h3>
-        {content.image && (
+        <h3 className="content-header">{title}</h3>
+        {image && (
           <div className="content-image">
-            <img src={pf + content.image} alt="Content emblem" />
+            <img src={pf + image} alt="Content emblem" />
           </div>
         )}
         <div className="space">
           <div className="content-details">
-            <p className="content-category">{content.category}</p>
-            <p className="content-author">Published by {content.author}</p>
-            <p className="content-timestamp">
-              Published {calcTime(content.updatedAt)}
-            </p>
+            <p className="content-category">{category}</p>
+            <p className="content-author">Published by {author}</p>
+            <p className="content-timestamp">{calcTime(updatedAt)}</p>
           </div>
           {user ? (
             content.author === `${user.firstName} ${user.secondName}` && (
@@ -99,10 +99,7 @@ const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
                   className="bi bi-pencil"
                 ></i>
 
-                <i
-                  onClick={() => openAlert(content._id)}
-                  className="bi bi-trash"
-                ></i>
+                <i onClick={() => openAlert(_id)} className="bi bi-trash"></i>
               </div>
             )
           ) : (
@@ -111,7 +108,7 @@ const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
         </div>
         <div
           className="content-story"
-          dangerouslySetInnerHTML={{ __html: content.content }}
+          dangerouslySetInnerHTML={{ __html: content }}
         ></div>
       </div>
     );

@@ -1,47 +1,54 @@
 import React, { useContext } from "react";
 import "./Profile.css";
-import image3 from "../../assets/asset-3.jpeg";
+import avatar from "../../assets/avatar.png";
 import { Context } from "../../Context/Context";
 import { Link } from "react-router-dom";
 
 function Profile() {
-
-  const {user} = useContext(Context);
-  console.log(user);
+  const { user } = useContext(Context);
+  // console.log(user);
 
   const pf = "http://localhost:8000/public/";
+
+  const { image, firstName, secondName, userName, email, bio } = user;
 
   return (
     <div className="profile">
       <div className="profile-pic">
-       { user.image ?  <img src={pf + user.image} alt="profile-pic" /> : <img src={image3} alt="profile-pic" /> }
+        {image ? (
+          <img src={pf + image} alt="profile-pic" />
+        ) : (
+          <img src={avatar} alt="profile-pic" />
+        )}
       </div>
       <div className="profile-details">
         <div>
           <label>First Name: </label>
-          <span>{user.firstName}</span>
+          <span>{firstName}</span>
         </div>
         <div>
           <label>Last Name: </label>
-          <span>{user.secondName}</span>
+          <span>{secondName}</span>
         </div>
         <div>
           <label>Username: </label>
-          <span>{user.userName}</span>
+          <span>{userName}</span>
         </div>
         <div>
           <label>Email Address: </label>
-          <span>{user.email}</span>
+          <span>{email}</span>
         </div>
         <div>
           <label>Short Bio:</label>
-          <span>
-           {user.bio || `No Bio Yet......`}
-          </span>
+          <span>{bio || 'No Bio Yet.'}</span>
         </div>
       </div>
 
-      <button className="edit-btn"><Link to={'/edit-profile'} className='edit-link'>Edit Profile</Link></button>
+      <button className="edit-btn">
+        <Link to={"/edit-profile"} className="edit-link">
+          Edit Profile
+        </Link>
+      </button>
       <div>
         <h3>Some of your Works</h3>
         {/* <div></div> */}

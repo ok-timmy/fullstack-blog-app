@@ -26,8 +26,6 @@ function Publish() {
 
   const navigation = useNavigate();
 
-  // const [error, setError] = useState(false)
-  // const [author, setValue] = useState();
   const author = `${user.firstName} ${user.secondName}`;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
