@@ -10,26 +10,22 @@ function Blogpage() {
 
   const [hpBlogs, setHpBlogs] = useState([]);
 
-  function calcTime (pubTime){
-    const currentTime =  Date.now();
+  function calcTime(pubTime) {
+    const currentTime = Date.now();
     // console.log(currentTime);
     const blogPubTime = new Date(pubTime);
     // console.log(seconds);
 
-    const timeDiff =(currentTime - blogPubTime)/(60*60*1000);
+    const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
 
-console.log(timeDiff);
+    console.log(timeDiff);
 
-    //Check if time is greater than a day 
-if (timeDiff<=23){
-  return `${Math.ceil(timeDiff)} Hours Ago`
-}
-else {
-  return `${Math.floor(timeDiff/24)} Days Ago`
-}
-
-
-    // console.log(pubTime);
+    //Check if time is greater than a day
+    if (timeDiff <= 23) {
+      return `${Math.ceil(timeDiff)} Hours Ago`;
+    } else {
+      return `${Math.floor(timeDiff / 24)} Days Ago`;
+    }
   }
 
   // calcTime(Date.now());
@@ -54,9 +50,9 @@ else {
       {hpBlogs.map((hpBlog) => {
         return (
           <div key={hpBlog._id} className="post">
-            <div className="post-image">
+           { hpBlog.image && <div className="post-image">
               <img src={pf + hpBlog.image} alt={"blog"} />
-            </div>
+            </div>}
             <div className="post-main">
               <h3>{hpBlog.title}</h3>
               <p>{hpBlog.excerpt} </p>

@@ -1,18 +1,35 @@
 import React, { useContext, useState } from "react";
 import "./Content.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
 import EditPost from "../EditPost/EditPost";
+import axios from "axios";
+import { useEffect } from "react";
 
 function Content() {
   const [editMode, setEditMode] = useState(false);
   const { user } = useContext(Context);
   const location = useLocation();
   const { blogContent } = location.state;
+  const navigation = useNavigate();
 
   const pf = "http://localhost:8000/public/";
+  const [content, setContent] = useState(blogContent);
 
-  // console.log(blogContent);
+  useEffect(() => {
+    const fetchSinglePost = async (id) => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8000/api/post/${id}`
+        );
+        setContent(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchSinglePost(blogContent._id);
+  }, [editMode]);
 
   function calcTime(pubTime) {
     const currentTime = Date.now();
@@ -32,31 +49,56 @@ function Content() {
     // console.log(pubTime);
   }
 
+  //DELETE POST
+  const deletePost = async (id) => {
+    await axios.delete(`http://localhost:8000/api/post/${id}`);
+  };
+
+  const openAlert = (id) => {
+    let text = "Are You sure You want to delete this Blog Post?";
+    if (window.confirm(text) === true) {
+      try {
+        deletePost(id);
+        navigation("/blog");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      return;
+    }
+  };
+
   if (editMode) {
-    return <EditPost blogContent={blogContent} setEditMode={setEditMode} />;
+    return <EditPost blogContent={content} setEditMode={setEditMode} />;
   } else
     return (
       <div className="content">
-        <div className="content-image">
-          <img src={pf + blogContent.image} alt="Content emblem" />
-        </div>
+        <h3 className="content-header">{content.title}</h3>
+        {content.image && (
+          <div className="content-image">
+            <img src={pf + content.image} alt="Content emblem" />
+          </div>
+        )}
         <div className="space">
           <div className="content-details">
-            <p className="content-category">{blogContent.category}</p>
-            <p className="content-author">Published by {blogContent.author}</p>
+            <p className="content-category">{content.category}</p>
+            <p className="content-author">Published by {content.author}</p>
             <p className="content-timestamp">
-              Published {calcTime(blogContent.updatedAt)}
+              Published {calcTime(content.updatedAt)}
             </p>
           </div>
           {user ? (
-            blogContent.author === `${user.firstName} ${user.secondName}` && (
+            content.author === `${user.firstName} ${user.secondName}` && (
               <div>
                 <i
                   onClick={() => setEditMode(true)}
                   className="bi bi-pencil"
                 ></i>
 
-                <i className="bi bi-trash"></i>
+                <i
+                  onClick={() => openAlert(content._id)}
+                  className="bi bi-trash"
+                ></i>
               </div>
             )
           ) : (
@@ -65,7 +107,7 @@ function Content() {
         </div>
         <div
           className="content-story"
-          dangerouslySetInnerHTML={{ __html: blogContent.content }}
+          dangerouslySetInnerHTML={{ __html: content.content }}
         ></div>
       </div>
     );

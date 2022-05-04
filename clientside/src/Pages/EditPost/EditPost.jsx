@@ -27,7 +27,7 @@ function EditPost({ blogContent,  setEditMode }) {
 
  const handlePostUpdate = async (e) => {
    e.preventDefault();
-   const postUpdate = {id, content, category}
+   const postUpdate = {id, content, category, title}
    console.log(postUpdate);
 
    try{
@@ -72,7 +72,7 @@ function EditPost({ blogContent,  setEditMode }) {
             id="title"
             placeholder="Article Title"
             value={title}
-            onChange={setTitle}
+            onChange={(e)=>setTitle(e.target.value)}
           />
         </div>
         <div>

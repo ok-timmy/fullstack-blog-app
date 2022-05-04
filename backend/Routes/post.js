@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 const Post = require("../Models/posts");
 
+// CREATE NEW POST
 router.post("/", async function (req, res) {
   try {
     const newPost = await new Post({
@@ -10,7 +11,7 @@ router.post("/", async function (req, res) {
       author: req.body.author,
       category: req.body.category,
       excerpt: req.body.excerpt,
-      image: req.body.image
+      image: req.body.image,
     });
 
     const post = await newPost.save();
@@ -22,6 +23,7 @@ router.post("/", async function (req, res) {
   }
 });
 
+// GET ALL POST
 router.get("/allposts", async (req, res) => {
   try {
     const posts = await Post.find();
@@ -31,21 +33,31 @@ router.get("/allposts", async (req, res) => {
   }
 });
 
+//GET SPECIFIC POST
 router.get("/:id", async (req, res) => {
-  try {
-    const post = await Post.findOne({ id: req.params.id });
+  try { 
+    const post = await Post.findById( req.params.id );  
     console.log("Post Found Successfully!");
+    console.log(post)
     res.status(200).json(post);
   } catch (error) {
-    console.log(error);
+    console.log(error); 
   }
 });
+
+//UPDATE POST
 
 router.put("/update", async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       { _id: req.body.id },
-      { $set: { content: req.body.content, category: req.body.category } },
+      {
+        $set: {
+          content: req.body.content,
+          category: req.body.category,
+          title: req.body.title,
+        },
+      },
       {
         new: true,
       }
@@ -56,5 +68,16 @@ router.put("/update", async (req, res) => {
     console.log(error);
   }
 });
+
+//DELETE POST
+router.delete('/:id', async (req, res) => {
+  try {
+     await Post.findByIdAndDelete( req.params.id );
+    console.log("Post Deleted Successfully!");
+    res.status(200).json("deleted successfully");
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 module.exports = router;

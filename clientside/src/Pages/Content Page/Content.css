@@ -62,6 +62,12 @@ padding: 0.2rem;
   border-radius: 16px 8px;
 }
 
+.content-header {
+  font-size: 40px;
+  font-weight: 400;
+  padding: 0.5rem 0 1rem;
+}
+
 .content-author {
   margin: 10px 0 5px;
   font-size: medium;
@@ -77,7 +83,7 @@ padding: 0.2rem;
   width: 100%;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 480px) {
   .content {
     display: block;
     margin: 0 auto;
