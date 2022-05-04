@@ -1,5 +1,5 @@
 main {
-  background-image: url("../../assets/asset-3.jpeg");
+  background: rgba(27, 27, 27, 0.7) url("../../assets/asset-3.jpeg");
   background-blend-mode: darken;
   color: rgb(46, 45, 45);
   height: 100vh;
@@ -16,7 +16,13 @@ main div {
   justify-content: center;
 }
 
+.intro-text {
+  font-size: 1.5rem;
+  color: rgb(236, 234, 234);
+}
+
 main div p {
+  color: rgb(236, 234, 234);
   font-size: medium;
   font-weight: 600;
 }
@@ -26,9 +32,10 @@ main div p {
   border: none;
   outline: none !important;
   color: white;
-  padding: 0.8rem 1rem;
-  border-radius: 20px 10px;
+  padding: 0.6rem 1rem;
+  border-radius: 10px 5px;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .start a {

@@ -15,7 +15,7 @@ function Home({hpBlogs}) {
       {/* <Header /> */}
       <main>
         <div>
-          <p>
+          <p className="intro-text">
             Beautiful Articles Start by Reading a Lot and then Writing Them
             down.
           </p>

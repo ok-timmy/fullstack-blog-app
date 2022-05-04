@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import "./EditProfile.css";
-import image3 from "../../assets/asset-3.jpeg";
 import { Context } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

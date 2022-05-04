@@ -17,7 +17,6 @@ function Content() {
   function calcTime(pubTime) {
     const currentTime = Date.now();
     const blogPubTime = new Date(pubTime);
-    const seconds = blogPubTime.getTime();
 
     const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
 

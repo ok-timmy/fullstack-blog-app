@@ -14,7 +14,6 @@ function Blogpage() {
     const currentTime =  Date.now();
     // console.log(currentTime);
     const blogPubTime = new Date(pubTime);
-    const seconds = blogPubTime.getTime()
     // console.log(seconds);
 
     const timeDiff =(currentTime - blogPubTime)/(60*60*1000);
