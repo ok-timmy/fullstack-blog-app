@@ -37,8 +37,8 @@ function Login() {
 
   const handleInput = async (e) => {
     e.preventDefault();
-    const userCredentials = { email, password };
-    console.log(userCredentials);
+    // const userCredentials = { email, password };
+    // console.log(userCredentials);
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("http://localhost:8000/api/auth/login/", {
@@ -46,6 +46,10 @@ function Login() {
         password,
       });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.others });
+      navigation("/");
+  
+      setEmail("");
+      setPassword("");
 
       console.log(res.data);
     } catch (error) {
@@ -53,14 +57,10 @@ function Login() {
       console.log(error.message);
       // setError(true);
     }
-    navigation("/");
-
-    setEmail("");
-    setPassword("");
   };
 
-  console.log(isFetching);
-  console.log(user);
+  // console.log(isFetching);
+  // console.log(user);
   return (
     <div>
       <Loginbox>

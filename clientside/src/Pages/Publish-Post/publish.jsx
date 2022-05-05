@@ -27,6 +27,7 @@ function Publish() {
   const navigation = useNavigate();
 
   const author = `${user.firstName} ${user.secondName}`;
+  const authorEmail = `${user.email}`;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState();
@@ -37,7 +38,7 @@ function Publish() {
   const handleInput = async (e) => {
     let image = "";
     e.preventDefault();
-    const post = { title, author, content, category, excerpt, file, image };
+    const post = { title, author, content, category, excerpt, file, image, authorEmail };
     if (file) {
       const data = new FormData();
       const fileName = Date.now() + file.name;

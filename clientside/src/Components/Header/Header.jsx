@@ -9,7 +9,7 @@ const WholeHead = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: 10vh;
-  background-color: transparent;
+  background-color: whitesmoke;
   color: black;
   padding: 10px;
 `;
@@ -69,9 +69,13 @@ function Header() {
           {user ? (
             <ul>
               <li>
+                {" "}
+                <button onClick={handleLogOut}>Logout </button>
+              </li>
+              {user && <li>
                 {" "}<span className="user">
                 <Link to={"/profile"} className="link">
-                  {user ? (
+                  {user.image ? (
                     <img
                       src={pf+user.image}
                       alt={user.userName}
@@ -80,14 +84,9 @@ function Header() {
                   ) : (
                     <img src={avatar} alt={avatar} className="user-pic" />
                   )}
-                  {user.userName}{" "}
                 </Link>
                 </span>
-              </li>
-              <li>
-                {" "}
-                <button onClick={handleLogOut}>Logout </button>
-              </li>
+              </li>}
             </ul>
           ) : (
             <ul>

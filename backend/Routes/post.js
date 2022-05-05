@@ -12,6 +12,7 @@ router.post("/", async function (req, res) {
       category: req.body.category,
       excerpt: req.body.excerpt,
       image: req.body.image,
+      authorEmail: req.body.authorEmail
     });
 
     const post = await newPost.save();
@@ -45,6 +46,21 @@ router.get("/:id", async (req, res) => {
     console.log(error); 
   }
 });
+
+//GET SPECIFIC USER POST
+router.get("/:email", async (req, res) => {
+  try { 
+    const post = await Post.find({}); 
+    const userpost = post.filter((p)=>{return p.authorEmail === req.params.email}) 
+    console.log("Posts Found Successfully!");
+    console.log(userpost)
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error.message); 
+  }
+});
+
+
 
 //UPDATE POST
 
