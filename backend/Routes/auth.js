@@ -31,15 +31,23 @@ router.post("/register", async function (req, res) {
 router.post("/login", async function (req, res) {
   try {
     const foundUser = await User.findOne({ email: req.body.email });
-    console.log(foundUser);
+    // console.log(foundUser);
     if (foundUser) {
-      console.log("User was found");
-      const validate = bcrypt.compare(req.body.password, foundUser.password);
-      validate && console.log("User exist!!");
-      const { password, ...others } = foundUser._doc;
+      // console.log("User was found");
+      const validate = await bcrypt.compare(
+        req.body.password,
+        foundUser.password
+      );
+      // console.log(validate);
 
-      const token = jwt.sign({ foundUser }, "secretkey", { expiresIn: "2h" });
-      res.status(200).json({ others, token });
+      if (validate) {
+        const { password, ...others } = foundUser._doc;
+        const token = jwt.sign({ foundUser }, "secretkey", { expiresIn: "2h" });
+        res.cookie("jwt", token, { httpOnly: true, maxAge: 60 });
+        res.status(200).json({ others, token });
+      } else {
+        res.status(401).json({ error: "Incorrect Password" });
+      }
     } else {
       console.log("User Was not found");
       res.status(401).send({ message: "User does not exist" });
@@ -87,7 +95,9 @@ function verifyToken(req, res, next) {
   if (typeof bearerHeader !== "undefined") {
     //get token from bearer header
     const bearerToken = bearerHeader.split(" ")[1];
-    req.token = bearerToken;
+    const token = bearerToken;
+
+    jwt.verify(token, "secretkey", (err, user) => {});
     next();
   } else {
     console.log("Can't Login");

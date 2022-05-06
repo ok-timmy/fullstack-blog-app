@@ -12,15 +12,15 @@ function Blogpage() {
     { id: 3, value: "Romance" },
     { id: 4, value: "Prose" },
     { id: 5, value: "Poetry" },
-    {id: 6, value:"Adventure"}
+    { id: 6, value: "Adventure" },
   ];
 
   const [filterCategory, setfilterCategory] = useState(category[0]);
   const [hpBlogs, setHpBlogs] = useState([]);
   const [filteredBlogs, setfilteredBlogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   const pf = "http://localhost:8000/public/";
-
 
   function calcTime(pubTime) {
     const currentTime = Date.now();
@@ -45,14 +45,12 @@ function Blogpage() {
 
   console.log(filteredBlogs);
 
- 
   const fetchBlogs = async () => {
-    const { data } = await axios.get(
-      "http://localhost:8000/api/post/allposts"
-    );
+    const { data } = await axios.get("http://localhost:8000/api/post/allposts");
     const reversedData = [...data].reverse();
     setHpBlogs(reversedData);
     setfilteredBlogs(reversedData);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -60,7 +58,7 @@ function Blogpage() {
   }, []);
 
   useEffect(() => {
-  setfilteredBlogs(hpBlogs)
+    setfilteredBlogs(hpBlogs);
     const filterPosts = (x, ys) => {
       if (x.value === "All Categories") {
         // console.log(ys);
@@ -68,60 +66,71 @@ function Blogpage() {
       } else {
         const filteredPost = ys.filter((y) => {
           const filt = y.category === x.value;
-         return filt;
+          return filt;
         });
         setfilteredBlogs(filteredPost);
       }
     };
 
     filterPosts(filterCategory, hpBlogs);
-  }, [filterCategory])
-  
+  }, [filterCategory]);
 
   return (
     <div className="blogpage">
       <h2 className="heading">Latest Posts</h2>
       <div className="category-heading">
         <p className="blog-category">{filterCategory.value}</p>
-        <span className="filter"> Filter: <select
-          onChange={(e) => {
-            setfilterCategory(category[e.target.value]);
-          }}
-        >
-          {category.map((f) => {
-            return (
-              <option key={f.id} value={f.id - 1} id={f.id}>
-                {f.value}
-              </option>
-            );
-          })}
-        </select></span>
+        <span className="filter">
+          {" "}
+          Filter:{" "}
+          <select
+            onChange={(e) => {
+              setfilterCategory(category[e.target.value]);
+            }}
+          >
+            {category.map((f) => {
+              return (
+                <option key={f.id} value={f.id - 1} id={f.id}>
+                  {f.value}
+                </option>
+              );
+            })}
+          </select>
+        </span>
       </div>
 
-      { filteredBlogs.length!==0 ? filteredBlogs.map((hpBlog) => {
-        return (
-          <div key={hpBlog._id} className="post">
-            {hpBlog.image && (
-              <div className="post-image">
-                <img src={pf + hpBlog.image} alt={"blog"} />
+      { isLoading ? 
+        (<div className="no-blog"> Loading....</div>)
+       :
+        filteredBlogs.length === 0 ? 
+          (<div className="no-blog"> There are No Blog posts for this category yet.</div>)
+         : (
+          filteredBlogs.map((hpBlog) => {
+            return (
+              <div key={hpBlog._id} className="post">
+                {hpBlog.image && (
+                  <div className="post-image">
+                    <img src={pf + hpBlog.image} alt={"blog"} />
+                  </div>
+                )}
+                <div className="post-main">
+                  <h3>{hpBlog.title}</h3>
+                  <p>{hpBlog.excerpt} </p>
+                  <button className="more">
+                    <Link
+                      to={`/blog/:${hpBlog._id}`}
+                      state={{ blogContent: hpBlog }}
+                    >
+                      Read More
+                    </Link>
+                  </button>
+                  <p className="post-time">{calcTime(hpBlog.updatedAt)}</p>
+                </div>
               </div>
-            )}
-            <div className="post-main">
-              <h3>{hpBlog.title}</h3>
-              <p>{hpBlog.excerpt} </p>
-              <button className="more">
-                <Link
-                  to={`/blog/:${hpBlog._id}`}
-                  state={{ blogContent: hpBlog }}
-                >
-                  Read More
-                </Link>
-              </button>
-              <p className="post-time">{calcTime(hpBlog.updatedAt)}</p>
-            </div>
-          </div>
-        );
-      }) : (<div className="no-blog"> There are No Blog posts for this category yet.</div>)}
+            );
+          })
+        )
+      }
     </div>
   );
 }

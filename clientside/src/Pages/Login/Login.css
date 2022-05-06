@@ -63,6 +63,10 @@ background-color: rgb(61, 144, 61);
     cursor: pointer;
 }
 
+.login__error {
+    color: red;
+}
+
 
 @media screen and (max-width: 400px) {
     .login-form .buttons input{

@@ -5,6 +5,17 @@ import styled from "styled-components";
 import { Context } from "../../Context/Context";
 import "./Login.css";
 
+const LoginDiv = styled.div`
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 480px) {
+    height: 80vh;
+  }
+`;
+
 const Loginbox = styled.div`
   width: 25rem;
   height: 25rem;
@@ -14,7 +25,7 @@ const Loginbox = styled.div`
   box-shadow: 4px 7px 10px 3px rgba(138, 131, 131, 0.91);
   -webkit-box-shadow: 4px 7px 10px 3px rgba(138, 131, 131, 0.91);
   -moz-box-shadow: 4px 7px 10px 3px rgba(138, 131, 131, 0.91);
-  @media (max-width: 400px) {
+  @media (max-width: 480px) {
     width: 90%;
   }
 `;
@@ -33,36 +44,39 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, dispatch, isFetching } = useContext(Context);
+  const [isError, setIsError] = useState(false);
+  const { dispatch } = useContext(Context);
 
   const handleInput = async (e) => {
     e.preventDefault();
-    // const userCredentials = { email, password };
-    // console.log(userCredentials);
+
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/login/", {
-        email,
-        password,
-      });
+      const res = await axios
+        .post("http://localhost:8000/api/auth/login/", {
+          email,
+          password,
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.others });
-      navigation("/");
-  
+
       setEmail("");
       setPassword("");
+      navigation("/");
 
       console.log(res.data);
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE" });
-      console.log(error.message);
-      // setError(true);
+      setIsError(true);
     }
   };
 
   // console.log(isFetching);
   // console.log(user);
   return (
-    <div>
+    <LoginDiv>
       <Loginbox>
         <Heading> Sign In </Heading>
         <form className="login-form">
@@ -76,6 +90,7 @@ function Login() {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
+              onFocus={() => setIsError(false)}
             />
           </div>
 
@@ -89,6 +104,7 @@ function Login() {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              onFocus={() => setIsError(false)}
             />
           </div>
           <input
@@ -97,6 +113,12 @@ function Login() {
             value="Login"
             onClick={handleInput}
           />
+          <span
+            style={{ opacity: `${isError ? "1" : "0"}` }}
+            className="login__error"
+          >
+            Incorrect Credentials
+          </span>
 
           <p>
             Don't Have An Account?{" "}
@@ -106,7 +128,7 @@ function Login() {
           </p>
         </form>
       </Loginbox>
-    </div>
+    </LoginDiv>
   );
 }
 

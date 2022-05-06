@@ -48,17 +48,17 @@ router.get("/:id", async (req, res) => {
 });
 
 //GET SPECIFIC USER POST
-router.get("/:email", async (req, res) => {
-  try { 
-    const post = await Post.find({}); 
-    const userpost = post.filter((p)=>{return p.authorEmail === req.params.email}) 
-    console.log("Posts Found Successfully!");
-    console.log(userpost)
-    res.status(200).json(post);
-  } catch (error) {
-    console.log(error.message); 
-  }
-});
+// router.get("/:email", async (req, res) => {
+//   try { 
+//     const post = await Post.find({}); 
+//     const userpost = post.filter((p)=>{return p.authorEmail === req.params.email}) 
+//     console.log("Posts Found Successfully!");
+//     console.log(userpost)
+//     res.status(200).json(post);
+//   } catch (error) {
+//     console.log(error.message); 
+//   }
+// });
 
 
 

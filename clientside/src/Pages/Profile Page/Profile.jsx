@@ -17,19 +17,25 @@ function Profile() {
   const { image, firstName, secondName, userName, email, bio } = user;
 
   useEffect(() => {
-   const fetchUserPosts = async(email) => {
-    //  const newEmail = email.slice(0, email.length)
-     const resp = await axios.get(`http://localhost:8000/api/post/:${email}`)
-     const {data} = resp.json();
-     console.log(data);
-     setuserPosts(data);
-   }
+    const fetchUserPosts = async (email) => {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/post/allposts"
+      );
+      const currentUserPost = data.filter((d) => {
+        return d.authorEmail === email;
+      });
+      console.log(currentUserPost);
+      if (currentUserPost === []) {
+        setuserPosts("no posts");
+      } else {
+        setuserPosts(currentUserPost);
+      }
+    };
 
-   fetchUserPosts(user.email)
-  }, [])
+    fetchUserPosts(user.email);
+  }, []);
 
   console.log(userPosts);
-  
 
   return (
     <div className="profile">
@@ -59,7 +65,7 @@ function Profile() {
         </div>
         <div>
           <label>Short Bio:</label>
-          <span>{bio || 'No Bio Yet.'}</span>
+          <span>{bio || "No Bio Yet."}</span>
         </div>
       </div>
 
@@ -70,8 +76,17 @@ function Profile() {
       </button>
       <div>
         <h3>Some of your Works</h3>
-        {/* <div></div> */}
-        Here we will display some of the Author Previous works
+        <div>
+          {!userPosts ? (
+            <div>Loading....</div>
+          ) : userPosts === null ? (
+            userPosts.map((userPost) => {
+              return <div>{userPost.title}</div>;
+            })
+          ) : (
+            <div>You Dont have any post</div>
+          )}
+        </div>
       </div>
     </div>
   );
