@@ -20,7 +20,7 @@ router.post("/register", async function (req, res) {
 
     const user = await newUser.save();
     res.status(200).json(user);
-    console.log("Save successful");
+    // console.log("Save successful");
   } catch (error) {
     res.status(500).send(error);
     console.log(error);
@@ -49,7 +49,7 @@ router.post("/login", async function (req, res) {
         res.status(401).json({ error: "Incorrect Password" });
       }
     } else {
-      console.log("User Was not found");
+      // console.log("User Was not found");
       res.status(401).send({ message: "User does not exist" });
     }
   } catch (error) {
@@ -65,7 +65,7 @@ router.get("/:email", async function (req, res) {
     console.log(foundUser);
     const { password, ...others } = foundUser._doc;
     res.status(200).json(others);
-    console.log("User Found");
+    // console.log("User Found");
   } catch {
     console.log(error);
   }
@@ -76,11 +76,11 @@ router.get("/:email", async function (req, res) {
 router.put("/:id", async function (req, res) {
   try {
     var userId = { _id: req.params.id };
-    console.log(userId);
+    // console.log(userId);
     const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
       new: true,
     });
-    console.log("User Updated Successfully!");
+    // console.log("User Updated Successfully!");
     res.status(200).json(updatedUser);
   } catch (error) {
     console.log(error);
@@ -88,20 +88,20 @@ router.put("/:id", async function (req, res) {
   }
 });
 
-function verifyToken(req, res, next) {
-  //Get auth header value
-  const bearerHeader = req.headers["authorization"];
-  // Check if header is undefined
-  if (typeof bearerHeader !== "undefined") {
-    //get token from bearer header
-    const bearerToken = bearerHeader.split(" ")[1];
-    const token = bearerToken;
+// function verifyToken(req, res, next) {
+//   //Get auth header value
+//   const bearerHeader = req.headers["authorization"];
+//   // Check if header is undefined
+//   if (typeof bearerHeader !== "undefined") {
+//     //get token from bearer header
+//     const bearerToken = bearerHeader.split(" ")[1];
+//     const token = bearerToken;
 
-    jwt.verify(token, "secretkey", (err, user) => {});
-    next();
-  } else {
-    console.log("Can't Login");
-  }
-}
+//     jwt.verify(token, "secretkey", (err, user) => {});
+//     next();
+//   } else {
+//     console.log("Can't Login");
+//   }
+// }
 
 module.exports = router;

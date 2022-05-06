@@ -14,6 +14,7 @@ import Footer from "./Components/Footer/Footer";
 
 function App() {
   const [allblogs, setAllblogs] = useState([]);
+  const [isFetching, setIsFetching] = useState(true)
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -23,6 +24,7 @@ function App() {
       // const blogs = await response.data
       setAllblogs(data);
       // console.log(data);
+      setIsFetching(false);
     };
 
     fetchBlogs();
@@ -37,7 +39,7 @@ function App() {
       <>
         <Header />
         <Routes>
-          <Route exact path="/" element={<Home hpBlogs={allblogs} />} />
+          <Route exact path="/" element={<Home hpBlogs={allblogs} isFetching={isFetching}/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/blog" element={<Blogpage/>} />

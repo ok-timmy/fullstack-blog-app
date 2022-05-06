@@ -3,6 +3,7 @@
   display: inline-flex;
   position: relative;
   height: auto;
+  width: 100%;
 }
 
 .blogs {
@@ -75,6 +76,10 @@
     margin: 0 auto;
     width: 90%;
     margin-bottom: 20px;
+  }
+
+  .categories {
+    padding-left: 20px;
   }
 
 

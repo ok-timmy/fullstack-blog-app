@@ -6,7 +6,7 @@ import Newsletter from "../../Components/Newletter/Newsletter";
 import { Context } from "../../Context/Context";
 import "./Home.css";
 
-function Home({hpBlogs}) {
+function Home({hpBlogs, isFetching}) {
 
   const { user } = useContext(Context);
 
@@ -23,7 +23,7 @@ function Home({hpBlogs}) {
           <button className="start"><Link to={user ? '/publish' : '/register'}>Start Now</Link></button>
         </div>
       </main>
-      <Blogs hpBlogs={hpBlogs}/>
+      <Blogs hpBlogs={hpBlogs} isFetching={isFetching}/>
       <Newsletter/>
     </>
   );

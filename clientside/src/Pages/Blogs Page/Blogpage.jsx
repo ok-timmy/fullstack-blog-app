@@ -74,7 +74,7 @@ function Blogpage() {
       </div>
 
       {isLoading ? (
-        <div class="loader"></div>
+        <div className="loader"></div>
       ) : filteredBlogs.length === 0 ? (
         <div className="no-blog">
           {" "}

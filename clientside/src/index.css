@@ -17,9 +17,10 @@ body {
   border: 5px solid #f3f3f3; /* Light grey */
   border-top: 5px solid #0f0f0f; 
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   animation: spin 1s linear infinite;
+  margin: auto;
 }
 
 @keyframes spin {
@@ -27,3 +28,12 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+.icon__section {
+  margin-top: 10px;
+}
+
+@media screen and (max-width:480px) {
+  .icon__section {
+    margin-bottom: 10px;
+  }
+}

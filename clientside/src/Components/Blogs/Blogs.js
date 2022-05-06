@@ -3,7 +3,7 @@ import "./Blogs.css";
 import { Link} from "react-router-dom";
 import BlogCard from "../BlogCard/BlogCard";
 
-function Blogs({ hpBlogs }) {
+function Blogs({ hpBlogs, isFetching }) {
   const latestBlogsArray = [...hpBlogs].reverse();
   // console.log(latestBlogsArray);
   const slicedArray = latestBlogsArray.slice(0, 3);
@@ -37,7 +37,7 @@ function Blogs({ hpBlogs }) {
       <h2 style={{ textAlign: "center", paddingTop: "1rem" }}>Blog Posts</h2>
       <div className="blog-section">
         <div className="blogs">
-          {slicedArray.map((hpBlog) => {
+          {isFetching ? <div className="loader"></div> : slicedArray.map((hpBlog) => {
             return (
               <BlogCard  key={hpBlog._id}  hpBlog={hpBlog} />
             );
@@ -48,7 +48,7 @@ function Blogs({ hpBlogs }) {
           <h2>Recent Posts</h2>
           <hr />
           <div className="recent-post-div">
-            {latestBlogsArrayTwo.map((latestBlog) => {
+            {isFetching ? <div className="loader-div"><div className="loader"></div></div> : latestBlogsArrayTwo.map((latestBlog) => {
               return (
                 <div key={latestBlog._id}>
                   {" "}
@@ -65,7 +65,7 @@ function Blogs({ hpBlogs }) {
                   <hr />
                 </div>
               );
-            })}
+            }) }
           </div>
         </div>
       </div>

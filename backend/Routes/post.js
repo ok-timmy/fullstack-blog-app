@@ -16,7 +16,7 @@ router.post("/", async function (req, res) {
     });
 
     const post = await newPost.save();
-    console.log("Post was Created Successfully!!");
+    // console.log("Post was Created Successfully!!");
     res.status(200).json(post);
   } catch (error) {
     res.status(500).send(error);
@@ -39,8 +39,8 @@ router.get("/allposts", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try { 
     const post = await Post.findById( req.params.id );  
-    console.log("Post Found Successfully!");
-    console.log(post)
+    // console.log("Post Found Successfully!");
+    // console.log(post)
     res.status(200).json(post);
   } catch (error) {
     console.log(error); 
@@ -65,7 +65,7 @@ router.put("/update", async (req, res) => {
         new: true,
       }
     );
-    console.log("Post Updated Successfully!!");
+    // console.log("Post Updated Successfully!!");
     res.status(200).json(updatedPost);
   } catch (error) {
     console.log(error);
@@ -86,7 +86,7 @@ router.patch("/updatelikes/:id", async (req, res) => {
         new: true,
       }
     );
-    console.log("Likes Updated Successfully!!");
+    // console.log("Likes Updated Successfully!!");
     res.status(200).json(updatedPost);
   } catch (error) {
     console.log(error);
@@ -97,7 +97,7 @@ router.patch("/updatelikes/:id", async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
      await Post.findByIdAndDelete( req.params.id );
-    console.log("Post Deleted Successfully!");
+    // console.log("Post Deleted Successfully!");
     res.status(200).json("deleted successfully");
   } catch (error) {
     console.log(error);
