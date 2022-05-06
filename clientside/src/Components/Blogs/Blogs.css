@@ -2,6 +2,7 @@
   padding: 1rem 0.8rem;
   display: inline-flex;
   position: relative;
+  height: auto;
 }
 
 .blogs {
@@ -14,65 +15,7 @@
   padding: 10px 0 20px;
 }
 
-.card {
-  width: auto;
-  height: 100%;
-  margin: 0 5px;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid rgb(252, 244, 244);
-  border-radius: 10px;
-  box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
-  padding: 10px 5px 2px;
-  margin-bottom: 20px;
-}
 
-.card-image {
-  width: 100%;
-  height: 300px;
-}
-
-.card-image img {
-  width: 100%;
-  height: 100%;
-}
-
-.category {
-  margin: 10px 10px;
-}
-
-.category button {
-  background-color: crimson;
-  color: white;
-  padding: 5px 10px;
-  outline: none;
-  border-radius: 5px 10px;
-}
-.card-details .class-header {
-  font-size: large;
-  justify-content: center;
-  padding: 10px 10px;
-}
-
-.card-details p {
-  font-size: small;
-  padding: 10px 10px;
-}
-
-.card-details h5 {
-  font-size: small;
-  font-weight: 300;
-  letter-spacing: 1px;
-  padding: 5px 10px;
-}
-
-.card-details span {
-  font-size: small;
-  justify-content: center;
-  padding: 5px 10px;
-}
 
 .categories {
   flex: 2;

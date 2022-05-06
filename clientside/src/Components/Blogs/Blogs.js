@@ -1,15 +1,15 @@
 import React from "react";
 import "./Blogs.css";
 import { Link} from "react-router-dom";
+import BlogCard from "../BlogCard/BlogCard";
 
 function Blogs({ hpBlogs }) {
   const latestBlogsArray = [...hpBlogs].reverse();
   // console.log(latestBlogsArray);
   const slicedArray = latestBlogsArray.slice(0, 3);
 
-  // const navigation = useNavigate();
+  const latestBlogsArrayTwo = latestBlogsArray.slice(0,5);
 
-  const pf = "http://localhost:8000/public/";
 
   function calcTime(pubTime) {
     const currentTime = Date.now();
@@ -17,17 +17,18 @@ function Blogs({ hpBlogs }) {
 
     const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
 
-    //Check if time is greater than or less a day or an hour
+    //Check if time is less than one hour
     if (timeDiff < 1) {
       const minTime = Math.ceil(timeDiff * 60);
       return `${minTime} Minute${minTime > 1 ? "s" : ""} Ago`;
     }
-
-    //Check if time is greater than or less a day
+    //Check if time is less than than a 24 hours
     else if (timeDiff <= 23) {
-      return `${Math.ceil(timeDiff)} Hours Ago`;
+      const hourTime = Math.ceil(timeDiff);
+      return `${hourTime} Hour${hourTime>1 ? "s" : ""} Ago`;
     } else {
-      return `${Math.floor(timeDiff / 24)} Days Ago`;
+      const dayNumber = Math.floor(timeDiff / 24);
+      return `${dayNumber} Day${dayNumber>1 ? "s" : "" } Ago`;
     }
   }
 
@@ -38,34 +39,7 @@ function Blogs({ hpBlogs }) {
         <div className="blogs">
           {slicedArray.map((hpBlog) => {
             return (
-              <div key={hpBlog._id} className="card">
-                <div className="card-image">
-                  <img src={pf + hpBlog.image} alt={"post-img"} />
-                </div>
-                <div className="category">
-                  <button>{hpBlog.category}</button>
-                </div>
-                <div className="card-details">
-                  <div className="class-header">
-                    <h3>{hpBlog.title}</h3>
-                  </div>
-                  <div>
-                    <p>{hpBlog.excerpt}</p>
-                  </div>
-                  <h5>{hpBlog.author}</h5>
-                  <span>{calcTime(hpBlog.updatedAt)}</span>
-                  <div>
-                    <button className="read-more">
-                      <Link
-                        to={`/blog/:${hpBlog._id}`}
-                        state={{ blogContent: hpBlog }}
-                      >
-                        Read More
-                      </Link>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <BlogCard  key={hpBlog._id}  hpBlog={hpBlog} />
             );
           })}
         </div>
@@ -74,7 +48,7 @@ function Blogs({ hpBlogs }) {
           <h2>Recent Posts</h2>
           <hr />
           <div className="recent-post-div">
-            {latestBlogsArray.map((latestBlog) => {
+            {latestBlogsArrayTwo.map((latestBlog) => {
               return (
                 <div key={latestBlog._id}>
                   {" "}

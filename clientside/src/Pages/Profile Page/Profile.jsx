@@ -78,7 +78,7 @@ function Profile() {
         <h3>Some of your Works</h3>
         <div>
           {!userPosts ? (
-            <div>Loading....</div>
+            <div class="loader"></div>
           ) : userPosts === null ? (
             userPosts.map((userPost) => {
               return <div>{userPost.title}</div>;

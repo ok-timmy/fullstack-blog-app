@@ -6,6 +6,9 @@ import { Context } from "../../Context/Context";
 import avatar from "../../assets/avatar.png";
 
 const WholeHead = styled.div`
+position:fixed;
+width:100%;
+z-index: 10;
   display: flex;
   flex-wrap: wrap;
   height: 10vh;

@@ -45,7 +45,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
-  const { dispatch } = useContext(Context);
+  const { dispatch, isFetching } = useContext(Context);
 
   const handleInput = async (e) => {
     e.preventDefault();
@@ -73,8 +73,6 @@ function Login() {
     }
   };
 
-  // console.log(isFetching);
-  // console.log(user);
   return (
     <LoginDiv>
       <Loginbox>
@@ -112,6 +110,7 @@ function Login() {
             type="submit"
             value="Login"
             onClick={handleInput}
+            style={{cursor: `${isFetching ? "not-allowed" : "pointer"}`}}
           />
           <span
             style={{ opacity: `${isError ? "1" : "0"}` }}

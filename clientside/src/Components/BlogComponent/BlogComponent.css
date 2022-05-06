@@ -1,0 +1,70 @@
+.post {
+  display: flex;
+  border-bottom: 1px solid black;
+  padding: 0.5rem 0;
+  height: auto;
+}
+
+.post-image {
+  flex: 2;
+  margin-right: 1rem;
+  width: 100%;
+}
+
+.post-image img {
+  height: 10rem;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.post-main {
+  flex: 7;
+}
+
+.post-main h3 {
+  font-size: larger;
+  font-weight: 600;
+  padding-bottom: 0.8rem;
+}
+
+.more {
+  border: none;
+  outline: none;
+  background-color: rgb(232, 230, 230);
+  border-radius: 3px;
+  padding: 5px 7px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.more:hover {
+  background-color: aliceblue;
+}
+
+.more-btn:hover {
+  background-color: rgb(207, 60, 60);
+}
+
+.post-time {
+  font-size: small;
+  font-weight: 300;
+}
+
+.icons__section {
+  margin-top: 10px;
+}
+
+.like {
+  color: red;
+  margin-right: 5px;
+}
+
+.share {
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .post-image img {
+    height: 100px;
+  }
+}

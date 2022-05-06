@@ -47,20 +47,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//GET SPECIFIC USER POST
-// router.get("/:email", async (req, res) => {
-//   try { 
-//     const post = await Post.find({}); 
-//     const userpost = post.filter((p)=>{return p.authorEmail === req.params.email}) 
-//     console.log("Posts Found Successfully!");
-//     console.log(userpost)
-//     res.status(200).json(post);
-//   } catch (error) {
-//     console.log(error.message); 
-//   }
-// });
-
-
 
 //UPDATE POST
 
@@ -80,6 +66,27 @@ router.put("/update", async (req, res) => {
       }
     );
     console.log("Post Updated Successfully!!");
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// UPDATE POST LIKES
+router.patch("/updatelikes/:id", async (req, res) => {
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          likes : req.body.likes
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    console.log("Likes Updated Successfully!!");
     res.status(200).json(updatedPost);
   } catch (error) {
     console.log(error);

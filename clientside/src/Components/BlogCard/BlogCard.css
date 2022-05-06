@@ -1,0 +1,63 @@
+.blogCard {
+    width: auto;
+    height: 100%;
+    margin: 0 5px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(252, 244, 244);
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(161, 153, 153, 0.6);
+    padding: 10px 5px 2px;
+    margin-bottom: 20px;
+  }
+  
+  .Card-image {
+    width: 100%;
+    height: 300px;
+  }
+  
+  .Card-image img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .Category {
+    margin: 10px 10px;
+  }
+  
+  .Category button {
+    background-color: crimson;
+    color: white;
+    padding: 5px 10px;
+    outline: none;
+    border-radius: 5px 10px;
+  }
+  .Card-details .class-header {
+    font-size: large;
+    justify-content: center;
+    padding: 10px 10px;
+  }
+  
+  .Card-details p {
+    font-size: small;
+    padding: 10px 10px;
+  }
+  
+  .Card-details h5 {
+    font-size: small;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+  }
+  
+  .Card-details span {
+    font-size: small;
+    justify-content: center;
+    padding: 5px 10px;
+  }
+
+  .icon__section {
+      margin-top: 10px;
+  }
