@@ -44,3 +44,11 @@ main div p {
   color: white;
   border: none !important;
 }
+
+
+@media screen and (max-width:600px) {
+  main div {
+    padding: 1rem;
+    text-align: center;
+  }
+}

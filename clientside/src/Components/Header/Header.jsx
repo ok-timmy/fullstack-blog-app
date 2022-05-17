@@ -9,13 +9,19 @@ import { useState, useRef, useCallback } from "react";
 const WholeHead = styled.div`
   position: fixed;
   width: 100%;
-  z-index: 10;
+  z-index: 100;
+  position: fixed;
+  top:0;
   display: flex;
   flex-wrap: wrap;
-  height: 10vh;
+  height: 12vh;
   background-color: whitesmoke;
   color: black;
   padding: 15px 10px;
+
+  @media screen and (max-width: 600px) {
+    height : 10vh;
+  }
 `;
 
 const HeaderLeft = styled.div`
@@ -29,13 +35,13 @@ const HeaderCenter = styled.div`
 `;
 const HeaderRight = styled.div`
   flex: 1;
-  @media screen and (max-width:600px) {
+  @media screen and (max-width: 600px) {
     display: none;
   }
 `;
 
 const MobileNav = styled.div`
-  width: 60vw;
+  width: 50vw;
   height: 100%;
   left: 0px;
   position: fixed;
@@ -152,7 +158,7 @@ function Header() {
                   <li>
                     {" "}
                     <span className="user">
-                      <Link to={"/profile"} className="link">
+                      <Link to={"/profile"} className="profile-link">
                         {user.image ? (
                           <img
                             src={pf + user.image}
@@ -189,11 +195,7 @@ function Header() {
       <MobileNav isMobileNav={isMobileNav} ref={node}>
         <h3>Blog Project</h3>
         {user ? (
-          <ul>
-            <li>
-              {" "}
-              <button onClick={handleLogOut}>Logout </button>
-            </li>
+          <>
             {user && (
               <li>
                 {" "}
@@ -212,20 +214,20 @@ function Header() {
                 </span>
               </li>
             )}
-          </ul>
+            <li>
+              <button onClick={handleLogOut}>Logout </button>
+            </li>
+          </>
         ) : (
-          <ul>
-            <li>
-              <Link to={"/login"} className="link">
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link to={"/register"} className="link">
-                Sign Up
-              </Link>
-            </li>
-          </ul>
+          <>
+            <Link to={"/login"} className="link">
+              Login
+            </Link>
+
+            <Link to={"/register"} className="link">
+              Sign Up
+            </Link>
+          </>
         )}
         <Link to="/" className="link">
           Home

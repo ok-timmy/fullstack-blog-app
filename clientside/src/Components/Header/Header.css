@@ -6,14 +6,21 @@ ul {
 
 li {
     margin: 0 20px;
+    list-style: none;
 }
+
 
 .link {
     cursor: pointer;
-    border: solid white 1px;
+    /* border: solid white 1px; */
     padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
+}
+
+.profile-link {
+    border: none;
+    cursor: pointer;
 }
 
 a:hover{
@@ -33,5 +40,6 @@ button{
     height: 35px;
     border-radius: 50%;
     margin-right: 10px;
+    outline: none;
 }
 

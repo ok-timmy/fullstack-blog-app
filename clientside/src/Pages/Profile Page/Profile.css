@@ -43,15 +43,15 @@
     font-weight: 400;
 }
 
-.edit-btn {
+.edit-profile-btn {
     background-color: rgb(244, 173, 51);
     color: white;
     position: absolute;
-    top: 20px;
+    top: 6rem;
     right: 20px;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 12px 25px;
+    border-radius: 12px;
     text-decoration: none;
 }
 
@@ -63,6 +63,7 @@
 @media screen and (max-width:480px) {
     .profile{
         width: 95%;
+        padding-top: 5rem;
     }
     .profile-details {
         display: block;
