@@ -30,7 +30,7 @@ function App() {
     fetchBlogs();
   }, []);
 
-  console.log(allblogs);
+  // console.log(allblogs);
 
   // const hpBlogs = allblogs.slice(0, 3);
 
