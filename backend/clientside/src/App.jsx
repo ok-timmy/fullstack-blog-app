@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../config.js";
+// import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import Blogpage from "./Pages/Blogs Page/Blogpage";
@@ -16,9 +17,10 @@ function App() {
   const [allblogs, setAllblogs] = useState([]);
   const [isFetching, setIsFetching] = useState(true)
 
+
   useEffect(() => {
     const fetchBlogs = async () => {
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(
         "http://localhost:8000/api/post/allposts"
       );
       // const blogs = await response.data

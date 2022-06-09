@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./EditPost.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../../config";
 
 const modules = {
   toolbar: [
@@ -31,7 +32,7 @@ function EditPost({ blogContent,  setEditMode }) {
    console.log(postUpdate);
 
    try{
-     const res = await axios.put('http://localhost:8000/api/post/update', postUpdate)
+     const res = await axiosInstance.put('http://localhost:8000/api/post/update', postUpdate)
      console.log(res.data);
    }
    catch(error) {

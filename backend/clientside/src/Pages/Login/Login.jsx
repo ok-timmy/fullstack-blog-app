@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../../config";
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -55,7 +56,7 @@ function Login() {
 
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios
+      const res = await axiosInstance
         .post("http://localhost:8000/api/auth/login/", {
           email,
           password,

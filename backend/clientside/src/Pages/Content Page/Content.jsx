@@ -3,7 +3,8 @@ import "./Content.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
 import EditPost from "../EditPost/EditPost";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../../config";
 import { useEffect } from "react";
 
 function Content() {
@@ -24,7 +25,7 @@ function Content() {
   useEffect(() => {
     const fetchSinglePost = async (id) => {
       try {
-        const { data } = await axios.get(
+        const { data } = await axiosInstance.get(
           `http://localhost:8000/api/post/${id}`
         );
         setPostcontent(data);
@@ -59,7 +60,7 @@ function Content() {
 
   //DELETE POST
   const deletePost = async (id) => {
-    await axios.delete(`http://localhost:8000/api/post/${id}`);
+    await axiosInstance.delete(`http://localhost:8000/api/post/${id}`);
   };
 
   const openAlert = (id) => {

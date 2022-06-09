@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import "./EditProfile.css";
 import { Context } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../../config";
 
 function EditProfile() {
   const { user, dispatch } = useContext(Context);
@@ -43,14 +44,14 @@ function EditProfile() {
       updatedUser.image = fileName;
 
       try {
-        await axios.post("http://localhost:8000/api/upload", data);
+        await axiosInstance.post("http://localhost:8000/api/upload", data);
       } catch (error) {
         console.log(error);
       }
     }
 
     try {
-       await axios.put(
+       await axiosInstance.put(
         `http://localhost:8000/api/auth/${id}`,
         updatedUser
       );
@@ -59,7 +60,7 @@ function EditProfile() {
     } catch (error) {
       console.log(error);
     }
-    const user = await axios.get(
+    const user = await axiosInstance.get(
       `http://localhost:8000/api/auth/${email}`
     );
     dispatch({ type: "LOGIN_SUCCESS", payload: user.data });
