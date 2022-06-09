@@ -31,6 +31,11 @@ const WholeHead = styled.div`
 
 const HeaderLeft = styled.div`
   flex: 1;
+  color: #2A8798;
+  font-weight: bold;
+  letter-spacing: 5px;
+  font-size: 2rem;
+  padding-left: 1rem;
 `;
 const HeaderCenter = styled.div`
   flex: 2;
@@ -131,7 +136,7 @@ function Header() {
   return (
     <>
       <WholeHead>
-        <HeaderLeft>Blog Project</HeaderLeft>
+        <HeaderLeft>JIGI</HeaderLeft>
         <HeaderCenter>
           <nav>
             <ul>
