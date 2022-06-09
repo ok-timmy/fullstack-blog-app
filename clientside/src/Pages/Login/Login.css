@@ -25,24 +25,22 @@
     margin-bottom: 1rem;
 }
 
-.login-form .input input:focus {
-    border-bottom: rgba(67, 67, 67, 0.5) 2px solid;
-}
 
 .login-form  .submitBtn {
     padding: 0.7rem 0;
     width: 100%;
     cursor: pointer;
     border-radius: 10px;
+    border: none;
     outline: none;
     font-size: medium;
     font-weight: 400;
     color: aliceblue;
-    background-color: green;
+    background-color: #00848B;
 }
 
 .login-form .submitBtn:hover {
-background-color: rgb(61, 144, 61);
+background-color: #65B2B4;
 }
 
 .login-form p{

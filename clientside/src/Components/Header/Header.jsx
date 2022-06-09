@@ -11,6 +11,7 @@ const WholeHead = styled.div`
   width: 100%;
   z-index: 100;
   position: fixed;
+  align-content: center;
   top:0;
   display: flex;
   flex-wrap: wrap;
@@ -20,6 +21,10 @@ const WholeHead = styled.div`
   padding: 15px 10px;
 
   @media screen and (max-width: 600px) {
+    height : 10vh;
+  }
+
+  @media screen and (max-width: 960px) {
     height : 10vh;
   }
 `;
@@ -32,11 +37,17 @@ const HeaderCenter = styled.div`
   @media screen and (max-width: 600px) {
     display: none;
   }
+  @media screen and (max-width: 960px) {
+    flex:3
+  }
 `;
 const HeaderRight = styled.div`
   flex: 1;
   @media screen and (max-width: 600px) {
     display: none;
+  }
+  @media screen and (max-width: 960px) {
+    flex: 2;
   }
 `;
 

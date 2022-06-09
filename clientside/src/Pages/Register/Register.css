@@ -1,63 +1,123 @@
-
+.register-page {
+    background:rgba(27, 27, 27, 0.7) url("../../assets/asset-1.webp");
+    background-blend-mode: darken;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0 0;
+    padding: 11vh 0 5vh ;
+}
 
 .sign-up-form {
-    margin: 0 20px;
-    padding: 0.2rem 0;
+  margin: 0 20px;
+  padding: 0.2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: auto;
+  grid-column-gap: 2rem;
+  grid-row-gap: 1rem;
 }
 
 .sign-up-form div {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .sign-up-form div label {
-    padding-bottom: 5px;
-    font-size: large;
-    font-weight: 300
+  padding-bottom: 5px;
+  font-size: large;
+  font-weight: 300;
 }
 
 .sign-up-form div input {
-    border: none;
-    outline: none;
-    padding: 5px 10px;
-    font-size: large;
-    font-weight: 200;
-    padding: 10px 10px;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  font-size: large;
+  font-weight: 200;
+  padding: 10px 10px;
 }
 
-.sign-up-form div input::placeholder{
-    font-size: medium;
-    color: rgb(201, 201, 202);
+.sign-up-form div input::placeholder {
+  font-size: medium;
+  color: rgb(201, 201, 202);
 }
 
 .sign-up-form div input:focus {
-    border-bottom: rgb(78, 78, 78) 1px solid;
+  border-bottom: rgb(78, 78, 78) 1px solid;
 }
 
-.sign-up-form .submitBtn {
-    cursor: pointer;
-    width: 100%;
-    margin: 1rem auto 0.5rem;
-    align-content: center;
-    padding: 10px 0;
-    background-color: green;
-    color: white;
-}
-.sign-up-form .submitBtn:hover {
-    background-color: rgb(7, 159, 7);
+.last-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
 }
 
-.sign-up-form p{
-    font-size: medium;
-    font-weight: 300;
-    margin-bottom: 1rem;
+.last-section .submitBtn {
+  cursor: pointer;
+  width: 80%;
+  margin: 1rem auto 0.5rem;
+  align-content: center;
+  border: none;
+  padding: 10px 0;
+  background-color: #00848b;
+  color: white;
+}
+.last-section .submitBtn:hover {
+  background-color: #65b2b4;
 }
 
-.sign-up-form .login-btn {
-    color: blue;
-    border: none;
-    outline: none;
-    text-decoration: underline;
-    font-size: large;
+.email-invalid {
+  font-size: small;
+  color: rgba(249, 40, 40, 0.6);
+}
+.password-msg {
+  font-size: small;
+}
+
+.match-success {
+  color: rgb(16, 196, 16);
+}
+
+.match-error {
+  color: rgb(249, 15, 15);
+}
+
+.last-section p {
+  font-size: medium;
+  font-weight: 300;
+  text-align: center;
+}
+
+.last-section .login-btn {
+  color: blue;
+  border: none;
+  outline: none;
+  text-decoration: underline;
+  font-size: large;
+}
+
+@media screen and (max-width: 600px) {
+  .sign-up-form {
+    display: block;
+  }
+  .last-section .submitBtn {
+      width: 90%;
+      margin: 1rem auto 0.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+
+}
+
+@media screen and (max-width: 960px) {
+  .register-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

@@ -4,27 +4,30 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../../Context/Context";
 import "./Login.css";
+import background from "../../assets/asset-1.webp"
 
 const LoginDiv = styled.div`
-  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 5rem;
+  background:rgba(57, 57, 57, 0.7) url(${background});
+  background-blend-mode: darken;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
 
   @media (max-width: 480px) {
-    height: 80vh;
+    height: 95vh;
   }
 `;
 
 const Loginbox = styled.div`
   width: 25rem;
   height: 25rem;
-  background-color: rgb(247, 239, 239);
+  background-color: #FAF7FF;
   margin: 50px auto;
   border-radius: 10px;
-  box-shadow: 4px 7px 10px 3px rgba(138, 131, 131, 0.91);
-  -webkit-box-shadow: 4px 7px 10px 3px rgba(138, 131, 131, 0.91);
-  -moz-box-shadow: 4px 7px 10px 3px rgba(138, 131, 131, 0.91);
   @media (max-width: 480px) {
     width: 90%;
   }
