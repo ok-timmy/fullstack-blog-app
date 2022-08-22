@@ -1,5 +1,5 @@
-// import axios from "axios";
-import axiosInstance from "../../config";
+import axios from "axios";
+// import axiosInstance from "../../config";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -15,7 +15,7 @@ function BlogComponent({ hpBlog }) {
   useEffect(() => {
     const fetchSinglePost = async (id) => {
       try {
-        const { data } = await axiosInstance.get(
+        const { data } = await axios.get(
           `http://localhost:8000/api/post/${id}`
         );
         setPostDetails(data);
@@ -51,14 +51,14 @@ function BlogComponent({ hpBlog }) {
   }
 
   const updateLikes = async (id, y) => {
-    await axiosInstance.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
+    await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
       likes: y + 1,
     });
     setIsLiked(true);
   };
 
   const decreaseLikes = async (id, y) => {
-    await axiosInstance.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
+    await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
       likes: y - 1,
     });
     setIsLiked(false);

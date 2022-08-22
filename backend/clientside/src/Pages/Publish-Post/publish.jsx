@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import "./publish.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-// import axios from "axios";
-import axiosInstance from "../../config";
+import axios from "axios";
+// import axiosInstance from "../../config";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
 
@@ -48,14 +48,14 @@ function Publish() {
       post.image = fileName;
 
       try {
-        await axiosInstance.post("http://localhost:8000/api/upload", data);
+        await axios.post("http://localhost:8000/api/upload", data);
       } catch (error) {
         console.log(error);
       }
     }
     console.log(post);
     try {
-      const res = await axiosInstance.post("http://localhost:8000/api/post/", post);
+      const res = await axios.post("http://localhost:8000/api/post/", post);
       console.log(res.data);
       setTitle("");
       setContent("");

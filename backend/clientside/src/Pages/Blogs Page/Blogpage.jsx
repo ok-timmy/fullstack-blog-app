@@ -1,5 +1,5 @@
-// import axios from "axios";
-import axiosInstance from "../../config";
+import axios from "axios";
+// import axiosInstance from "../../config";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -22,7 +22,7 @@ function Blogpage() {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchBlogs = async () => {
-    const { data } = await axiosInstance.get("http://localhost:8000/api/post/allposts");
+    const { data } = await axios.get("http://localhost:8000/api/post/allposts");
     const reversedData = [...data].reverse();
     setHpBlogs(reversedData);
     setfilteredBlogs(reversedData);

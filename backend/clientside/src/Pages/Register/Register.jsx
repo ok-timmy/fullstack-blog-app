@@ -1,5 +1,5 @@
-// import axios from "axios";
-import axiosInstance from "../../config"
+import axios from "axios";
+// import axiosInstance from "../../config"
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -76,7 +76,7 @@ function Register() {
     console.log(user);
 
     try {
-      const res = await axiosInstance.post(
+      const res = await axios.post(
         "http://localhost:8000/api/auth/register",
         user
       );

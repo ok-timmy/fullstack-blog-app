@@ -5,8 +5,8 @@ import { Context } from "../../Context/Context";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-// import axios from "axios";
-import axiosInstance from "../../config";
+import axios from "axios";
+// import axiosInstance from "../../config";
 
 function Profile() {
   const { user } = useContext(Context);
@@ -19,7 +19,7 @@ function Profile() {
 
   useEffect(() => {
     const fetchUserPosts = async (email) => {
-      const { data } = await axiosInstance.get(
+      const { data } = await axios.get(
         "http://localhost:8000/api/post/allposts"
       );
       const currentUserPost = data.filter((d) => {
