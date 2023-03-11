@@ -27,6 +27,12 @@ const userSchema= new mongoose.Schema({
         },
         image: {
             type: String
+        },
+        accessToken: {
+            type: String
+        },
+        refreshToken : {
+            type: String
         }
 
 }, {
