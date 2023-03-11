@@ -25,16 +25,11 @@ mongoose.connect(process.env.MONGO_DB_URL, {useNewUrlParser : true, useUnifiedTo
 app.use('/api/auth', authRoute);
 app.use('/api/post', postRoute);
 
-app.get('/', function (req, res) {
-    res.send("This is my first Express line!!")
-    console.log('I am damn happy!')
-});
+// app.use(express.static(path.join(__dirname, "/clientside/build")));
 
-app.use(express.static(path.join(__dirname, "/clientside/build")));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/clientside/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/clientside/build', 'index.html'));
+// });
 
 
 app.listen(PORT || 8000, () => {
