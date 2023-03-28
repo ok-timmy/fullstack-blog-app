@@ -1,9 +1,10 @@
-import axios from "axios";
+// import axios from "axios";
 // import axiosInstance from "../../config"
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./Register.css";
+import { useSignUpMutation } from "../../Redux/Auth/authApiSlice";
 
 const Registerbox = styled.div`
   width: 60vw;
@@ -36,6 +37,9 @@ const Heading = styled.h2`
 `;
 
 function Register() {
+  const [signUp, { isLoading, isError, isSuccess, error }] =
+    useSignUpMutation();
+
   const navigation = useNavigate();
 
   const [firstName, setFirstName] = useState("");
@@ -46,7 +50,7 @@ function Register() {
   const [passwordTwo, setPasswordTwo] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
   const [match, setMatch] = useState();
-  const [emailValid, setEmailValid] = useState(true)
+  const [emailValid, setEmailValid] = useState(true);
 
   const checkPasswordMatch = () => {
     if (password === passwordTwo) {
@@ -60,37 +64,45 @@ function Register() {
 
   const checkEmail = (emailInput) => {
     // eslint-disable-next-line
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (re.test(emailInput) ){
+    if (re.test(emailInput)) {
       setEmailValid(true);
-    }
-    else {
+    } else {
       setEmailValid(false);
     }
-  }
+  };
 
   const handleInput = async (e) => {
     e.preventDefault();
     const user = { firstName, secondName, email, password, userName };
     console.log(user);
 
-    try {
-      const res = await axios.post(
-        "http://localhost:8000/api/auth/register",
-        user
-      );
-      console.log(res.data);
-    } catch (error) {
-      console.log(error.message);
-    }
+    if (!firstName || !secondName || !email || !userName || !password) {
+      return;
+    } else {
+      try {
+        await signUp({
+          firstName,
+          secondName,
+          userName,
+          email,
+          password,
+        }).unwrap();
+        setFirstName("");
+        setSecondName("");
+        setUserName("");
+        setEmail("");
+        setPassword("");
+        setPasswordTwo("");
 
-    setFirstName("");
-    setSecondName("");
-    setUserName("");
-    setEmail("");
-    setPassword("");
-    navigation("/login");
+        navigation("/login");
+      } catch (err) {
+        console.log(err.message);
+        console.log(error);
+      }
+    }
   };
   return (
     <div className="register-page">
@@ -147,10 +159,14 @@ function Register() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                checkEmail(e.target.value)
+                checkEmail(e.target.value);
               }}
             />
-            {!emailValid && <p className="email-invalid">Please Provide a valid email address</p>}
+            {!emailValid && (
+              <p className="email-invalid">
+                Please Provide a valid email address
+              </p>
+            )}
           </div>
 
           <div>
@@ -189,12 +205,9 @@ function Register() {
           </div>
         </form>
         <div className="last-section">
-          <input
-            className="submitBtn"
-            type="button"
-            value="Submit"
-            onClick={handleInput}
-          />
+          <button className="submitBtn" onClick={handleInput}>
+            {isLoading ? "Loading...." : "Submit"}
+          </button>
           <p>
             Have An Account Already?{" "}
             <Link to={"/login"}>

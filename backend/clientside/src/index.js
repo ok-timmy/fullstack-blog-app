@@ -2,14 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-// import Home from "./Pages/Home/Home";
-import { ContextProvider } from "./Context/Context";
+import { Provider } from "react-redux";
+import {store, persistor} from "./App/store"
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ContextProvider>
+    <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
       <App />
-    </ContextProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

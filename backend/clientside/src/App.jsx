@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import  Layout from "./Components/Layout/Layout";
-import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import Blogpage from "./Pages/Blogs Page/Blogpage";

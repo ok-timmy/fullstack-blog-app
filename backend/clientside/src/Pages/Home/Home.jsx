@@ -1,15 +1,12 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import Blogs from '../../Components/Blogs/Blogs';
+import Blogs from "../../Components/Blogs/Blogs";
 import Newsletter from "../../Components/Newletter/Newsletter";
 import { Context } from "../../Context/Context";
 import "./Home.css";
 
-function Home({hpBlogs, isFetching}) {
-
-  const { user } = useContext(Context);
-
+function Home() {
   return (
     <>
       {/* <Header /> */}
@@ -20,11 +17,17 @@ function Home({hpBlogs, isFetching}) {
             down.
           </p>
           <p>Start Your Journey to Becoming a Writer</p>
-          <button className="start"><Link to={user ? '/publish' : '/register'}>Start Now</Link></button>
+          <button className="start">
+            <Link
+            // to={user ? '/publish' : '/register'}
+            >
+              Start Now
+            </Link>
+          </button>
         </div>
       </main>
-      <Blogs hpBlogs={hpBlogs} isFetching={isFetching}/>
-      <Newsletter/>
+      {/* <Blogs hpBlogs={hpBlogs} isFetching={isFetching}/>
+      <Newsletter/> */}
     </>
   );
 }
