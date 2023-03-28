@@ -30,12 +30,16 @@ exports.createUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    const user = await newUser.save();
-    res.status(200).json(user);
-    // console.log("Save successful");
+    await newUser.save();
+    res.json({
+      status: 200,
+      message: "User Created Successfully"
+    });
+    console.log("User Created Successfully!");
   } catch (error) {
-    res.status(500).send(error);
-    console.log(error);
+    res.status(500).json(error.code);
+      console.log(error);
+      console.log("User Not Created!!");
   }
 };
 

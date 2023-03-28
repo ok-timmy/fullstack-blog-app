@@ -37,7 +37,7 @@ const Heading = styled.h2`
 `;
 
 function Register() {
-  const [signUp, { isLoading, isError, isSuccess, error }] =
+  const [signUp, { isLoading, error }] =
     useSignUpMutation();
 
   const navigation = useNavigate();
