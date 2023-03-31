@@ -4,6 +4,8 @@ import { useSignInMutation } from "../../Redux/Auth/authApiSlice";
 import styled from "styled-components";
 import "./Login.css";
 import background from "../../assets/asset-1.webp";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../Redux/Auth/authSlice";
 
 const LoginDiv = styled.div`
   display: flex;
@@ -43,6 +45,7 @@ const Heading = styled.h2`
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [signIn, { isLoading }] = useSignInMutation();
 
@@ -57,7 +60,8 @@ function Login() {
       setIsError(true);
       return;
     } else {
-      await signIn({ email, password }).unwrap();
+      const userData = await signIn({ email, password }).unwrap();
+      dispatch(setCredentials({ ...userData }));
       setEmail("");
       setPassword("");
       navigate("/blog");

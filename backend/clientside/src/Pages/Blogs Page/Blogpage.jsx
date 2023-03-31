@@ -21,34 +21,34 @@ function Blogpage() {
   const [filteredBlogs, setfilteredBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchBlogs = async () => {
-    const { data } = await axios.get("http://localhost:8000/api/post/allposts");
-    const reversedData = [...data].reverse();
-    setHpBlogs(reversedData);
-    setfilteredBlogs(reversedData);
-    setIsLoading(false);
-  };
+  // const fetchBlogs = async () => {
+  //   const { data } = await axios.get("http://localhost:8000/api/post/allposts");
+  //   const reversedData = [...data].reverse();
+  //   setHpBlogs(reversedData);
+  //   setfilteredBlogs(reversedData);
+  //   setIsLoading(false);
+  // };
 
-  useEffect(() => {
-    fetchBlogs();
-  }, []);
+  // useEffect(() => {
+  //   fetchBlogs();
+  // }, []);
 
-  useEffect(() => {
-    setfilteredBlogs(hpBlogs);
-    const filterPosts = (x, ys) => {
-      if (x.value === "All Categories") {
-        setfilteredBlogs(ys);
-      } else {
-        const filteredPost = ys.filter((y) => {
-          const filt = y.category === x.value;
-          return filt;
-        });
-        setfilteredBlogs(filteredPost);
-      }
-    };
+  // useEffect(() => {
+  //   setfilteredBlogs(hpBlogs);
+  //   const filterPosts = (x, ys) => {
+  //     if (x.value === "All Categories") {
+  //       setfilteredBlogs(ys);
+  //     } else {
+  //       const filteredPost = ys.filter((y) => {
+  //         const filt = y.category === x.value;
+  //         return filt;
+  //       });
+  //       setfilteredBlogs(filteredPost);
+  //     }
+  //   };
 
-    filterPosts(filterCategory, hpBlogs);
-  }, [filterCategory]);
+  //   filterPosts(filterCategory, hpBlogs);
+  // }, [filterCategory]);
 
   return (
     <div className="blogpage">

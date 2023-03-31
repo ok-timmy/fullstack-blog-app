@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Context } from "../../Context/Context";
 import avatar from "../../assets/avatar.png";
 import { useState, useRef, useCallback } from "react";
+import { useSignOutMutation } from "../../Redux/Auth/authApiSlice";
+import {
+  logOut,
+  setCurrentUser,
+  // setCurrentUserImage,
+  setCurrentUserName,
+} from "../../Redux/Auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const WholeHead = styled.div`
   position: fixed;
@@ -12,7 +19,7 @@ const WholeHead = styled.div`
   z-index: 100;
   position: fixed;
   align-content: center;
-  top:0;
+  top: 0;
   display: flex;
   flex-wrap: wrap;
   height: 12vh;
@@ -21,17 +28,17 @@ const WholeHead = styled.div`
   padding: 15px 10px;
 
   @media screen and (max-width: 600px) {
-    height : 10vh;
+    height: 10vh;
   }
 
   @media screen and (max-width: 960px) {
-    height : 10vh;
+    height: 10vh;
   }
 `;
 
 const HeaderLeft = styled.div`
   flex: 1;
-  color: #2A8798;
+  color: #2a8798;
   font-weight: bold;
   letter-spacing: 5px;
   font-size: 2rem;
@@ -43,7 +50,7 @@ const HeaderCenter = styled.div`
     display: none;
   }
   @media screen and (max-width: 960px) {
-    flex:3
+    flex: 3;
   }
 `;
 const HeaderRight = styled.div`
@@ -114,9 +121,13 @@ const ToggleIcon = styled.div`
 `;
 
 function Header() {
-  const { user, dispatch } = useContext(Context);
+  const [signOut] = useSignOutMutation();
   const [isMobileNav, setIsMobileNav] = useState(false);
   const node = useRef();
+  const user = useSelector(setCurrentUser);
+  const userName = useSelector(setCurrentUserName);
+  // const image = useSelector(setCurrentUserImage);
+  console.log(user);
 
   const onToggleMobileNav = useCallback(() => {
     if (!isMobileNav) {
@@ -124,14 +135,16 @@ function Header() {
     } else setIsMobileNav(false);
   }, [isMobileNav]);
 
-  const navigation = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // const logOutUser = async () => {
+  //   await signOut().unwrap();
+  //   dispatch(logOut());
+  //   navigate("/")
+  // };
 
   const pf = "http://localhost:8000/public/";
-
-  const handleLogOut = () => {
-    dispatch({ type: "LOGOUT" });
-    navigation("/");
-  };
 
   return (
     <>
@@ -166,19 +179,16 @@ function Header() {
           <nav>
             {user ? (
               <ul>
-                <li>
-                  {" "}
-                  <button onClick={handleLogOut}>Logout </button>
-                </li>
+                <li> {/* <button onClick={logOutUser}>Logout </button> */}</li>
                 {user && (
                   <li>
                     {" "}
                     <span className="user">
                       <Link to={"/profile"} className="profile-link">
-                        {user.image ? (
+                        {user ? (
                           <img
                             src={pf + user.image}
-                            alt={user.userName}
+                            alt={userName}
                             className="user-pic"
                           />
                         ) : (
@@ -217,7 +227,7 @@ function Header() {
                 {" "}
                 <span className="user">
                   <Link to={"/profile"} className="link">
-                    {user.image ? (
+                    {user?.image ? (
                       <img
                         src={pf + user.image}
                         alt={user.userName}
@@ -230,9 +240,7 @@ function Header() {
                 </span>
               </li>
             )}
-            <li>
-              <button onClick={handleLogOut}>Logout </button>
-            </li>
+            <li>{/* <button onClick={logOutUser}>Logout </button> */}</li>
           </>
         ) : (
           <>

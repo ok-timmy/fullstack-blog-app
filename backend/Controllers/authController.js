@@ -21,25 +21,25 @@ exports.createUser = async (req, res) => {
   }
 
   try {
-    hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    const { firstName, secondName, userName, email, password } = req.body;
+    hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = await new User({
-      firstName: req.body.firstName,
-      secondName: req.body.secondName,
-      userName: req.body.userName,
-      email: req.body.email,
+      firstName,
+      secondName,
+      userName,
+      email,
       password: hashedPassword,
     });
 
     await newUser.save();
     res.json({
       status: 200,
-      message: "User Created Successfully"
+      message: "User Created Successfully",
     });
     console.log("User Created Successfully!");
   } catch (error) {
     res.status(500).json(error.code);
-      console.log(error);
-      console.log("User Not Created!!");
+    console.log(error);
   }
 };
 
@@ -74,6 +74,7 @@ exports.loginUser = async (req, res) => {
 
         foundUser.refreshToken = refreshToken;
         await foundUser.save();
+        // console.log("Refresh Token updated", refreshToken)
 
         res.cookie("jwt", accessToken, {
           httpOnly: true,
@@ -82,8 +83,20 @@ exports.loginUser = async (req, res) => {
           // secure: true,  This has to be in production mode
         });
 
-        const { email } = foundUser;
-        res.status(200).json({ email, accessToken });
+        const { email, firstName, secondName, userName, bio, image } =
+          foundUser;
+          // console.log("Logged In User already", accessToken)
+        res
+          .status(200)
+          .json({
+            email,
+            firstName,
+            secondName,
+            userName,
+            bio,
+            image,
+            accessToken,
+          });
       } else {
         res.status(401).json({ error: "Incorrect Password" });
       }

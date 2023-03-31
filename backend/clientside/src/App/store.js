@@ -14,7 +14,7 @@ import {
 import { configureStore } from "@reduxjs/toolkit";
 
 const persistConfig = {
-  key: "root",
+  key: "detailsStore",
   storage,
 };
 
