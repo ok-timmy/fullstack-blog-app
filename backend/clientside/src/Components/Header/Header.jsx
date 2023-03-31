@@ -2,15 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
-import avatar from "../../assets/avatar.png";
 import { useState, useRef, useCallback } from "react";
 import { useSignOutMutation } from "../../Redux/Auth/authApiSlice";
-import {
-  logOut,
-  setCurrentUser,
-  // setCurrentUserImage,
-  setCurrentUserName,
-} from "../../Redux/Auth/authSlice";
+import { logOut, setCurrentUser } from "../../Redux/Auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const WholeHead = styled.div`
@@ -125,8 +119,6 @@ function Header() {
   const [isMobileNav, setIsMobileNav] = useState(false);
   const node = useRef();
   const user = useSelector(setCurrentUser);
-  const userName = useSelector(setCurrentUserName);
-  // const image = useSelector(setCurrentUserImage);
   console.log(user);
 
   const onToggleMobileNav = useCallback(() => {
@@ -138,13 +130,11 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const logOutUser = async () => {
-  //   await signOut().unwrap();
-  //   dispatch(logOut());
-  //   navigate("/")
-  // };
-
-  const pf = "http://localhost:8000/public/";
+  const logOutUser = async () => {
+    await signOut().unwrap();
+    dispatch(logOut());
+    navigate("/");
+  };
 
   return (
     <>
@@ -179,25 +169,22 @@ function Header() {
           <nav>
             {user ? (
               <ul>
-                <li> {/* <button onClick={logOutUser}>Logout </button> */}</li>
-                {user && (
-                  <li>
-                    {" "}
-                    <span className="user">
-                      <Link to={"/profile"} className="profile-link">
-                        {user ? (
-                          <img
-                            src={pf + user.image}
-                            alt={userName}
-                            className="user-pic"
-                          />
-                        ) : (
-                          <img src={avatar} alt={avatar} className="user-pic" />
-                        )}
-                      </Link>
-                    </span>
-                  </li>
-                )}
+                <li>
+                  {" "}
+                  <span className="user">
+                    <Link to={"/profile"} className="profile-link">
+                      <img
+                        src={user.image}
+                        alt={user.userName}
+                        className="user-pic"
+                      />
+                    </Link>
+                  </span>
+                </li>
+                <li>
+                  {" "}
+                  <button onClick={logOutUser}>Logout </button>
+                </li>
               </ul>
             ) : (
               <ul>
@@ -222,25 +209,23 @@ function Header() {
         <h3>Blog Project</h3>
         {user ? (
           <>
-            {user && (
-              <li>
-                {" "}
-                <span className="user">
-                  <Link to={"/profile"} className="link">
-                    {user?.image ? (
-                      <img
-                        src={pf + user.image}
-                        alt={user.userName}
-                        className="user-pic"
-                      />
-                    ) : (
-                      <img src={avatar} alt={avatar} className="user-pic" />
-                    )}
-                  </Link>
-                </span>
-              </li>
-            )}
-            <li>{/* <button onClick={logOutUser}>Logout </button> */}</li>
+            (
+            <li>
+              {" "}
+              <span className="user">
+                <Link to={"/profile"} className="link">
+                  <img
+                    src={user.image}
+                    alt={user.userName}
+                    className="user-pic"
+                  />
+                </Link>
+              </span>
+            </li>
+            )
+            <li>
+              <button onClick={logOutUser}>Logout </button>
+            </li>
           </>
         ) : (
           <>
