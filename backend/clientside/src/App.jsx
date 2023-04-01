@@ -32,7 +32,7 @@ function App() {
             <Route path="/blog" element={<Blogpage />} />
             <Route path="/publish" element={<Publish />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/edit-profile" element={<EditProfile />} />
+            {/* <Route path="/edit-profile" element={<EditProfile />} /> */}
             <Route path="/blog/:id" element={<Content />} />
           </Route>
         </Route>

@@ -20,7 +20,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
 
     getUserDetails: builder.query({
       query: (email) => `api/auth/${email}`,
-      keepUnusedDataFor: 5,
+      keepUnusedDataFor: 0
+    }),
+
+    updateUserDetails: builder.mutation({
+      query: (updatedUserDetails) => ({
+        url: `api/auth/${updatedUserDetails.id}`,
+        method: "PUT",
+        body: { ...updatedUserDetails },
+      }),
     }),
 
     signOut: builder.mutation({
@@ -37,4 +45,6 @@ export const {
   useSignUpMutation,
   useSignOutMutation,
   useGetUserDetailsQuery,
+  useLazyGetUserDetailsQuery,
+  useUpdateUserDetailsMutation,
 } = authApiSlice;

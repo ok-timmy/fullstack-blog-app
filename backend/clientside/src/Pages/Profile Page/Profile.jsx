@@ -1,15 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 import avatar from "../../assets/avatar.png";
-import { Context } from "../../Context/Context";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
-import axios from "axios";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useGetUserDetailsQuery } from "../../Redux/Auth/authApiSlice";
+import { useGetUserDetailsQuery, useLazyGetUserDetailsQuery } from "../../Redux/Auth/authApiSlice";
 import { setCurrentUser } from "../../Redux/Auth/authSlice";
-// import axiosInstance from "../../config";
+import EditProfile from "../Edit-Profile/EditProfile";
+
 
 function Profile() {
   const [userPosts, setuserPosts] = useState();
@@ -19,10 +16,20 @@ function Profile() {
     isLoading,
     isError,
     isSuccess,
-  } = useGetUserDetailsQuery(user.email);
+    isFetching,
+  } = useGetUserDetailsQuery(user.email, {});
   console.log(userDetails);
 
+  const location = useLocation();
+  console.log(location);
+
+  if (location.search === "?edit") {
+    return <EditProfile />;
+  }
+
   if (isLoading) {
+    return <div>Loading...</div>;
+  } else if (isFetching) {
     return <div>Loading...</div>;
   } else if (isError) {
     return <div>Sorry, Something went wrong, please try again...</div>;
@@ -57,11 +64,15 @@ function Profile() {
           </div>
           <div>
             <label>Short Bio:</label>
-            <span>{bio || "No Bio Yet."}</span>
+            <span>{bio ? bio : "No Bio Yet."}</span>
           </div>
         </div>
         <button className="edit-profile-btn">
-          <Link to={"/edit-profile"} className="edit-link">
+          <Link
+            to={"?edit"}
+            state={{ user: userDetails }}
+            className="edit-link"
+          >
             Edit Profile
           </Link>
         </button>

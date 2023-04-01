@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./EditProfile.css";
-import { Context } from "../../Context/Context";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-// import axiosInstance from "../../config";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useUpdateUserDetailsMutation } from "../../Redux/Auth/authApiSlice";
 
 function EditProfile() {
-  const { user, dispatch } = useContext(Context);
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
-  const id = user._id;
+  const location = useLocation();
+  console.log(location);
+  const user = location.state.user;
+  console.log(user, "User details in state")
 
   const [firstName, setFirstname] = useState(user.firstName);
   const [secondName, setSecondname] = useState(user.secondName);
@@ -18,14 +18,15 @@ function EditProfile() {
   const [bio, setBio] = useState(user.bio);
   const [file, setFile] = useState(null);
   const profilepic = user.image;
- 
 
-  const pf = "http://localhost:8000/public/";
   let image = user.image;
 
+  const [updatedUserDetails, { isLoading, isSuccess }] =
+    useUpdateUserDetailsMutation();
   const handleInput = async (e) => {
     e.preventDefault();
     const updatedUser = {
+      id: user._id.toString(),
       firstName,
       secondName,
       email,
@@ -34,39 +35,25 @@ function EditProfile() {
       file,
       image,
     };
-    // console.log(updatedUser);
 
+    console.log(updatedUser.id)
     if (file) {
       const data = new FormData();
       const fileName = Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
       updatedUser.image = fileName;
-
-      try {
-        await axios.post("http://localhost:8000/api/upload", data);
-      } catch (error) {
-        console.log(error);
-      }
     }
 
-    try {
-       await axios.put(
-        `http://localhost:8000/api/auth/${id}`,
-        updatedUser
-      );
-      // console.log(res.data);   
+   const result = await updatedUserDetails(updatedUser ).unwrap();
+   console.log(result);
+   console.log(isSuccess, "isSuccess")
+   console.log(isLoading, "IsLoading")
+   navigate("/profile");
 
-    } catch (error) {
-      console.log(error);
+    if (isSuccess) {
+      //Go back to Profile Page
     }
-    const user = await axios.get(
-      `http://localhost:8000/api/auth/${email}`
-    );
-    dispatch({ type: "LOGIN_SUCCESS", payload: user.data });
-    // console.log(user.data);
-
-    navigation("/profile");
   };
 
   return (
@@ -75,11 +62,8 @@ function EditProfile() {
       <div className="editprofile-pic">
         {file ? (
           <img src={URL.createObjectURL(file)} alt="profile-pic" />
-        ) : profilepic ? (
-          <img src={pf + profilepic} alt="profile-pic" />
         ) : (
-          // <img src={image3} alt="profile-pic" />
-          null
+          profilepic && <img src={profilepic} alt="profile-pic" />
         )}
       </div>
       <div className="profile-pic">
@@ -97,7 +81,7 @@ function EditProfile() {
             type="text"
             id="FirstName"
             value={firstName}
-            onChange={(e) => setFirstname(e.target.value)}
+            // onChange={(e) => setFirstname(e.target.value)}
           />
         </div>
         <div>
@@ -106,7 +90,7 @@ function EditProfile() {
             type="text"
             id="LastName"
             value={secondName}
-            onChange={(e) => setSecondname(e.target.value)}
+            // onChange={(e) => setSecondname(e.target.value)}
           />
         </div>
         <div>
@@ -124,7 +108,7 @@ function EditProfile() {
             type="text"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            // onChange={(e) => setEmail(e.target.value)}
           />
         </div>
       </div>
@@ -139,7 +123,7 @@ function EditProfile() {
       </div>
 
       <button className="edit-btn" onClick={handleInput}>
-        Save Changes
+        {isLoading ? "Loading...." : "Save Changes"}
       </button>
     </div>
   );

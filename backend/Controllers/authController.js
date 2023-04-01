@@ -85,18 +85,16 @@ exports.loginUser = async (req, res) => {
 
         const { email, firstName, secondName, userName, bio, image } =
           foundUser;
-          // console.log("Logged In User already", accessToken)
-        res
-          .status(200)
-          .json({
-            email,
-            firstName,
-            secondName,
-            userName,
-            bio,
-            image,
-            accessToken,
-          });
+        // console.log("Logged In User already", accessToken)
+        res.status(200).json({
+          email,
+          firstName,
+          secondName,
+          userName,
+          bio,
+          image,
+          accessToken,
+        });
       } else {
         res.status(401).json({ error: "Incorrect Password" });
       }
@@ -113,7 +111,7 @@ exports.loginUser = async (req, res) => {
 exports.getUserData = async (req, res) => {
   try {
     const foundUser = await User.findOne({ email: req.params.email });
-    console.log(foundUser);
+    // console.log(foundUser);
     const { password, ...others } = foundUser._doc;
     res.status(200).json(others);
     // console.log("User Found");
@@ -124,12 +122,14 @@ exports.getUserData = async (req, res) => {
 
 exports.updateUserData = async (req, res) => {
   try {
-    var userId = { _id: req.params.id };
-    // console.log(userId);
-    const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
+    var id = { _id: req.params.id };
+
+    const updatedUser = await User.findByIdAndUpdate(id, req.body, {
       new: true,
-    });
-    // console.log("User Updated Successfully!");
+    })
+      .select("-password")
+      .select("-refreshToken");
+    console.log("User Updated Successfully!");
     res.status(200).json(updatedUser);
   } catch (error) {
     console.log(error);
