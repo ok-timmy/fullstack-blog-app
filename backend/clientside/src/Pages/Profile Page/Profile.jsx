@@ -3,7 +3,7 @@ import "./Profile.css";
 import avatar from "../../assets/avatar.png";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useGetUserDetailsQuery, useLazyGetUserDetailsQuery } from "../../Redux/Auth/authApiSlice";
+import { useGetUserDetailsQuery} from "../../Redux/Auth/authApiSlice";
 import { setCurrentUser } from "../../Redux/Auth/authSlice";
 import EditProfile from "../Edit-Profile/EditProfile";
 
@@ -15,7 +15,7 @@ function Profile() {
     data: userDetails,
     isLoading,
     isError,
-    isSuccess,
+    // isSuccess,
     isFetching,
   } = useGetUserDetailsQuery(user.email, {});
   console.log(userDetails);

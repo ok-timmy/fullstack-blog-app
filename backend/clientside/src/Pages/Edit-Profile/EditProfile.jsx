@@ -11,9 +11,12 @@ function EditProfile() {
   const user = location.state.user;
   console.log(user, "User details in state")
 
-  const [firstName, setFirstname] = useState(user.firstName);
-  const [secondName, setSecondname] = useState(user.secondName);
-  const [email, setEmail] = useState(user.email);
+  // const [firstName, setFirstname] = useState(user.firstName);
+  // const [secondName, setSecondname] = useState(user.secondName);
+  // const [email, setEmail] = useState(user.email);
+  const firstName = user.firstName;
+  const secondName = user.secondName;
+  const email = user.email
   const [userName, setUsername] = useState(user.userName);
   const [bio, setBio] = useState(user.bio);
   const [file, setFile] = useState(null);
@@ -81,7 +84,7 @@ function EditProfile() {
             type="text"
             id="FirstName"
             value={firstName}
-            // onChange={(e) => setFirstname(e.target.value)}
+            onChange={(e) => {return}}
           />
         </div>
         <div>
@@ -90,7 +93,7 @@ function EditProfile() {
             type="text"
             id="LastName"
             value={secondName}
-            // onChange={(e) => setSecondname(e.target.value)}
+            onChange={(e) => {return}}
           />
         </div>
         <div>
@@ -108,7 +111,7 @@ function EditProfile() {
             type="text"
             id="email"
             value={email}
-            // onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {return}}
           />
         </div>
       </div>
