@@ -2,9 +2,10 @@ const express = require ('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const authRoute = require('./Routes/auth')
-const postRoute = require('./Routes/post')
+const postRoute = require('./Routes/blogPosts')
 const refreshRoute = require('./Routes/refresh')
 const logoutRoute = require('./Routes/logout')
+const allPostsRoute = require('./Routes/allPosts')
 var cors = require('cors')
 const multer = require('multer')
 const cookieParser = require("cookie-parser");
@@ -27,9 +28,10 @@ const PORT = process.env.PORT;
 
 app.use('/api/auth', authRoute);
 app.use('/api/logout', logoutRoute)
+app.use('api/allPost', allPostsRoute)
 app.use(verifyJWT);
 app.use('/api/refresh', refreshRoute)
-app.use('/api/post', postRoute);
+app.use('/api/blogPost', postRoute);
 
 // app.use(express.static(path.join(__dirname, "/clientside/build")));
 

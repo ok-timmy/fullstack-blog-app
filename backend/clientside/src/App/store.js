@@ -1,4 +1,5 @@
 import authReducer from "../Redux/Auth/authSlice";
+import blogsReducer from "../Redux/Blogs/blogSlice"
 import { apiSlice } from "../App/api/apiSlice";
 import storage from "redux-persist/lib/storage";
 import {
@@ -24,6 +25,7 @@ export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: persistedReducer,
+    blogs: blogsReducer
   },
 
   middleware: (getDefaultMiddleware) =>
