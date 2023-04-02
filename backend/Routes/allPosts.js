@@ -5,7 +5,7 @@ const {
 } = require("../Controllers/allPostsController");
 
 // GET ALL POST
-router.get("/", getAllPosts);
+router.get("/all", getAllPosts);
 
 //GET SPECIFIC POST
 router.get("/specificPost/:id", getSpecificPost);

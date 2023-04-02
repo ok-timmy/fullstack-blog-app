@@ -1,74 +1,37 @@
-import axios from "axios";
-// import axiosInstance from "../../config";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { RWebShare } from "react-web-share";
 import "./BlogComponent.css";
+import { calcTime } from "../../Utilities/FormatTime";
 
 function BlogComponent({ hpBlog }) {
   const [isLiked, setIsLiked] = useState(false);
-  const [postDetails, setPostDetails] = useState(hpBlog);
-  const pf = "http://localhost:8000/public/";
 
-  useEffect(() => {
-    const fetchSinglePost = async (id) => {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:8000/api/post/${id}`
-        );
-        setPostDetails(data);
-        //   console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchSinglePost(hpBlog._id);
-  }, [isLiked]);
+  const { image, _id, title, excerpt, likes, createdAt } = hpBlog;
 
-  const { image, _id, title, excerpt, likes, createdAt } = postDetails;
 
-  function calcTime(pubTime) {
-    const currentTime = Date.now();
-    const blogPubTime = new Date(pubTime);
 
-    const timeDiff = (currentTime - blogPubTime) / (60 * 60 * 1000);
+  // const updateLikes = async (id, y) => {
+  //   await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
+  //     likes: y + 1,
+  //   });
+  //   setIsLiked(true);
+  // };
 
-    //Check if time is less than one hour
-    if (timeDiff < 1) {
-      const minTime = Math.ceil(timeDiff * 60);
-      return `${minTime} Minute${minTime > 1 ? "s" : ""} Ago`;
-    }
-    //Check if time is less than than a 24 hours
-    else if (timeDiff <= 23) {
-      const hourTime = Math.ceil(timeDiff);
-      return `${hourTime} Hour${hourTime > 1 ? "s" : ""} Ago`;
-    } else {
-      const dayNumber = Math.floor(timeDiff / 24);
-      return `${dayNumber} Day${dayNumber > 1 ? "s" : ""} Ago`;
-    }
-  }
-
-  const updateLikes = async (id, y) => {
-    await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
-      likes: y + 1,
-    });
-    setIsLiked(true);
-  };
-
-  const decreaseLikes = async (id, y) => {
-    await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
-      likes: y - 1,
-    });
-    setIsLiked(false);
-  };
+  // const decreaseLikes = async (id, y) => {
+  //   await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
+  //     likes: y - 1,
+  //   });
+  //   setIsLiked(false);
+  // };
 
   return (
     <div className="post">
       {image && (
         <div className="post-image">
-          <img src={pf + image} alt={"blog"} />
+          <img src={image} alt={"blog"} />
         </div>
       )}
       <div className="post-main">
@@ -83,9 +46,9 @@ function BlogComponent({ hpBlog }) {
         <div className="icons__section">
           <span>
             <button
-              onClick={() => {
-                isLiked ? decreaseLikes(_id, likes) : updateLikes(_id, likes);
-              }}
+              // onClick={() => {
+              //   isLiked ? decreaseLikes(_id, likes) : updateLikes(_id, likes);
+              // }}
             >
               {isLiked ? (
                 <i className="bi bi-heart-fill like"></i>

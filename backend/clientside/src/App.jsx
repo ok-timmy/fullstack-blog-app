@@ -24,14 +24,14 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/blog" element={<Blogpage />} />
+            <Route path="/blog/:id" element={<Content />} />
           </Route>
 
           <Route element={<RequireAuth />}>
             {/* Protected Routes */}
-            <Route path="/blog" element={<Blogpage />} />
             <Route path="/publish" element={<Publish />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/blog/:id" element={<Content />} />
           </Route>
         </Route>
       </Routes>

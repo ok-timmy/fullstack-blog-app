@@ -4,7 +4,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //Get all BlogPost
     getAllBlogPost: builder.query({
-      query: () => "api/allPost/",
+      query: () => "api/allPost/all",
       keepUnusedDataFor: 5,
     }),
 
@@ -34,9 +34,12 @@ export const blogApiSlice = apiSlice.injectEndpoints({
 
     //EditBlogPostLikes
     editBlogPostLikes: builder.mutation({
-      query: (postId) => ({
+      query: (postId, y) => ({
         url: `api/blogPost/updateLikes/${postId}`,
         method: "PATCH",
+        body: {
+          likes: y + 1,
+        },
       }),
     }),
 

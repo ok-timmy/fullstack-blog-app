@@ -209,7 +209,6 @@ function Header() {
         <h3>Blog Project</h3>
         {user ? (
           <>
-            (
             <li>
               {" "}
               <span className="user">
@@ -222,7 +221,7 @@ function Header() {
                 </Link>
               </span>
             </li>
-            )
+
             <li>
               <button onClick={logOutUser}>Logout </button>
             </li>

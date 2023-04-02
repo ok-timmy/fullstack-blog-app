@@ -1,15 +1,15 @@
 import React from "react";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Blogs from "../../Components/Blogs/Blogs";
 import Newsletter from "../../Components/Newletter/Newsletter";
-import { Context } from "../../Context/Context";
 import "./Home.css";
+import { useSelector } from "react-redux";
+import { setCurrentUser } from "../../Redux/Auth/authSlice";
 
 function Home() {
+  const user = useSelector(setCurrentUser);
   return (
     <>
-      {/* <Header /> */}
       <main>
         <div>
           <p className="intro-text">
@@ -18,16 +18,12 @@ function Home() {
           </p>
           <p>Start Your Journey to Becoming a Writer</p>
           <button className="start">
-            <Link
-            // to={user ? '/publish' : '/register'}
-            >
-              Start Now
-            </Link>
+            <Link to={user ? "/publish" : "/register"}>Start Now</Link>
           </button>
         </div>
       </main>
-      {/* <Blogs hpBlogs={hpBlogs} isFetching={isFetching}/>
-      <Newsletter/> */}
+      <Blogs />
+      <Newsletter />
     </>
   );
 }

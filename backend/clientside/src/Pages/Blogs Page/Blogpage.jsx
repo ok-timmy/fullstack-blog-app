@@ -1,54 +1,37 @@
-import axios from "axios";
-// import axiosInstance from "../../config";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import BlogComponent from "../../Components/BlogComponent/BlogComponent";
 import "./Blogpage.css";
+import { category } from "../../Utilities/Category";
+import { useGetAllBlogPostQuery } from "../../Redux/Blogs/blogApiSlice";
 
 function Blogpage() {
-  const category = [
-    { id: 1, value: "All Categories" },
-    { id: 2, value: "Sport" },
-    { id: 3, value: "Romance" },
-    { id: 4, value: "Prose" },
-    { id: 5, value: "Poetry" },
-    { id: 6, value: "Adventure" },
-  ];
+  const { data: hpBlogs, isLoading, isError, error } = useGetAllBlogPostQuery();
+  console.log(error);
+  console.log(hpBlogs);
 
   const [filterCategory, setfilterCategory] = useState(category[0]);
-  const [hpBlogs, setHpBlogs] = useState();
   const [filteredBlogs, setfilteredBlogs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  // const fetchBlogs = async () => {
-  //   const { data } = await axios.get("http://localhost:8000/api/post/allposts");
-  //   const reversedData = [...data].reverse();
-  //   setHpBlogs(reversedData);
-  //   setfilteredBlogs(reversedData);
-  //   setIsLoading(false);
-  // };
+  useEffect(() => {
+    hpBlogs && setfilteredBlogs(hpBlogs);
+    const filterPosts = (x, ys) => {
+      if (x.value === "All Categories") {
+        setfilteredBlogs(ys);
+      } else {
+        const filteredPost =
+          ys &&
+          [...ys].filter((y) => {
+            const filt = y.category === x.value;
+            return filt;
+          });
+        setfilteredBlogs(filteredPost);
+      }
+    };
 
-  // useEffect(() => {
-  //   fetchBlogs();
-  // }, []);
-
-  // useEffect(() => {
-  //   setfilteredBlogs(hpBlogs);
-  //   const filterPosts = (x, ys) => {
-  //     if (x.value === "All Categories") {
-  //       setfilteredBlogs(ys);
-  //     } else {
-  //       const filteredPost = ys.filter((y) => {
-  //         const filt = y.category === x.value;
-  //         return filt;
-  //       });
-  //       setfilteredBlogs(filteredPost);
-  //     }
-  //   };
-
-  //   filterPosts(filterCategory, hpBlogs);
-  // }, [filterCategory]);
+    filterPosts(filterCategory, hpBlogs);
+  }, [filterCategory, hpBlogs]);
 
   return (
     <div className="blogpage">
@@ -74,15 +57,18 @@ function Blogpage() {
         </span>
       </div>
 
-      {isLoading ? (
+      {isError ? (
+        <div className="no-blog"> Something Went Wrong.....</div>
+      ) : isLoading ? (
         <div className="loader"></div>
-      ) : filteredBlogs.length === 0 ? (
+      ) : filteredBlogs && filteredBlogs.length === 0 ? (
         <div className="no-blog">
           {" "}
           There are No Blog posts for this category yet.
         </div>
       ) : (
-        filteredBlogs.map((hpBlog) => {
+        filteredBlogs &&
+        [...filteredBlogs].map((hpBlog) => {
           return <BlogComponent key={hpBlog._id} hpBlog={hpBlog} />;
         })
       )}
