@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./publish.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import axios from "axios";
-// import axiosInstance from "../../config";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../../Context/Context";
+import { useSelector } from "react-redux";
+import { setCurrentUser } from "../../Redux/Auth/authSlice";
+import { useCreateBlogPostMutation } from "../../Redux/Blogs/blogApiSlice";
 
 const modules = {
   toolbar: [
@@ -23,9 +23,11 @@ const modules = {
 };
 
 function Publish() {
-  const { user } = useContext(Context);
+  const user = useSelector(setCurrentUser);
+  const [createBlogPost, { isLoading, isError, error }] =
+    useCreateBlogPostMutation();
 
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const author = `${user.firstName} ${user.secondName}`;
   const authorEmail = `${user.email}`;
@@ -34,49 +36,73 @@ function Publish() {
   const [category, setCategory] = useState();
   const [excerpt, setExcerpt] = useState();
   const [file, setFile] = useState(null);
-  // console.log(value)
 
   const handleInput = async (e) => {
     let image = "";
     e.preventDefault();
-    const post = { title, author, content, category, excerpt, file, image, authorEmail };
+    const post = {
+      title,
+      author,
+      content,
+      category,
+      excerpt,
+      file,
+      image,
+      authorEmail,
+    };
     if (file) {
       const data = new FormData();
       const fileName = Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
       post.image = fileName;
-
-      try {
-        await axios.post("http://localhost:8000/api/upload", data);
-      } catch (error) {
-        console.log(error);
-      }
     }
-    console.log(post);
-    try {
-      const res = await axios.post("http://localhost:8000/api/post/", post);
-      console.log(res.data);
-      setTitle("");
-      setContent("");
-      setCategory("");
-      setExcerpt("");
 
-      navigation("/blog");
-    } catch (error) {
-      console.log(error.message);
-      // setError(true);
+    try {
+      if (category === "") {
+        alert("Please select a category");
+        return;
+      }
+
+      await createBlogPost({ ...post }).unwrap();
+      setTitle("");
+      setCategory("");
+      setContent("");
+      setExcerpt("");
+      setFile(null);
+
+      navigate("/blog");
+    } catch (err) {
+      console.log(err);
+      console.log(isError);
+      console.log(error);
     }
   };
 
-  // setValue()
+  if (isLoading) {
+    return (
+      <div className="publish">
+        <h2>Publish Your Article</h2>
+        <div className="publish-form">
+          <div className="nessage">Blog Post is Currently Uploading</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="publish">
       <h2>Publish Your Article</h2>
       <form className="publish-form">
-       {  file &&  <div className="post-image-div">
-         <img src={URL.createObjectURL(file)} alt={"FileImg"} className="post-image"/>
-        </div>}
+        {file && (
+          <div className="post-image-div">
+            <img
+              src={URL.createObjectURL(file)}
+              alt={"FileImg"}
+              className="post-image"
+            />
+          </div>
+        )}
         <div className="category">
           <label>Category</label>
           <select
@@ -85,6 +111,7 @@ function Publish() {
               console.log(category);
             }}
           >
+            <option value={""}></option>
             <option value={"Sport"}>Sport</option>
             <option value={"Romance"}>Romance</option>
             <option value={"Prose"}>Prose </option>

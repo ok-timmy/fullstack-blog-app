@@ -25,9 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const PORT = process.env.PORT;
 
+app.use('/api/allPost', allPostsRoute)
 
 app.use('/api/auth', authRoute);
-app.use('/api/allPost', allPostsRoute)
 app.use('/api/logout', logoutRoute)
 app.use(verifyJWT);
 app.use('/api/refresh', refreshRoute)

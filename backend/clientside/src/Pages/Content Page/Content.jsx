@@ -11,7 +11,6 @@ function Content() {
   const [editMode, setEditMode] = useState(false);
   const { user } = useContext(Context);
   const location = useLocation();
-  // const { blogContent } = location.state;
   const navigation = useNavigate();
 
   const pf = "http://localhost:8000/public/";

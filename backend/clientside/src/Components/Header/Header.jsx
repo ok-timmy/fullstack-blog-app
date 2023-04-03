@@ -8,18 +8,14 @@ import { logOut, setCurrentUser } from "../../Redux/Auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const WholeHead = styled.div`
-  position: fixed;
   width: 100%;
-  z-index: 100;
-  position: fixed;
   align-content: center;
-  top: 0;
   display: flex;
   flex-wrap: wrap;
   height: 12vh;
   background-color: whitesmoke;
   color: black;
-  padding: 15px 10px;
+  vertical-align: middle;
 
   @media screen and (max-width: 600px) {
     height: 10vh;
@@ -40,6 +36,7 @@ const HeaderLeft = styled.div`
 `;
 const HeaderCenter = styled.div`
   flex: 2;
+  vertical-align: middle;
   @media screen and (max-width: 600px) {
     display: none;
   }
