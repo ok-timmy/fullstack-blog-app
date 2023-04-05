@@ -5,7 +5,7 @@ import Header from "./Components/Header/Header";
 import Blogpage from "./Pages/Blogs Page/Blogpage";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
-import Publish from "./Pages/Publish-Post/publish";
+import Publish from "./Pages/Publish-Post/Publish";
 import Content from "./Pages/Content Page/Content";
 import Register from "./Pages/Register/Register";
 import Profile from "./Pages/Profile Page/Profile";

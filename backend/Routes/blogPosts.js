@@ -16,6 +16,6 @@ router.put("/update/:id", updateSpecificPost);
 router.patch("/updatelikes/:id", updateSpecificPostLikes);
 
 //DELETE POST
-router.delete("deletePost/:id", deleteSpecificPost);
+router.delete("/deletePost/:id", deleteSpecificPost);
 
 module.exports = router;

@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { RWebShare } from "react-web-share";
@@ -10,8 +9,6 @@ function BlogComponent({ hpBlog }) {
   const [isLiked, setIsLiked] = useState(false);
 
   const { image, _id, title, excerpt, likes, createdAt } = hpBlog;
-
-
 
   // const updateLikes = async (id, y) => {
   //   await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {

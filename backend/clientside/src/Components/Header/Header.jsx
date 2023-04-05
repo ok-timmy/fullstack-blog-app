@@ -116,7 +116,7 @@ function Header() {
   const [isMobileNav, setIsMobileNav] = useState(false);
   const node = useRef();
   const user = useSelector(setCurrentUser);
-  console.log(user);
+  // console.log(user);
 
   const onToggleMobileNav = useCallback(() => {
     if (!isMobileNav) {

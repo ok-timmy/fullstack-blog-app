@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./publish.css";
+import "./Publish.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
