@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "./Header.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useRef, useCallback } from "react";
 import { useSignOutMutation } from "../../Redux/Auth/authApiSlice";
 import { logOut, setCurrentUser } from "../../Redux/Auth/authSlice";
@@ -124,13 +124,11 @@ function Header() {
     } else setIsMobileNav(false);
   }, [isMobileNav]);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const logOutUser = async () => {
     await signOut().unwrap();
     dispatch(logOut());
-    navigate("/");
   };
 
   return (

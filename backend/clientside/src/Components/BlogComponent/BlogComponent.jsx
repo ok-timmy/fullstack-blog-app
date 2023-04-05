@@ -38,7 +38,7 @@ function BlogComponent({ hpBlog }) {
         <h3>{title}</h3>
         <p>{excerpt} </p>
         <button className="more">
-          <Link to={`/blog/:${_id}`} state={{ blogContent: hpBlog }}>
+          <Link to={`/blog/${_id}/${title}`} state={{ blogContent: hpBlog }}>
             Read More
           </Link>
         </button>
@@ -62,7 +62,7 @@ function BlogComponent({ hpBlog }) {
           <RWebShare
                 data={{
                   text: `Web Share - ${title}`,
-                  url: `http://localhost:3000/blog/:${_id}`,
+                  url: `http://localhost:3000/blog/${_id}/${title}`,
                   title: `${title}` ,
                 }}
                 onClick={() => console.log("shared successfully!")}

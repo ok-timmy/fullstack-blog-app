@@ -8,6 +8,11 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
 
+    getSingleBlogPostContent: builder.query({
+      query: (id) => `api/allPost/specificPost/${id}`,
+      keepUnusedDataFor: 10,
+    }),
+
     //Create New BlogPost
     createBlogPost: builder.mutation({
       query: (blogPostDetails) => ({
@@ -58,5 +63,6 @@ export const {
   useEditBlogPostMutation,
   useDeleteBlogPostMutation,
   useGetAllBlogPostQuery,
+  useGetSingleBlogPostContentQuery,
   useEditBlogPostLikesMutation,
 } = blogApiSlice;

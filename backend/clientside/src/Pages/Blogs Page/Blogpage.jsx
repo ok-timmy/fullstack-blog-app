@@ -33,6 +33,8 @@ function Blogpage() {
     filterPosts(filterCategory, hpBlogs);
   }, [filterCategory, hpBlogs]);
 
+  console.log(filteredBlogs);
+
   return (
     <div className="blogpage">
       <h2 className="heading">Latest Posts</h2>
