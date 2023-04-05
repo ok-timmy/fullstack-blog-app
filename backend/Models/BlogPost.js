@@ -23,9 +23,12 @@ const blogPostSchema = new Schema(
       type: String,
       required: true,
     },
-    likes: {
+    numberOfLikes: {
       type: Number,
       default: 0,
+    },
+    likesArray: {
+      type: Array,
     },
     image: {
       type: String,
