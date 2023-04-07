@@ -29,6 +29,7 @@ const blogPostSchema = new Schema(
     },
     likesArray: {
       type: Array,
+      default: [],
     },
     image: {
       type: String,

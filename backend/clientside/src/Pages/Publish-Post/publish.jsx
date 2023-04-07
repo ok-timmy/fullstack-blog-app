@@ -33,9 +33,14 @@ function Publish() {
   const authorEmail = `${user.email}`;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState("");
   const [excerpt, setExcerpt] = useState();
   const [file, setFile] = useState(null);
+
+  const changeCategory = (newCategory) => {
+    setCategory(newCategory)
+    console.log(newCategory, category)
+  }
 
   const handleInput = async (e) => {
     let image = "";
@@ -107,8 +112,8 @@ function Publish() {
           <label>Category</label>
           <select
             onChange={(e) => {
-              setCategory(e.target.value);
-              console.log(category);
+              console.log(e.target.value);
+              changeCategory(e.target.value);
             }}
           >
             <option value={""}></option>

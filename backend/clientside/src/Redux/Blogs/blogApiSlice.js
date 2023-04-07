@@ -39,12 +39,10 @@ export const blogApiSlice = apiSlice.injectEndpoints({
 
     //EditBlogPostLikes
     editBlogPostLikes: builder.mutation({
-      query: (postId, y) => ({
-        url: `api/blogPost/updateLikes/${postId}`,
+      query: (details) => ({
+        url: `api/blogPost/updateLikes/${details.postId}`,
         method: "PATCH",
-        body: {
-          likes: y + 1,
-        },
+        body: { ...details },
       }),
     }),
 

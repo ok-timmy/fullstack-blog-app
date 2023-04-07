@@ -1,28 +1,27 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { RWebShare } from "react-web-share";
 import "./BlogComponent.css";
 import { calcTime } from "../../Utilities/FormatTime";
+import { useEditBlogPostLikesMutation } from "../../Redux/Blogs/blogApiSlice";
+import { useSelector } from "react-redux";
+import { setCurrentUser } from "../../Redux/Auth/authSlice";
 
 function BlogComponent({ hpBlog }) {
-  const [isLiked, setIsLiked] = useState(false);
+  // const [isLiked, setIsLiked] = useState(false);
+  const user = useSelector(setCurrentUser);
 
+  const [editBlogPostLikes, { isLoading, isError }] =
+    useEditBlogPostLikesMutation();
   const { image, _id, title, excerpt, likes, createdAt } = hpBlog;
 
-  // const updateLikes = async (id, y) => {
-  //   await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
-  //     likes: y + 1,
-  //   });
-  //   setIsLiked(true);
-  // };
-
-  // const decreaseLikes = async (id, y) => {
-  //   await axios.patch(`http://localhost:8000/api/post/updatelikes/${id}`, {
-  //     likes: y - 1,
-  //   });
-  //   setIsLiked(false);
-  // };
+  const handleLikeFunction = async () => {
+    await editBlogPostLikes({
+      postId: _id,
+      userEmail: user.email,
+    }).unwrap();
+  };
 
   return (
     <div className="post">
@@ -42,12 +41,8 @@ function BlogComponent({ hpBlog }) {
         <p className="post-time">{calcTime(createdAt)}</p>
         <div className="icons__section">
           <span>
-            <button
-              // onClick={() => {
-              //   isLiked ? decreaseLikes(_id, likes) : updateLikes(_id, likes);
-              // }}
-            >
-              {isLiked ? (
+            <button onClick={handleLikeFunction}>
+              {user ? (
                 <i className="bi bi-heart-fill like"></i>
               ) : (
                 <i className="bi bi-heart like"></i>
@@ -56,18 +51,18 @@ function BlogComponent({ hpBlog }) {
             {likes}
           </span>
           <span>
-          <RWebShare
-                data={{
-                  text: `Web Share - ${title}`,
-                  url: `http://localhost:3000/blog/${_id}/${title}`,
-                  title: `${title}` ,
-                }}
-                onClick={() => console.log("shared successfully!")}
-              >
-                <button>
-                  <i className="bi bi-share share"></i>
-                </button>
-              </RWebShare>
+            <RWebShare
+              data={{
+                text: `Web Share - ${title}`,
+                url: `http://localhost:3000/blog/${_id}/${title}`,
+                title: `${title}`,
+              }}
+              onClick={() => console.log("shared successfully!")}
+            >
+              <button>
+                <i className="bi bi-share share"></i>
+              </button>
+            </RWebShare>
           </span>
         </div>
       </div>
