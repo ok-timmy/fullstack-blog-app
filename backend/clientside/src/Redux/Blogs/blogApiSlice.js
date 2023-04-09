@@ -46,6 +46,15 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    //Comment on BlogPost
+    commentOnBlogPost: builder.mutation({
+      query: (details) => ({
+        url: `api/blogPost/comment/${details.postId}`,
+        method: "POST",
+        body: { ...details },
+      }),
+    }),
+
     //Delete BlogPost
     deleteBlogPost: builder.mutation({
       query: (postId) => ({
@@ -63,4 +72,5 @@ export const {
   useGetAllBlogPostQuery,
   useGetSingleBlogPostContentQuery,
   useEditBlogPostLikesMutation,
+  useCommentOnBlogPostMutation
 } = blogApiSlice;

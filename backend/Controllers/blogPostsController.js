@@ -76,13 +76,8 @@ exports.updateSpecificPost = async (req, res) => {
 };
 
 //UPDATE SPECIFIC POST LIKES
-//Todo here:
-/*
-1. When an authenticated user wants to like, 
-We first check if their id does not exist in the likesArray,
-if it doesn't exist, then, their id is added to the likesArray, then the number of Likes is increased by 1
-2. However if their id exist there, we remove the id and decrease the number of likes by 1
 
+/*
 On the FE, when a post is fetched, we loop through the fetched post to see if the logged In user Id exist there,
 If it does, we render a filled like icon and otherwise we render a plain like icon
 */
@@ -118,6 +113,10 @@ exports.updateSpecificPostLikes = async (req, res) => {
   
       res.status(200).json({
         statusCode: 200,
+        data: {
+          totalLikes: blogPost.numberOfLikes,
+          likesArray: blogPost.likesArray
+        },
         message: "User already Liked Post before and this user unliked the post",
       });
     } catch (error) {
@@ -147,6 +146,10 @@ exports.updateSpecificPostLikes = async (req, res) => {
       // console.log("Likes Updated Successfully!!");
       res.status(200).json({
         statusCode: 200,
+        data: {
+          totalLikes: blogPost.numberOfLikes,
+          likesArray: blogPost.likesArray
+        },
         message: "Post Likes Updated successfully",
       });
     } catch (error) {
@@ -156,7 +159,37 @@ exports.updateSpecificPostLikes = async (req, res) => {
 };
 
 //COMMENT ON A SPECIFIC POST
-exports.commentOnSpecificPost = async (req, res) => {};
+exports.commentOnSpecificPost = async (req, res) => {
+  const {comment } = req.body;
+
+  try {
+    await BlogPost.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        $push: {
+          comment: {
+            commenter: comment.commenter,
+            content: comment.content,
+            time: new Date().getTime()
+          },  
+        }
+      },
+      {
+        new: true,
+      }
+    );
+    console.log("Comment Added Successfully!!");
+    res.status(200).json({
+      statusCode: 200,
+      data: {
+       comments: comment.reverse()
+      },
+      message: "Comment Added Updated successfully",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 //DELETE SPECIFIC POST
 exports.deleteSpecificPost = async (req, res) => {

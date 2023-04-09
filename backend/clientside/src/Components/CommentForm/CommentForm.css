@@ -1,0 +1,39 @@
+.main__comment__form{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.loggedIn__user {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.image{
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    margin-bottom: 0.25rem;
+}
+
+.username {
+    font-size: 0.625rem;
+}
+
+.quill {
+    height: 7.5rem;
+}
+
+
+.submit__btn {
+    margin-top: 2rem;
+    background-color: rgb(138, 43, 226);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    color: white;
+}
+
+.submit__btn:hover {
+    background-color: rgb(94, 39, 145);
+}

@@ -1,5 +1,4 @@
-import React from "react";
-// import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { RWebShare } from "react-web-share";
 import "./BlogComponent.css";
@@ -9,18 +8,54 @@ import { useSelector } from "react-redux";
 import { setCurrentUser } from "../../Redux/Auth/authSlice";
 
 function BlogComponent({ hpBlog }) {
-  // const [isLiked, setIsLiked] = useState(false);
   const user = useSelector(setCurrentUser);
 
-  const [editBlogPostLikes, { isLoading, isError }] =
-    useEditBlogPostLikesMutation();
-  const { image, _id, title, excerpt, likes, createdAt } = hpBlog;
+  const [editBlogPostLikes] = useEditBlogPostLikesMutation();
+  const { image, _id, title, excerpt, numberOfLikes, likesArray, createdAt } =
+    hpBlog;
+
+  const [totalLikes, setTotalLikes] = useState(numberOfLikes);
+
+  const checkFirst = (likesArray) => {
+    const result = likesArray.filter((e) => {
+      if (user.email === e) {
+        return true;
+      }
+      return false;
+    });
+    return result;
+  };
+
+  console.log(likesArray);
+  const [isLiked, setIsLiked] = useState(checkFirst(likesArray));
+
+  const checkIfLiked = (likesArray, newTotalLikes) => {
+    const yes = likesArray.filter((e, index) => {
+      if (e === likesArray[index]) {
+        return true;
+      }
+      return false;
+    });
+
+    console.log(yes);
+
+    if (yes) {
+      setIsLiked(!isLiked);
+      setTotalLikes(newTotalLikes);
+    } else {
+      setIsLiked(!isLiked);
+      setTotalLikes(newTotalLikes);
+    }
+  };
 
   const handleLikeFunction = async () => {
-    await editBlogPostLikes({
+    const resp = await editBlogPostLikes({
       postId: _id,
       userEmail: user.email,
     }).unwrap();
+    console.log(resp);
+    const { likesArray, totalLikes } = resp.data;
+    checkIfLiked(likesArray, totalLikes);
   };
 
   return (
@@ -42,13 +77,13 @@ function BlogComponent({ hpBlog }) {
         <div className="icons__section">
           <span>
             <button onClick={handleLikeFunction}>
-              {user ? (
+              {isLiked ? (
                 <i className="bi bi-heart-fill like"></i>
               ) : (
                 <i className="bi bi-heart like"></i>
               )}
             </button>
-            {likes}
+            {totalLikes}
           </span>
           <span>
             <RWebShare

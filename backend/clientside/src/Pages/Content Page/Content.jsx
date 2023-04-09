@@ -5,7 +5,11 @@ import EditPost from "../EditPost/EditPost";
 import { useSelector } from "react-redux";
 import { setCurrentUser } from "../../Redux/Auth/authSlice";
 import { calcTime } from "../../Utilities/FormatTime";
-import { useDeleteBlogPostMutation, useGetSingleBlogPostContentQuery } from "../../Redux/Blogs/blogApiSlice";
+import {
+  useDeleteBlogPostMutation,
+  useGetSingleBlogPostContentQuery,
+} from "../../Redux/Blogs/blogApiSlice";
+import CommentForm from "../../Components/CommentForm/CommentForm";
 
 function Content() {
   const user = useSelector(setCurrentUser);
@@ -17,8 +21,7 @@ function Content() {
   const locate = location.pathname;
   const pathId = locate.split("/")[2];
 
-
-  const openAlert = async(id) => {
+  const openAlert = async (id) => {
     let text = "Are You sure You want to delete this Blog Post?";
     if (window.confirm(text) === true) {
       try {
@@ -33,13 +36,15 @@ function Content() {
   };
 
   if (location.state) {
-   return <FetchContentFromState
-      editMode={editMode}
-      location={location}
-      setEditMode={setEditMode}
-      user={user}
-      openAlert={openAlert}
-    />;
+    return (
+      <FetchContentFromState
+        editMode={editMode}
+        location={location}
+        setEditMode={setEditMode}
+        user={user}
+        openAlert={openAlert}
+      />
+    );
   } else
     return (
       <FetchContentFromAPI pathId={pathId} user={user} openAlert={openAlert} />
@@ -74,9 +79,8 @@ const FetchContentFromState = ({
           <p className="content-author">Published by {postcontent.author}</p>
           <p className="content-timestamp">{calcTime(postcontent.updatedAt)}</p>
         </div>
-        {user && (
-          (postcontent.author ===
-            `${user.firstName} ${user.secondName}`) && (
+        {user &&
+          postcontent.author === `${user.firstName} ${user.secondName}` && (
             <div>
               <i onClick={() => setEditMode(true)} className="bi bi-pencil"></i>
 
@@ -85,13 +89,13 @@ const FetchContentFromState = ({
                 className="bi bi-trash"
               ></i>
             </div>
-          )
-        )}
+          )}
       </div>
       <div
         className="content-story"
         dangerouslySetInnerHTML={{ __html: postcontent.content }}
       ></div>
+      <CommentForm postId={postcontent._id} />
     </div>
   );
 };
@@ -135,7 +139,7 @@ const FetchContentFromAPI = ({ pathId, user, openAlert }) => {
           <p className="content-author">Published by {postcontent.author}</p>
           <p className="content-timestamp">{calcTime(postcontent.updatedAt)}</p>
         </div>
-        {user ? (
+        {user &&
           postcontent.content.author ===
             `${user.firstName} ${user.secondName}` && (
             <div>
@@ -146,15 +150,13 @@ const FetchContentFromAPI = ({ pathId, user, openAlert }) => {
                 className="bi bi-trash"
               ></i>
             </div>
-          )
-        ) : (
-          <div></div>
-        )}
+          )}
       </div>
       <div
         className="content-story"
         dangerouslySetInnerHTML={{ __html: postcontent.content }}
       ></div>
+          <CommentForm postId={postcontent._id} />
     </div>
   );
 };
