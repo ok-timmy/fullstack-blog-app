@@ -48,10 +48,10 @@ export const blogApiSlice = apiSlice.injectEndpoints({
 
     //Comment on BlogPost
     commentOnBlogPost: builder.mutation({
-      query: (details) => ({
-        url: `api/blogPost/comment/${details.postId}`,
-        method: "POST",
-        body: { ...details },
+      query: (comment) => ({
+        url: `api/blogPost/comment/${comment.postId}`,
+        method: "PUT",
+        body: { ...comment },
       }),
     }),
 

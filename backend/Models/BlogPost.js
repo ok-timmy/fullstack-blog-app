@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Comments = require("./Comments");
 const { Schema } = mongoose;
 
 const blogPostSchema = new Schema(
@@ -39,13 +40,16 @@ const blogPostSchema = new Schema(
       required: true,
     },
     comments: {
-      type: Array,
-      default: []
+      type: Schema.Types.ObjectId,
+      ref: "Comments",
+      
     }
   },
   {
     timestamps: true,
   }
 );
+
+
 
 module.exports = mongoose.model("BlogPost", blogPostSchema);

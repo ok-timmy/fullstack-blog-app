@@ -1,4 +1,5 @@
 const BlogPost = require("../Models/BlogPost");
+const Comments = require("../Models/Comments");
 
 //CREATE NEW POSTS
 exports.createPost = async (req, res) => {
@@ -160,30 +161,41 @@ exports.updateSpecificPostLikes = async (req, res) => {
 
 //COMMENT ON A SPECIFIC POST
 exports.commentOnSpecificPost = async (req, res) => {
-  const {comment } = req.body;
+  // const {comment} = req.body;
+  const {commenter, content, postId } = req.body;
+
+  const {id} = req.params;
+  console.log(id);
+  console.log(commenter, content, postId);
+  const newComment = await new Comments({
+    postId, commenter, content
+  });
+  await newComment.save();
+  console.log("Comment saved successfully");
 
   try {
-    await BlogPost.findByIdAndUpdate(
-      { _id: req.params.id },
-      {
-        $push: {
-          comment: {
-            commenter: comment.commenter,
-            content: comment.content,
-            time: new Date().getTime()
-          },  
-        }
-      },
-      {
-        new: true,
-      }
-    );
+    // await BlogPost.findByIdAndUpdate(
+    //   { _id: req.params.id },
+    //   {
+    //     $push: {
+    //       comments: {
+    //         postId,
+    //         commenter,
+    //         content,
+            
+    //       },  
+    //     }
+    //   },
+    //   {
+    //     new: true,
+    //   }
+    // );
     console.log("Comment Added Successfully!!");
     res.status(200).json({
       statusCode: 200,
-      data: {
-       comments: comment.reverse()
-      },
+      // data: {
+      //  comments: comment.reverse()
+      // },
       message: "Comment Added Updated successfully",
     });
   } catch (error) {

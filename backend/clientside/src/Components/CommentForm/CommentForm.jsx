@@ -34,7 +34,7 @@ const CommentForm = ({ postId }) => {
   };
 
   const submitComment = async () => {
-    if (!commentDetails.commenter) {
+    if (!commentDetails.commenter || commentDetails.commenter === undefined) {
       alert("You have to be logged in in order to comment!");
     }
     const response = await sendComment({ ...commentDetails });
@@ -44,7 +44,7 @@ const CommentForm = ({ postId }) => {
   return (
     <Fragment>
       <div>Comment</div>
-      <form>
+      {/* <form> */}
         <div className="main__comment__form">
           <div className="loggedIn__user">
             <img src={image} alt="user" className="image"/>
@@ -54,7 +54,7 @@ const CommentForm = ({ postId }) => {
           <div className="comment__form">
             <label className="label">Type your comment</label>
             <ReactQuill
-              className="quill"
+              className="quill__comment"
               theme="snow"
               onChange={setComment}
               modules={modules}
@@ -63,7 +63,7 @@ const CommentForm = ({ postId }) => {
             <button className="submit__btn" onClick={submitComment}>{isLoading? "Submitting" : "Submit Comment"}</button>
           </div>
         </div>
-      </form>
+      {/* </form> */}
     </Fragment>
   );
 };

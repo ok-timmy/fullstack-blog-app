@@ -1,4 +1,5 @@
 const BlogPost = require("../Models/BlogPost");
+const Comments = require("../Models/Comments");
 
 // GET ALL POSTS
 exports.getAllPosts = async (req, res) => {
@@ -40,3 +41,15 @@ exports.getPostsBySearchName = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.getAllComments = async(req, res) => {
+  const {id} = req.params
+  console.log(id);
+  try {
+    const foundComments = await BlogPost.findById({_id: id}).select("comments")
+    console.log(foundComments);
+    res.status(200).send(foundComments);
+  } catch (error) {
+    console.log(error)
+  }
+}
