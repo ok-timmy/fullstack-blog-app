@@ -22,14 +22,14 @@ const CommentForm = ({ postId }) => {
   };
 
   const user = useSelector(setCurrentUser);
-  const { firstName, secondName, image } = user;
+  const { _id, firstName, secondName, image } = user;
 
   const [comment, setComment] = useState("");
   const [sendComment, { isLoading, isSuccess }] =
     useCommentOnBlogPostMutation();
   const commentDetails = {
     postId,
-    commenter: `${firstName} ${secondName}`,
+    commenter: _id,
     content: comment,
   };
 

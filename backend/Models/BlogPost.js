@@ -39,17 +39,16 @@ const blogPostSchema = new Schema(
       type: String,
       required: true,
     },
-    comments: {
-      type: Schema.Types.ObjectId,
-      ref: "Comments",
-      
-    }
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comments",
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
-
-
 
 module.exports = mongoose.model("BlogPost", blogPostSchema);

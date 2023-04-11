@@ -1,5 +1,6 @@
 const BlogPost = require("../Models/BlogPost");
 const Comments = require("../Models/Comments");
+const User = require("../Models/User");
 
 //CREATE NEW POSTS
 exports.createPost = async (req, res) => {
@@ -83,7 +84,7 @@ On the FE, when a post is fetched, we loop through the fetched post to see if th
 If it does, we render a filled like icon and otherwise we render a plain like icon
 */
 exports.updateSpecificPostLikes = async (req, res) => {
-  const {userEmail} = req.body;
+  const { userEmail } = req.body;
   const blogPost = await BlogPost.findById(req.params.id);
   const existingLikesArray = blogPost.likesArray;
   const numberOfLikes = blogPost.numberOfLikes;
@@ -95,7 +96,6 @@ exports.updateSpecificPostLikes = async (req, res) => {
 
   //If User has liked the post before
   if (isExist) {
-
     try {
       await BlogPost.findByIdAndUpdate(
         { _id: req.params.id },
@@ -105,26 +105,25 @@ exports.updateSpecificPostLikes = async (req, res) => {
           },
           $pull: {
             likesArray: userEmail,
-          }
+          },
         },
         {
           new: true,
         }
       );
-  
+
       res.status(200).json({
         statusCode: 200,
         data: {
           totalLikes: blogPost.numberOfLikes,
-          likesArray: blogPost.likesArray
+          likesArray: blogPost.likesArray,
         },
-        message: "User already Liked Post before and this user unliked the post",
+        message:
+          "User already Liked Post before and this user unliked the post",
       });
     } catch (error) {
       console.log(error);
     }
-
-   
   }
 
   //If User has not liked the post before
@@ -137,8 +136,8 @@ exports.updateSpecificPostLikes = async (req, res) => {
             numberOfLikes: numberOfLikes + 1,
           },
           $push: {
-            likesArray: userEmail,  
-          }
+            likesArray: userEmail,
+          },
         },
         {
           new: true,
@@ -149,7 +148,7 @@ exports.updateSpecificPostLikes = async (req, res) => {
         statusCode: 200,
         data: {
           totalLikes: blogPost.numberOfLikes,
-          likesArray: blogPost.likesArray
+          likesArray: blogPost.likesArray,
         },
         message: "Post Likes Updated successfully",
       });
@@ -162,34 +161,26 @@ exports.updateSpecificPostLikes = async (req, res) => {
 //COMMENT ON A SPECIFIC POST
 exports.commentOnSpecificPost = async (req, res) => {
   // const {comment} = req.body;
-  const {commenter, content, postId } = req.body;
+  const { commenter, content, postId } = req.body;
 
-  const {id} = req.params;
-  console.log(id);
-  console.log(commenter, content, postId);
+  const { id } = req.params;
+
   const newComment = await new Comments({
-    postId, commenter, content
+    postId,
+    commenter,
+    content,
   });
-  await newComment.save();
+  var comm = await Comments.create(newComment);
+  comm = await comm.populate("commenter", "firstName secondName userName image");
+  comm = await comm.populate("postId", "title author excerpt")
+  comm = await User.populate(comm, {
+    path: "blogposts",
+    select: "commenter content"
+  })
+  console.log(comm);
   console.log("Comment saved successfully");
 
   try {
-    // await BlogPost.findByIdAndUpdate(
-    //   { _id: req.params.id },
-    //   {
-    //     $push: {
-    //       comments: {
-    //         postId,
-    //         commenter,
-    //         content,
-            
-    //       },  
-    //     }
-    //   },
-    //   {
-    //     new: true,
-    //   }
-    // );
     console.log("Comment Added Successfully!!");
     res.status(200).json({
       statusCode: 200,

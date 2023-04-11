@@ -46,7 +46,7 @@ exports.getAllComments = async(req, res) => {
   const {id} = req.params
   console.log(id);
   try {
-    const foundComments = await BlogPost.findById({_id: id}).select("comments")
+    const foundComments = await BlogPost.findById({_id: id}).populate("comments")
     console.log(foundComments);
     res.status(200).send(foundComments);
   } catch (error) {

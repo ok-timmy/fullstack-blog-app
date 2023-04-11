@@ -83,10 +83,11 @@ exports.loginUser = async (req, res) => {
           // secure: true,  This has to be in production mode
         });
 
-        const { email, firstName, secondName, userName, bio, image } =
+        const { _id ,email, firstName, secondName, userName, bio, image } =
           foundUser;
         // console.log("Logged In User already", accessToken)
         res.status(200).json({
+          _id,
           email,
           firstName,
           secondName,
