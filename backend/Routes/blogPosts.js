@@ -5,7 +5,11 @@ const {
   updateSpecificPostLikes,
   deleteSpecificPost,
   commentOnSpecificPost,
+  getUserPosts
 } = require("../Controllers/blogPostsController");
+
+//GET A USER POSTS
+router.get("/user/:authorEmail", getUserPosts)
 
 // CREATE NEW POST
 router.post("/create", createPost);

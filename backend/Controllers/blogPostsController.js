@@ -2,6 +2,20 @@ const BlogPost = require("../Models/BlogPost");
 const Comments = require("../Models/Comments");
 const User = require("../Models/User");
 
+//GET A USER POSTS
+exports.getUserPosts = async (req, res) => {
+  const { authorEmail } = req.params;
+  console.log(authorEmail);
+
+  try {
+    const usersPosts = await BlogPost.find({ authorEmail });
+    // console.log(usersPosts);
+    res.status(200).json({ statusCode: 200, data: usersPosts });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 //CREATE NEW POSTS
 exports.createPost = async (req, res) => {
   const { title, content, author, category, excerpt, image, authorEmail } =
@@ -171,12 +185,15 @@ exports.commentOnSpecificPost = async (req, res) => {
     content,
   });
   var comm = await Comments.create(newComment);
-  comm = await comm.populate("commenter", "firstName secondName userName image");
-  comm = await comm.populate("postId", "title author excerpt")
+  comm = await comm.populate(
+    "commenter",
+    "firstName secondName userName image"
+  );
+  comm = await comm.populate("postId", "title author excerpt");
   comm = await User.populate(comm, {
     path: "blogposts",
-    select: "commenter content"
-  })
+    select: "commenter content",
+  });
   console.log(comm);
   console.log("Comment saved successfully");
 
