@@ -3,13 +3,13 @@ import "./Profile.css";
 import avatar from "../../assets/avatar.png";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useGetUserDetailsQuery} from "../../Redux/Auth/authApiSlice";
+import { useGetUserDetailsQuery } from "../../Redux/Auth/authApiSlice";
 import { setCurrentUser } from "../../Redux/Auth/authSlice";
 import EditProfile from "../Edit-Profile/EditProfile";
-
+import { useGetLoggedInUserBlogPostsQuery } from "../../Redux/Blogs/blogApiSlice";
 
 function Profile() {
-  const [userPosts, setuserPosts] = useState();
+  // const [userPosts, setuserPosts] = useState();
   const user = useSelector(setCurrentUser);
   const {
     data: userDetails,
@@ -17,7 +17,8 @@ function Profile() {
     isError,
     // isSuccess,
     isFetching,
-  } = useGetUserDetailsQuery(user.email, {});
+  } = useGetUserDetailsQuery(user.email);
+
   console.log(userDetails);
 
   const location = useLocation();
@@ -27,9 +28,7 @@ function Profile() {
     return <EditProfile />;
   }
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  } else if (isFetching) {
+  if (isLoading || isFetching) {
     return <div>Loading...</div>;
   } else if (isError) {
     return <div>Sorry, Something went wrong, please try again...</div>;
@@ -78,17 +77,7 @@ function Profile() {
         </button>
         <div>
           <h3>Some of your Works</h3>
-          <div>
-            {!userPosts ? (
-              <div className="loader"></div>
-            ) : userPosts === null ? (
-              userPosts.map((userPost) => {
-                return <div>{userPost.title}</div>;
-              })
-            ) : (
-              <div>You Dont have any post</div>
-            )}
-          </div>
+          <UserBlogPosts email={email} />
         </div>
       </div>
     );
@@ -96,3 +85,35 @@ function Profile() {
 }
 
 export default Profile;
+
+export const UserBlogPosts = ({ email }) => {
+  const {
+    data: userPosts,
+    isLoading,
+    isFetching,
+    isError,
+  } = useGetLoggedInUserBlogPostsQuery(email);
+
+  console.log(userPosts);
+
+  if (isLoading || isFetching) {
+    return <div className="loader"></div>;
+  }
+
+  if (isError) {
+    return <div>Something Went Wrong.... Try Again</div>;
+  }
+
+  return (
+    <div>
+      {" "}
+      {userPosts !== [] ? (
+        userPosts.map((userPost) => {
+          return <div key={userPost._id}>{userPost.title}</div>;
+        })
+      ) : (
+        <div>You Dont have any post</div>
+      )}
+    </div>
+  );
+};

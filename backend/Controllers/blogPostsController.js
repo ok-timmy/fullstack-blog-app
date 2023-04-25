@@ -10,7 +10,7 @@ exports.getUserPosts = async (req, res) => {
   try {
     const usersPosts = await BlogPost.find({ authorEmail });
     // console.log(usersPosts);
-    res.status(200).json({ statusCode: 200, data: usersPosts });
+    res.status(200).json(usersPosts);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -92,11 +92,6 @@ exports.updateSpecificPost = async (req, res) => {
 };
 
 //UPDATE SPECIFIC POST LIKES
-
-/*
-On the FE, when a post is fetched, we loop through the fetched post to see if the logged In user Id exist there,
-If it does, we render a filled like icon and otherwise we render a plain like icon
-*/
 exports.updateSpecificPostLikes = async (req, res) => {
   const { userEmail } = req.body;
   const blogPost = await BlogPost.findById(req.params.id);

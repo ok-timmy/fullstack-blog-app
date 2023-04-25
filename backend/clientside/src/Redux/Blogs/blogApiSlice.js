@@ -8,6 +8,12 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
 
+    //Get LoggedIn User Blogpost only
+    getLoggedInUserBlogPosts: builder.query({
+      query: (userEmail) => `api/blogPost/user/${userEmail}`,
+      keepUnusedDataFor: 5,
+    }),
+    //Get single blogpost content
     getSingleBlogPostContent: builder.query({
       query: (id) => `api/allPost/specificPost/${id}`,
       keepUnusedDataFor: 10,
@@ -67,6 +73,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useCreateBlogPostMutation,
+  useGetLoggedInUserBlogPostsQuery,
   useEditBlogPostMutation,
   useDeleteBlogPostMutation,
   useGetAllBlogPostQuery,

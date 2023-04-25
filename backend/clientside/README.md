@@ -6,3 +6,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 TODOS FOR THIS PROJECT
 
 - Select a good theme/color scheme and if possible add a dark theme funtionality
+- Rebuild frontend with a good UI
+- Upload profile image and cover image for blogpost
