@@ -14,7 +14,7 @@ exports.handleLogoutController = async (req, res) => {
     const foundUser = await User.findOne({ refreshToken }).exec();
     if (!foundUser) {
       // Cookie is found but does not match the user details.
-      res.clearCookie("jwt", { httpOnly: true, sameSite: none, secure: true });
+      res.clearCookie("jwt", { httpOnly: true, sameSite: "none", secure: true });
       res.sendStatus(204); // All cookies is cleared
     }
 

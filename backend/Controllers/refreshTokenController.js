@@ -3,9 +3,7 @@ const jwt = require("jsonwebtoken");
 
 exports.handleRefreshToken = async (req, res) => {
   const cookies = req.cookies;
-  console.log("No cookies found", 1)
   if (!cookies.jwt) {
-    console.log("No cookies found",2)
     res.sendStatus(401);
   } else {
     const refreshToken = cookies.jwt;

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { handleLogoutController } = require("../Controllers/logoutController");
 
-//GET REFRESH TOKEN
+//LOG OUT USER
 router.get("/", handleLogoutController);
 
 
