@@ -20,7 +20,7 @@ const Registerbox = styled.div`
 
   @media (max-width: 600px) {
     width: 90vw;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

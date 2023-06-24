@@ -16,8 +16,8 @@ const LoginDiv = styled.div`
   min-height: 100vh;
 
   @media (max-width: 480px) {
-    height: 95vh;
-    padding-top: 0.5rem;
+    min-height: 70vh;
+    padding: 2rem 0;
   }
 `;
 
