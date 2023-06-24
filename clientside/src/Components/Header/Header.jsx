@@ -126,6 +126,7 @@ function Header() {
   const logOutUser = async () => {
     await signOut().unwrap();
     dispatch(logOut());
+    localStorage.removeItem("persist:detailsStore");
   };
 
   return (
