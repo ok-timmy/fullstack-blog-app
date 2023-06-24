@@ -10,7 +10,6 @@ const LoginDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 3rem;
   background-blend-mode: darken;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,13 +17,14 @@ const LoginDiv = styled.div`
 
   @media (max-width: 480px) {
     height: 95vh;
+    padding-top: 0.5rem;
   }
 `;
 
 const Loginbox = styled.div`
   width: 25rem;
   height: 25rem;
-  background-color: #faf7ff;
+  background-color: #c2d8da;
   margin: 25px auto;
   border-radius: 10px;
   padding-top: 1rem;

@@ -10,7 +10,7 @@ const Registerbox = styled.div`
   width: 60vw;
   padding: 0 0 2rem;
   height: 100%;
-  background-color: #faf7ff;
+  background-color: #c2d8da;
   margin: 0 auto;
   border-radius: 10px;
 
