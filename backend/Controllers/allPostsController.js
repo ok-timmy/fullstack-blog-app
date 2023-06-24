@@ -14,10 +14,31 @@ exports.getAllPosts = async (req, res) => {
 //GET SPECIFIC POSTS
 exports.getSpecificPost = async (req, res) => {
   try {
-    const blogPost = await BlogPost.findById(req.params.id);
+    
+    const blogPost = await BlogPost.findOne({title: req.params.title});
     res.status(200).json(blogPost);
   } catch (error) {
     console.log(error);
+  }
+};
+
+// FETCH COMMENTS ON A SPECIFIC POST
+exports.getBlogPostComments = async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    const blogPostComments = await Comments.find({
+      postId: id,
+    }).populate("commenter", "image firstName secondName userName");
+  
+    res.status(200).json({
+      message: "Fetched blogpost comments",
+      data: blogPostComments,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "An Error occured!",
+    });
   }
 };
 
@@ -33,7 +54,8 @@ exports.getPostsBySearchName = async (req, res) => {
     const blogPosts = await BlogPost.find({
       title: { $elemMatch: { $eq: searchInput } },
     }).sort({ updatedAt: -1 });
-    console.log(blogPosts);
+    
+
 
     //Send the found and populated array to the frontend
     res.status(200).json(blogPosts);
@@ -42,14 +64,14 @@ exports.getPostsBySearchName = async (req, res) => {
   }
 };
 
-exports.getAllComments = async(req, res) => {
-  const {id} = req.params
-  console.log(id);
-  try {
-    const foundComments = await BlogPost.findById({_id: id}).populate("comments")
-    console.log(foundComments);
-    res.status(200).send(foundComments);
-  } catch (error) {
-    console.log(error)
-  }
-}
+// exports.getAllComments = async(req, res) => {
+//   const {id} = req.params
+
+//   try {
+//     const foundComments = await BlogPost.findById({_id: id}).populate("comments")
+
+//     res.status(200).send(foundComments);
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }

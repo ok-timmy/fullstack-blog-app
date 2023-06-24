@@ -34,11 +34,11 @@ const Heading = styled.h2`
   font-size: xx-large;
   font-weight: 300;
   margin: 1rem auto 2rem;
+  padding: 1rem;
 `;
 
 function Register() {
-  const [signUp, { isLoading, error }] =
-    useSignUpMutation();
+  const [signUp, { isLoading }] = useSignUpMutation();
 
   const navigation = useNavigate();
 
@@ -76,8 +76,6 @@ function Register() {
 
   const handleInput = async (e) => {
     e.preventDefault();
-    const user = { firstName, secondName, email, password, userName };
-    console.log(user);
 
     if (!firstName || !secondName || !email || !userName || !password) {
       return;
@@ -100,7 +98,6 @@ function Register() {
         navigation("/login");
       } catch (err) {
         console.log(err.message);
-        console.log(error);
       }
     }
   };

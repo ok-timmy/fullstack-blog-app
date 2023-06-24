@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Profile.css";
 import avatar from "../../assets/avatar.png";
 import { Link, useLocation } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useGetUserDetailsQuery } from "../../Redux/Auth/authApiSlice";
 import { setCurrentUser } from "../../Redux/Auth/authSlice";
 import EditProfile from "../Edit-Profile/EditProfile";
 import { useGetLoggedInUserBlogPostsQuery } from "../../Redux/Blogs/blogApiSlice";
+import BlogCard from "../../Components/BlogCard/BlogCard";
 
 function Profile() {
   // const [userPosts, setuserPosts] = useState();
@@ -19,10 +20,7 @@ function Profile() {
     isFetching,
   } = useGetUserDetailsQuery(user.email);
 
-  console.log(userDetails);
-
   const location = useLocation();
-  console.log(location);
 
   if (location.search === "?edit") {
     return <EditProfile />;
@@ -45,27 +43,31 @@ function Profile() {
           )}
         </div>
         <div className="profile-details">
-          <div>
-            <label>First Name: </label>
+          <div className="firstName">
+            <label>First Name </label>
             <span>{firstName}</span>
           </div>
-          <div>
-            <label>Last Name: </label>
+          <div className="secondName">
+            <label>Last Name </label>
             <span>{secondName}</span>
           </div>
-          <div>
-            <label>Username: </label>
+          <div className="userName">
+            <label>Username </label>
             <span>{userName}</span>
           </div>
-          <div>
-            <label>Email Address: </label>
+          <div className="email">
+            <label>Email</label>
             <span>{email}</span>
           </div>
-          <div>
-            <label>Short Bio:</label>
-            <span>{bio ? bio : "No Bio Yet."}</span>
-          </div>
         </div>
+          <div className="bio">
+            <label>Short Bio</label>
+            <div className="bio__Content">
+              {bio
+                ? bio
+                : "No Bio Yet.No Bio Yet.No Bio Yet.No Bio Yet.No Bio Yet.No Bio Yet.No Bio Yet.No Bio Yet.No Bio Yet.No Bio Yet."}
+            </div>
+          </div>
         <button className="edit-profile-btn">
           <Link
             to={"?edit"}
@@ -94,8 +96,6 @@ export const UserBlogPosts = ({ email }) => {
     isError,
   } = useGetLoggedInUserBlogPostsQuery(email);
 
-  console.log(userPosts);
-
   if (isLoading || isFetching) {
     return <div className="loader"></div>;
   }
@@ -107,9 +107,13 @@ export const UserBlogPosts = ({ email }) => {
   return (
     <div>
       {" "}
-      {userPosts !== [] ? (
+      {userPosts.length !== 0 ? (
         userPosts.map((userPost) => {
-          return <div key={userPost._id}>{userPost.title}</div>;
+          return (
+            <div className="users__posts" key={userPost._id}>
+              <BlogCard hpBlog={userPost} />
+            </div>
+          );
         })
       ) : (
         <div>You Dont have any post</div>

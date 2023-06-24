@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import "./EditPost.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import axios from "axios";
-// import axiosInstance from "../../config";
+import { useEditBlogPostMutation } from "../../Redux/Blogs/blogApiSlice";
 
 const modules = {
   toolbar: [
@@ -20,29 +19,30 @@ const modules = {
   ],
 };
 
-function EditPost({ blogContent,  setEditMode }) {
-  const id = blogContent._id
+function EditPost({ blogContent, setEditMode }) {
+  const id = blogContent._id;
   const [title, setTitle] = useState(blogContent.title);
   const [content, setContent] = useState(blogContent.content);
   const [category, setCategory] = useState(blogContent.category);
 
- const handlePostUpdate = async (e) => {
-   e.preventDefault();
-   const postUpdate = {id, content, category, title}
-   console.log(postUpdate);
+  const [editBlogPost, { isLoading, isError, error }] =
+    useEditBlogPostMutation();
 
-   try{
-     const res = await axios.put('http://localhost:8000/api/post/update', postUpdate)
-     console.log(res.data);
-   }
-   catch(error) {
-     console.log(error);
-   };
+  const handlePostUpdate = async (e) => {
+    e.preventDefault();
 
-   setEditMode(false);
-   
- }
+    const response = await editBlogPost({
+      id,
+      title,
+      category,
+      content,
+    }).unwrap();
 
+
+    if (response.status === 200) {
+      setEditMode(false);
+    }
+  };
 
   return (
     <div className="editpost">
@@ -50,7 +50,10 @@ function EditPost({ blogContent,  setEditMode }) {
       <form className="editpost-form">
         <div>
           <label>Category</label>
-          <select onChange={(e)=>setCategory(e.target.value)} defaultValue={category}>
+          <select
+            onChange={(e) => setCategory(e.target.value)}
+            defaultValue={category}
+          >
             <option>Sport</option>
             <option>Romance</option>
             <option>Prose </option>
@@ -73,7 +76,7 @@ function EditPost({ blogContent,  setEditMode }) {
             id="title"
             placeholder="Article Title"
             value={title}
-            onChange={(e)=>setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div>
@@ -84,12 +87,12 @@ function EditPost({ blogContent,  setEditMode }) {
             modules={modules}
             value={content}
             onChange={setContent}
-            onKeyUp={console.log(content)}
+            // onKeyUp={console.log(content)}
             placeholder="Content goes here..."
           />
         </div>
 
-        <button type="submit" onClick={handlePostUpdate}  className="submit-btn">
+        <button type="submit" onClick={handlePostUpdate} className="submit-btn">
           Save Changes
         </button>
       </form>

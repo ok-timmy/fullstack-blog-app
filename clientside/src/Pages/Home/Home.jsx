@@ -13,10 +13,9 @@ function Home() {
       <main>
         <div>
           <p className="intro-text">
-            Beautiful Articles Start by Reading a Lot and then Writing Them
-            down.
+            SHOWCASE YOUR <span>CREATIVITY</span>
           </p>
-          <p>Start Your Journey to Becoming a Writer</p>
+          <p className="desc">Start Your Journey to Becoming a Writer</p>
           <button className="start">
             <Link to={user ? "/publish" : "/register"}>Start Now</Link>
           </button>

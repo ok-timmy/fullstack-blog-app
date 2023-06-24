@@ -4,6 +4,7 @@
   padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
+  margin-bottom: 3.5rem;
 }
 
 .content-image {
@@ -18,34 +19,45 @@
 }
 
 .space {
- display: flex;
- justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-
-.bi-pencil{
- color: blue;
- font-size: x-large;
- font-weight: 400;
- cursor: pointer;
- padding: 0.2rem;
+.bi-pencil {
+  color: blue;
+  font-size: large;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 0.2rem;
 }
 
-.bi-trash{
-color: red;
-font-size: x-large;
-font-weight: 400;
-cursor: pointer;
-margin-left: 0.5rem;
-padding: 0.2rem;
+.bi-trash {
+  color: red;
+  font-size: large;
+  font-weight: 400;
+  cursor: pointer;
+  margin-left: 1.5rem;
+  padding: 0.2rem;
 }
 
-.bi-trash:hover{
+.bi-trash:hover {
   color: rgb(219, 72, 72);
 }
 
-.bi-pencil:hover{
+.bi-pencil:hover {
   color: rgb(89, 89, 249);
+}
+
+.Likebutton {
+  background-color: aliceblue;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.25rem;
+  margin-top: 3rem;
+}
+
+.Likebutton:hover {
+  background-color: rgb(222, 228, 233);
 }
 
 .content-details {
@@ -90,10 +102,10 @@ padding: 0.2rem;
     width: 90%;
   }
 
-  .content-image{
-      width:fit-content ;
+  .content-image {
+    width: fit-content;
   }
-  
+
   /* .content-image img {
     width: 18rem;
     height: 15rem;

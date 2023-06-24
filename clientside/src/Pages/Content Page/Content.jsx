@@ -19,7 +19,9 @@ function Content() {
 
   const [editMode, setEditMode] = useState(false);
   const locate = location.pathname;
-  const pathId = locate.split("/")[2];
+  const pathName = locate.split("/")[2];
+  const normalPathName = pathName.split("%20").join(" ")
+  // console.log(normalPathName);
 
   const openAlert = async (id) => {
     let text = "Are You sure You want to delete this Blog Post?";
@@ -28,7 +30,7 @@ function Content() {
         await deleteBlogPost(id).unwrap();
         navigation("/blog");
       } catch (error) {
-        console.log(error);
+        console.log(error, "Could Not Delete Post");
       }
     } else {
       return;
@@ -47,7 +49,11 @@ function Content() {
     );
   } else
     return (
-      <FetchContentFromAPI pathId={pathId} user={user} openAlert={openAlert} />
+      <FetchContentFromAPI
+        pathName={normalPathName}
+        user={user}
+        openAlert={openAlert}
+      />
     );
 }
 
@@ -61,7 +67,7 @@ const FetchContentFromState = ({
   const postcontent = location.state.blogContent;
 
   return editMode ? (
-    <EditPost blogContent={postcontent.content} setEditMode={setEditMode} />
+    <EditPost blogContent={postcontent} setEditMode={setEditMode} />
   ) : (
     <div className="content">
       <h3 className="content-header">{postcontent.title}</h3>
@@ -77,9 +83,9 @@ const FetchContentFromState = ({
         <div className="content-details">
           <p className="content-category">{postcontent.category}</p>
           <p className="content-author">Published by {postcontent.author}</p>
-          <p className="content-timestamp">{calcTime(postcontent.updatedAt)}</p>
+          <p className="content-timestamp">{calcTime(postcontent.createdAt)}</p>
         </div>
-        {user &&
+        {user !== null &&
           postcontent.author === `${user.firstName} ${user.secondName}` && (
             <div>
               <i onClick={() => setEditMode(true)} className="bi bi-pencil"></i>
@@ -95,28 +101,38 @@ const FetchContentFromState = ({
         className="content-story"
         dangerouslySetInnerHTML={{ __html: postcontent.content }}
       ></div>
+      <div>
+        <button className="Likebutton">
+          Like <i className="bi bi-hand-thumbs-up"></i>
+        </button>
+      </div>
+
       <CommentForm postId={postcontent._id} />
+
+      {/* <Comments/> */}
     </div>
   );
 };
 
-const FetchContentFromAPI = ({ pathId, user, openAlert }) => {
+const FetchContentFromAPI = ({ pathName, user, openAlert }) => {
   const [editMode, setEditMode] = useState(false);
 
-  console.log(pathId);
+  const postTitle = pathName
+  // console.log(postTitle);
+
   const {
     data: postcontent,
     isLoading,
-    isError,
-  } = useGetSingleBlogPostContentQuery(pathId);
+    error,
+  } = useGetSingleBlogPostContentQuery(postTitle);
 
-  console.log("I dey cook");
+  // console.log(postcontent)
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="loader"></div>;
   }
 
-  if (isError) {
+  if (error) {
     return <div>An Error Occured, Please try again</div>;
   }
 
@@ -156,7 +172,12 @@ const FetchContentFromAPI = ({ pathId, user, openAlert }) => {
         className="content-story"
         dangerouslySetInnerHTML={{ __html: postcontent.content }}
       ></div>
-          <CommentForm postId={postcontent._id} />
+      <div>
+        <button className="Likebutton">
+          Like <i className="bi bi-hand-thumbs-up"></i>
+        </button>
+      </div>
+      <CommentForm postId={postcontent._id} />
     </div>
   );
 };

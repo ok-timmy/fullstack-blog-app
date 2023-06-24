@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { setCurrentUser } from "../../Redux/Auth/authSlice";
 import { useCreateBlogPostMutation } from "../../Redux/Blogs/blogApiSlice";
+import { category } from "../../Utilities/Category";
 
 const modules = {
   toolbar: [
@@ -24,7 +25,7 @@ const modules = {
 
 function Publish() {
   const user = useSelector(setCurrentUser);
-  const [createBlogPost, { isLoading, isError, error }] =
+  const [createBlogPost, ] =
     useCreateBlogPostMutation();
 
   const navigate = useNavigate();
@@ -33,14 +34,14 @@ function Publish() {
   const authorEmail = `${user.email}`;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
+  const [postCategory, setPostCategory] = useState({ value: "All Categories" });
   const [excerpt, setExcerpt] = useState();
   const [file, setFile] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const changeCategory = (newCategory) => {
-    setCategory(newCategory)
-    console.log(newCategory, category)
-  }
+  const changePostCategory = (newCategory) => {
+    setPostCategory(newCategory);
+  };
 
   const handleInput = async (e) => {
     let image = "";
@@ -49,7 +50,7 @@ function Publish() {
       title,
       author,
       content,
-      category,
+      category: postCategory.value,
       excerpt,
       file,
       image,
@@ -64,36 +65,38 @@ function Publish() {
     }
 
     try {
-      if (category === "") {
+      if (postCategory.value === "All Categories") {
         alert("Please select a category");
         return;
       }
 
-      await createBlogPost({ ...post }).unwrap();
-      setTitle("");
-      setCategory("");
-      setContent("");
-      setExcerpt("");
-      setFile(null);
+      const response = await createBlogPost({ ...post }).unwrap();
 
-      navigate("/blog");
+      if (response.statusCode === 200) {
+        setTitle("");
+        setPostCategory("");
+        setContent("");
+        setExcerpt("");
+        setFile(null);
+        navigate("/blog");
+      }
     } catch (err) {
-      console.log(err);
-      console.log(isError);
-      console.log(error);
+      if (err.status === 409) {
+        setErrorMessage("Title Already exists");
+      }
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="publish">
-        <h2>Publish Your Article</h2>
-        <div className="publish-form">
-          <div className="nessage">Blog Post is Currently Uploading</div>
-        </div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="publish">
+  //       <h2>Publish Your Article</h2>
+  //       <div className="publish-form">
+  //         <div className="nessage">Blog Post is Currently Uploading</div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="publish">
@@ -112,15 +115,16 @@ function Publish() {
           <label>Category</label>
           <select
             onChange={(e) => {
-              console.log(e.target.value);
-              changeCategory(e.target.value);
+              changePostCategory(category[e.target.value]);
             }}
           >
-            <option value={""}></option>
-            <option value={"Sport"}>Sport</option>
-            <option value={"Romance"}>Romance</option>
-            <option value={"Prose"}>Prose </option>
-            <option value={"Poetry"}>Poetry</option>
+            {category.map((f) => {
+              return (
+                <option key={f.id} value={f.id - 1} id={f.id}>
+                  {f.value}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div>
@@ -139,8 +143,12 @@ function Publish() {
             className="title"
             id="title"
             placeholder="Article Title"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setErrorMessage("");
+            }}
           />
+          <p className="error__message">{errorMessage}</p>
         </div>
         <div>
           <label>Excerpts</label>

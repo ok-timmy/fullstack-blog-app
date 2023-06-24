@@ -69,15 +69,17 @@ option{
     cursor: pointer;
 }
 
-@media screen and (max-width:400px) {
+@media screen and (max-width:600px) {
     .editpost{
-        margin: 2rem 0.6rem;
+        width: 95%;
+        margin: 2rem 1rem;
     }
     .submit-btn{
-        position: unset;
-        margin-top: 4rem;
+        position: relative !important;
+        margin: 2rem !important;
     }
-    .quill{
-        width: 100%;
-    }
+    .quill {
+        width: 100% !important;
+        margin-bottom: 1rem;
+      }
 }

@@ -5,7 +5,7 @@ const {
   updateSpecificPostLikes,
   deleteSpecificPost,
   commentOnSpecificPost,
-  getUserPosts
+  getUserPosts,
 } = require("../Controllers/blogPostsController");
 
 //GET A USER POSTS
@@ -22,6 +22,7 @@ router.patch("/updatelikes/:id", updateSpecificPostLikes);
 
 //COMMENT ON A PARTICULAR POST
 router.put("/comment/:id", commentOnSpecificPost);
+
 
 //DELETE POST
 router.delete("/deletePost/:id", deleteSpecificPost);

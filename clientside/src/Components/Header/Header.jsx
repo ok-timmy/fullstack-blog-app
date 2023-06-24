@@ -25,7 +25,6 @@ const WholeHead = styled.div`
     height: 10vh;
   }
 `;
-
 const HeaderLeft = styled.div`
   flex: 1;
   color: #2a8798;
@@ -53,7 +52,6 @@ const HeaderRight = styled.div`
     flex: 2;
   }
 `;
-
 const MobileNav = styled.div`
   width: 50vw;
   height: 100%;
@@ -74,7 +72,6 @@ const MobileNav = styled.div`
     transform: ${({ isMobileNav }) => (isMobileNav ? "translateX(0)" : "")};
   }
 `;
-
 const ToggleIcon = styled.div`
   position: relative;
   opacity: 1;
@@ -162,15 +159,15 @@ function Header() {
         </HeaderCenter>
         <HeaderRight>
           <nav>
-            {user ? (
+            {user !== null ? (
               <ul>
                 <li>
                   {" "}
                   <span className="user">
                     <Link to={"/profile"} className="profile-link">
                       <img
-                        src={user.image}
-                        alt={user.userName}
+                        src={user?.image}
+                        alt={user?.userName}
                         className="user-pic"
                       />
                     </Link>
@@ -202,15 +199,15 @@ function Header() {
 
       <MobileNav isMobileNav={isMobileNav} ref={node}>
         <h3>Blog Project</h3>
-        {user ? (
+        {user !== null ? (
           <>
             <li>
               {" "}
               <span className="user">
                 <Link to={"/profile"} className="link">
                   <img
-                    src={user.image}
-                    alt={user.userName}
+                    src={user?.image}
+                    alt={user?.userName}
                     className="user-pic"
                   />
                 </Link>

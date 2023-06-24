@@ -52,6 +52,10 @@
   align-items: flex-start;
 }
 
+.error__message{
+  color: rgb(248, 61, 61);
+}
+
 select {
   margin-bottom: 20px;
   padding: 5px 0;

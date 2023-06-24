@@ -30,7 +30,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
 
     //Get Specific Post
     getSpecificPost: builder.query({
-      query: (postId) => `api/allPost/specificPost/${postId}`,
+      query: (postTitle) => `api/allPost/specificPost/${postTitle}`,
       keepUnusedDataFor: 5,
     }),
 
@@ -61,6 +61,12 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    //Fetch Comments
+    getBlogPostComments: builder.query({
+      query: (postId) => `api/allPost/comments/${postId}`,
+      keepUnusedDataFor: 2,
+    }),
+
     //Delete BlogPost
     deleteBlogPost: builder.mutation({
       query: (postId) => ({
@@ -79,5 +85,6 @@ export const {
   useGetAllBlogPostQuery,
   useGetSingleBlogPostContentQuery,
   useEditBlogPostLikesMutation,
-  useCommentOnBlogPostMutation
+  useCommentOnBlogPostMutation,
+  useGetBlogPostCommentsQuery
 } = blogApiSlice;

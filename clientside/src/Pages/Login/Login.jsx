@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignInMutation } from "../../Redux/Auth/authApiSlice";
 import styled from "styled-components";
 import "./Login.css";
-import background from "../../assets/asset-1.webp";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../Redux/Auth/authSlice";
 
@@ -11,8 +10,7 @@ const LoginDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 5rem;
-  background: rgba(57, 57, 57, 0.7) url(${background});
+  padding-top: 3rem;
   background-blend-mode: darken;
   background-repeat: no-repeat;
   background-size: cover;
@@ -27,8 +25,9 @@ const Loginbox = styled.div`
   width: 25rem;
   height: 25rem;
   background-color: #faf7ff;
-  margin: 50px auto;
+  margin: 25px auto;
   border-radius: 10px;
+  padding-top: 1rem;
   @media (max-width: 480px) {
     width: 90%;
   }

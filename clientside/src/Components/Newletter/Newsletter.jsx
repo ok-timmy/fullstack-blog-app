@@ -15,6 +15,7 @@ function Newsletter() {
 					type="email"
 					placeholder="Provide Your email address"
 				/>
+				<button className="subscribe__btn">Subscribe</button>
 			</div>
 		</div>
 	);

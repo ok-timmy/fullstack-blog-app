@@ -8,8 +8,8 @@ import { useGetAllBlogPostQuery } from "../../Redux/Blogs/blogApiSlice";
 
 function Blogpage() {
   const { data: hpBlogs, isLoading, isError, error } = useGetAllBlogPostQuery();
-  console.log(error);
-  console.log(hpBlogs);
+  // console.log(error);
+  // console.log(hpBlogs);
 
   const [filterCategory, setfilterCategory] = useState(category[0]);
   const [filteredBlogs, setfilteredBlogs] = useState([]);
@@ -33,7 +33,7 @@ function Blogpage() {
     filterPosts(filterCategory, hpBlogs);
   }, [filterCategory, hpBlogs]);
 
-  console.log(filteredBlogs);
+  // console.log(filteredBlogs);
 
   return (
     <div className="blogpage">
@@ -70,7 +70,7 @@ function Blogpage() {
         </div>
       ) : (
         filteredBlogs &&
-        [...filteredBlogs].map((hpBlog) => {
+        [...filteredBlogs].reverse().map((hpBlog) => {
           return <BlogComponent key={hpBlog._id} hpBlog={hpBlog} />;
         })
       )}

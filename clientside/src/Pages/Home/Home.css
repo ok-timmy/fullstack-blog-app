@@ -1,5 +1,5 @@
 main {
-  background: rgba(27, 27, 27, 0.7) url("../../assets/asset-3.jpeg");
+  background: white;
   background-blend-mode: darken;
   background-repeat: no-repeat;
   background-size: cover;
@@ -12,6 +12,7 @@ main {
 
 main div {
   display: flex;
+  padding: 0 2.5rem;
   flex-direction: column;
   align-content: center;
   align-items: center;
@@ -19,21 +20,26 @@ main div {
 }
 
 .intro-text {
-  font-size: 1.5rem;
-  color: rgb(236, 234, 234);
+  font-size: 4rem;
+  text-align: center;
+  /* color: rgb(236, 234, 234); */
 }
 
-main div p {
-  color: rgb(236, 234, 234);
+main div .desc {
+  /* color: rgb(236, 234, 234); */
   font-size: medium;
+  font-size: 2.5rem;
   font-weight: 600;
+}
+
+main div p span {
+  color: #20b2aa;
 }
 
 .start {
   background-color: lightseagreen;
   border: none;
   outline: none !important;
-  color: white;
   padding: 0.6rem 1rem;
   border-radius: 10px 5px;
   cursor: pointer;
@@ -43,7 +49,7 @@ main div p {
 .start a {
   outline: none !important;
   text-decoration: none;
-  color: white;
+  color: black;
   border: none !important;
 }
 

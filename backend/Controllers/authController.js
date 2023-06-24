@@ -36,7 +36,7 @@ exports.createUser = async (req, res) => {
       status: 200,
       message: "User Created Successfully",
     });
-    console.log("User Created Successfully!");
+    
   } catch (error) {
     res.status(500).json(error.code);
     console.log(error);
@@ -51,9 +51,9 @@ exports.loginUser = async (req, res) => {
 
   try {
     const foundUser = await User.findOne({ email: req.body.email });
-    // console.log(foundUser);
+    
     if (foundUser) {
-      // console.log("User was found");
+
       const validate = await bcrypt.compare(
         req.body.password,
         foundUser.password
@@ -74,7 +74,6 @@ exports.loginUser = async (req, res) => {
 
         foundUser.refreshToken = refreshToken;
         await foundUser.save();
-        // console.log("Refresh Token updated", refreshToken)
 
         res.cookie("jwt", accessToken, {
           httpOnly: true,
@@ -85,7 +84,7 @@ exports.loginUser = async (req, res) => {
 
         const { _id ,email, firstName, secondName, userName, bio, image } =
           foundUser;
-        // console.log("Logged In User already", accessToken)
+
         res.status(200).json({
           _id,
           email,
@@ -100,11 +99,11 @@ exports.loginUser = async (req, res) => {
         res.status(401).json({ error: "Incorrect Password" });
       }
     } else {
-      // console.log("User Was not found");
+      
       res.status(401).send({ message: "User does not exist" });
     }
   } catch (error) {
-    console.log(error);
+
     res.status(403).send({ message: error });
   }
 };
@@ -112,10 +111,9 @@ exports.loginUser = async (req, res) => {
 exports.getUserData = async (req, res) => {
   try {
     const foundUser = await User.findOne({ email: req.params.email });
-    // console.log(foundUser);
     const { password, ...others } = foundUser._doc;
     res.status(200).json(others);
-    // console.log("User Found");
+
   } catch {
     console.log(error);
   }
@@ -130,10 +128,10 @@ exports.updateUserData = async (req, res) => {
     })
       .select("-password")
       .select("-refreshToken");
-    console.log("User Updated Successfully!");
+  
     res.status(200).json(updatedUser);
   } catch (error) {
-    console.log(error);
+
     res.status(403).send(error);
   }
 };

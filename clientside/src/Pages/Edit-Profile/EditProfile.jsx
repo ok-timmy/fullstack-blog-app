@@ -7,13 +7,10 @@ function EditProfile() {
   const navigate = useNavigate();
 
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const user = location.state.user;
-  console.log(user, "User details in state")
+  // console.log(user, "User details in state")
 
-  // const [firstName, setFirstname] = useState(user.firstName);
-  // const [secondName, setSecondname] = useState(user.secondName);
-  // const [email, setEmail] = useState(user.email);
   const firstName = user.firstName;
   const secondName = user.secondName;
   const email = user.email
@@ -39,7 +36,7 @@ function EditProfile() {
       image,
     };
 
-    console.log(updatedUser.id)
+    // console.log(updatedUser.id)
     if (file) {
       const data = new FormData();
       const fileName = Date.now() + file.name;
@@ -48,13 +45,13 @@ function EditProfile() {
       updatedUser.image = fileName;
     }
 
-   const result = await updatedUserDetails(updatedUser ).unwrap();
-   console.log(result);
-   console.log(isSuccess, "isSuccess")
-   console.log(isLoading, "IsLoading")
+   await updatedUserDetails(updatedUser ).unwrap();
+  //  console.log(result);
+  
    navigate("/profile");
 
     if (isSuccess) {
+      //Update user details state here
       //Go back to Profile Page
     }
   };

@@ -1,3 +1,4 @@
+import dateFormat from "dateformat"
 export function calcTime(pubTime) {
   const currentTime = Date.now();
   const blogPubTime = new Date(pubTime);
@@ -15,6 +16,12 @@ export function calcTime(pubTime) {
     return `${hourTime} Hour${hourTime > 1 ? "s" : ""} Ago`;
   } else {
     const dayNumber = Math.floor(timeDiff / 24);
-    return `${dayNumber} Day${dayNumber > 1 ? "s" : ""} Ago`;
+
+    if (dayNumber <= 7) {
+      return `${dayNumber} Day${dayNumber > 1 ? "s" : ""} Ago`;
+    } else {
+      const returnDate = dateFormat(`${blogPubTime}`, "mmmm dS, yyyy")
+      return `${returnDate}`;
+    }
   }
 }

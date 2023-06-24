@@ -16,7 +16,7 @@ const blogsSlice = createSlice({
     setFeaturedBlogs: (state, action) => {
       const selectedBlogs = action.payload;
 
-      console.log(selectedBlogs)
+      // console.log(selectedBlogs)
     },
   },
 });

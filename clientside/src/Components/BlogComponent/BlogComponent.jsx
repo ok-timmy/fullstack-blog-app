@@ -26,7 +26,7 @@ function BlogComponent({ hpBlog }) {
     return result;
   };
 
-  console.log(likesArray);
+  // console.log(likesArray);
   const [isLiked, setIsLiked] = useState(checkFirst(likesArray));
 
   const checkIfLiked = (likesArray, newTotalLikes) => {
@@ -37,7 +37,7 @@ function BlogComponent({ hpBlog }) {
       return false;
     });
 
-    console.log(yes);
+    // console.log(yes);
 
     if (yes) {
       setIsLiked(!isLiked);
@@ -53,7 +53,7 @@ function BlogComponent({ hpBlog }) {
       postId: _id,
       userEmail: user.email,
     }).unwrap();
-    console.log(resp);
+    // console.log(resp);
     const { likesArray, totalLikes } = resp.data;
     checkIfLiked(likesArray, totalLikes);
   };
@@ -69,7 +69,7 @@ function BlogComponent({ hpBlog }) {
         <h3>{title}</h3>
         <p>{excerpt} </p>
         <button className="more">
-          <Link to={`/blog/${_id}/${title}`} state={{ blogContent: hpBlog }}>
+          <Link to={`/blog/${title}`} state={{ blogContent: hpBlog }}>
             Read More
           </Link>
         </button>
@@ -89,10 +89,10 @@ function BlogComponent({ hpBlog }) {
             <RWebShare
               data={{
                 text: `Web Share - ${title}`,
-                url: `http://localhost:3000/blog/${_id}/${title}`,
+                url: `http://localhost:3000/blog/${title}`,
                 title: `${title}`,
               }}
-              onClick={() => console.log("shared successfully!")}
+              onClick={() => console.log("Link shared successfully!")}
             >
               <button>
                 <i className="bi bi-share share"></i>

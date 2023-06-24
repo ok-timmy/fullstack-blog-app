@@ -10,7 +10,6 @@ exports.handleRefreshToken = async (req, res) => {
     const foundUser = await User.findOne({ refreshToken }).exec();
 
     if (!foundUser) {
-      console.log("No cookies found", 3)
       res.sendStatus(403);
     }
 
@@ -29,7 +28,7 @@ exports.handleRefreshToken = async (req, res) => {
             expiresIn: "200m",
           }
         );
-        console.log("No cookies found", 4)
+
         res.json({ accessToken });
       }
     );

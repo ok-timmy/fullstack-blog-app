@@ -1,7 +1,5 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RWebShare } from "react-web-share";
 import "./BlogCard.css";
@@ -36,7 +34,7 @@ function BlogCard({ hpBlog }) {
        setPostDetails(data);
         //   console.log(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchSinglePost(hpBlog._id);
@@ -64,7 +62,7 @@ function BlogCard({ hpBlog }) {
         <span>{calcTime(createdAt)}</span>
         <div>
           <button className="read-more">
-            <Link to={`/blog/:${_id}`} state={{ blogContent: hpBlog }}>
+            <Link to={`/blog/:${title}`} state={{ blogContent: hpBlog }}>
               Read More
             </Link>
           </button>

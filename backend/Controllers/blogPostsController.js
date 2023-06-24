@@ -5,11 +5,10 @@ const User = require("../Models/User");
 //GET A USER POSTS
 exports.getUserPosts = async (req, res) => {
   const { authorEmail } = req.params;
-  console.log(authorEmail);
 
   try {
     const usersPosts = await BlogPost.find({ authorEmail });
-    // console.log(usersPosts);
+
     res.status(200).json(usersPosts);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -20,51 +19,58 @@ exports.getUserPosts = async (req, res) => {
 exports.createPost = async (req, res) => {
   const { title, content, author, category, excerpt, image, authorEmail } =
     req.body;
-  try {
-    const newBlogPost = await new BlogPost({
-      title,
-      content,
-      author,
-      category,
-      excerpt,
-      image,
-      authorEmail,
-    });
 
-    if (!title) {
-      res.status(403).json({
-        statusCode: 403,
-        message: "Please Provide a title",
-      });
-    }
-    if (!content) {
-      res.status(403).json({
-        statusCode: 403,
-        message: "A Blog post cannot be empty",
-      });
-    }
-    if (!category) {
-      res.status(403).json({
-        statusCode: 403,
-        message: "Your Blog Post Must have a category",
-      });
-    }
-    if (!excerpt) {
-      res.statusCode(403).json({
-        statusCode: 403,
-        message: "Please Provide an excerpt for your post",
-      });
-    }
+  const checkIfTitleExists = await BlogPost.findOne({ title: req.body.title });
 
-    await newBlogPost.save();
-    // console.log("Post was Created Successfully!!");
-    res.status(200).json({
-      statusCode: 200,
-      message: "Post was uploaded successfully",
+  if (checkIfTitleExists) {
+    res.status(409).json({
+      status: 409,
+      message: "Title Already Exists, Please Select a new title",
     });
-  } catch (error) {
-    res.status(500).send(error);
-    console.log(error);
+  } else {
+    try {
+      const newBlogPost = await new BlogPost({
+        title,
+        content,
+        author,
+        category,
+        excerpt,
+        image,
+        authorEmail,
+      });
+
+      if (!title) {
+        res.status(403).json({
+          statusCode: 403,
+          message: "Please Provide a title",
+        });
+      } else if (!content) {
+        res.status(403).json({
+          statusCode: 403,
+          message: "A Blog post cannot be empty",
+        });
+      } else if (!category) {
+        res.status(403).json({
+          statusCode: 403,
+          message: "Your Blog Post Must have a category",
+        });
+      } else if (!excerpt) {
+        res.statusCode(403).json({
+          statusCode: 403,
+          message: "Please Provide an excerpt for your post",
+        });
+      } else {
+        await newBlogPost.save();
+
+        res.status(200).json({
+          statusCode: 200,
+          message: "Post was uploaded successfully",
+        });
+      }
+    } catch (error) {
+      res.status(500).send(error);
+      console.log(error);
+    }
   }
 };
 
@@ -84,8 +90,8 @@ exports.updateSpecificPost = async (req, res) => {
         new: true,
       }
     );
-    // console.log("Post Updated Successfully!!");
-    res.status(200).json(updatedBlogPost);
+
+    res.status(200).json({ status: 200, data: updatedBlogPost });
   } catch (error) {
     console.log(error);
   }
@@ -98,10 +104,6 @@ exports.updateSpecificPostLikes = async (req, res) => {
   const existingLikesArray = blogPost.likesArray;
   const numberOfLikes = blogPost.numberOfLikes;
   const isExist = existingLikesArray.includes(userEmail);
-
-  console.log(isExist, userEmail, "line 100");
-  console.log(existingLikesArray, "line 101");
-  console.log(numberOfLikes, "line 102");
 
   //If User has liked the post before
   if (isExist) {
@@ -152,7 +154,7 @@ exports.updateSpecificPostLikes = async (req, res) => {
           new: true,
         }
       );
-      // console.log("Likes Updated Successfully!!");
+
       res.status(200).json({
         statusCode: 200,
         data: {
@@ -185,15 +187,13 @@ exports.commentOnSpecificPost = async (req, res) => {
     "firstName secondName userName image"
   );
   comm = await comm.populate("postId", "title author excerpt");
+
   comm = await User.populate(comm, {
     path: "blogposts",
     select: "commenter content",
   });
-  console.log(comm);
-  console.log("Comment saved successfully");
 
   try {
-    console.log("Comment Added Successfully!!");
     res.status(200).json({
       statusCode: 200,
       // data: {
@@ -210,7 +210,7 @@ exports.commentOnSpecificPost = async (req, res) => {
 exports.deleteSpecificPost = async (req, res) => {
   try {
     await BlogPost.findByIdAndDelete(req.params.id);
-    // console.log("Post Deleted Successfully!");
+
     res.status(200).json({
       statusCode: 200,
       message: "Blog Post has been successfully deleted",

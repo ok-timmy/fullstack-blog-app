@@ -1,3 +1,8 @@
+.commentForm__header {
+    margin-top: 3rem;
+    font-size: 2rem;
+}
+
 .main__comment__form{
     margin-top: 2rem;
     display: flex;
@@ -29,8 +34,8 @@
 .submit__btn {
     margin-top: 2rem;
     background-color: rgb(138, 43, 226);
-    padding: 1rem;
-    border-radius: 0.75rem;
+    padding: 0.875rem 2rem;
+    border-radius: 1rem;
     color: white;
 }
 

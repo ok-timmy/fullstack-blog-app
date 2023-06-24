@@ -4,6 +4,7 @@ import "./CommentForm.css";
 import { setCurrentUser } from "../../Redux/Auth/authSlice";
 import { useSelector } from "react-redux";
 import { useCommentOnBlogPostMutation } from "../../Redux/Blogs/blogApiSlice";
+import Comments from "../Comments/Comments";
 
 const CommentForm = ({ postId }) => {
   const modules = {
@@ -22,48 +23,56 @@ const CommentForm = ({ postId }) => {
   };
 
   const user = useSelector(setCurrentUser);
-  const { _id, firstName, secondName, image } = user;
+  // const { _id, firstName, secondName, image } = user;
 
   const [comment, setComment] = useState("");
   const [sendComment, { isLoading, isSuccess }] =
     useCommentOnBlogPostMutation();
+
   const commentDetails = {
     postId,
-    commenter: _id,
+    commenter: user?._id,
     content: comment,
   };
 
   const submitComment = async () => {
-    if (!commentDetails.commenter || commentDetails.commenter === undefined) {
+    if (!commentDetails.commenter || commentDetails.commenter === null) {
       alert("You have to be logged in in order to comment!");
     }
     const response = await sendComment({ ...commentDetails });
-    console.log(response);
+    if (response.status === 200) {
+      setComment("");
+    }
+    // console.log(response);
   };
 
   return (
     <Fragment>
-      <div>Comment</div>
+      <div className="commentForm__header">Leave A Comment</div>
       {/* <form> */}
-        <div className="main__comment__form">
-          <div className="loggedIn__user">
-            <img src={image} alt="user" className="image"/>
-            <p className="username">{`${firstName} ${secondName}`}</p>
-          </div>
+      <div className="main__comment__form">
+        {user && <div className="loggedIn__user">
+          <img src={user?.image} alt="user" className="image" />
+          <p className="username">{`${user?.firstName} ${user?.secondName}`}</p>
+        </div>}
 
-          <div className="comment__form">
-            <label className="label">Type your comment</label>
-            <ReactQuill
-              className="quill__comment"
-              theme="snow"
-              onChange={setComment}
-              modules={modules}
-              placeholder="Type your comment here....."
-            />
-            <button className="submit__btn" onClick={submitComment}>{isLoading? "Submitting" : "Submit Comment"}</button>
-          </div>
+        <div className="comment__form">
+          <label className="label">Type your comment</label>
+          <ReactQuill
+            className="quill__comment"
+            theme="snow"
+            onChange={setComment}
+            modules={modules}
+            placeholder="Type your comment here....."
+          />
+          <button className="submit__btn" onClick={submitComment}>
+            {isLoading ? "Submitting" : "Submit"}
+          </button>
         </div>
+      </div>
       {/* </form> */}
+
+      <Comments postId={postId} hasCommentSucceeded={isSuccess} />
     </Fragment>
   );
 };

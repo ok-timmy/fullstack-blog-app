@@ -7,13 +7,13 @@ import { useGetAllBlogPostQuery } from "../../Redux/Blogs/blogApiSlice";
 
 function Blogs() {
   const { data: hpBlogs, isLoading, isError, error } = useGetAllBlogPostQuery();
-  console.log(hpBlogs);
-  console.log(error);
+  // console.log(hpBlogs);
+  // console.log(error);
 
   if (isError) {
     return (
       <>
-        <h2 style={{ textAlign: "center", paddingTop: "1rem" }}>Blog Posts</h2>
+        <h2 className="blogPost__header">Blog Posts</h2>
         <div className="blog-section">
           <div className="blogs">Something Went Wrong....</div>
           <div className="categories">
@@ -28,12 +28,12 @@ function Blogs() {
 
   return (
     <>
-      <h2 style={{ textAlign: "center", paddingTop: "1rem" }}>Blog Posts</h2>
+      <h2 className="blogPost__header">Blog Posts</h2>
       <div className="blog-section">
         <div className="blogs">
           {isLoading ? (
             <div className="loader"></div>
-          ) : hpBlogs ? (
+          ) : !hpBlogs ? (
             <div>No Blog Post Created Yet</div>
           ) : (
             [...hpBlogs]
@@ -63,7 +63,7 @@ function Blogs() {
                       {" "}
                       <div className="each-recent-post">
                         <h2>{latestBlog.title}</h2>
-                        <p>{calcTime(latestBlog.updatedAt)}</p>
+                        <p>{calcTime(latestBlog.createdAt)}</p>
                         <Link
                           to={`/blog/:${latestBlog._id}`}
                           state={{ blogContent: latestBlog }}
