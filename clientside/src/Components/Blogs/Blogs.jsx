@@ -36,8 +36,8 @@ function Blogs() {
           ) : !hpBlogs ? (
             <div>No Blog Post Created Yet</div>
           ) : (
-            [...hpBlogs]
-              .reverse()
+            hpBlogs
+              ?.reverse()
               .slice(0, 3)
               .map((hpBlog) => {
                 return <BlogCard key={hpBlog._id} hpBlog={hpBlog} />;
@@ -54,8 +54,8 @@ function Blogs() {
                 <div className="loader"></div>
               </div>
             ) : (
-              [...hpBlogs]
-                .reverse()
+              hpBlogs
+                ?.reverse()
                 .slice(0, 5)
                 .map((latestBlog) => {
                   return (
