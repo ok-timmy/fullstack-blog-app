@@ -160,7 +160,7 @@ function Header() {
         </HeaderCenter>
         <HeaderRight>
           <nav>
-            {user !== null ? (
+            {(user !== null || user._id !== null) ? (
               <ul>
                 <li>
                   {" "}
@@ -200,7 +200,7 @@ function Header() {
 
       <MobileNav isMobileNav={isMobileNav} ref={node}>
         <h3>Blog Project</h3>
-        {user !== null ? (
+        {(user !== null || user._id !== null) ? (
           <>
             <li>
               {" "}
