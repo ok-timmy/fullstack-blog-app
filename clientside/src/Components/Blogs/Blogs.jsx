@@ -7,7 +7,7 @@ import { useGetAllBlogPostQuery } from "../../Redux/Blogs/blogApiSlice";
 
 function Blogs() {
   const { data: hpBlogs, isLoading, isError, error } = useGetAllBlogPostQuery();
-  // console.log(hpBlogs);
+  console.log(hpBlogs);
   // console.log(error);
 
   if (isError) {
@@ -36,7 +36,7 @@ function Blogs() {
           ) : (hpBlogs.length === 0) ? (
             <div>No Blog Post Created Yet</div>
           ) : (
-            hpBlogs
+            [...hpBlogs]
               ?.reverse()
               .slice(0, 3)
               .map((hpBlog) => {
@@ -54,7 +54,7 @@ function Blogs() {
                 <div className="loader"></div>
               </div>
             ) : (
-              hpBlogs
+              [...hpBlogs]
                 ?.reverse()
                 .slice(0, 5)
                 .map((latestBlog) => {

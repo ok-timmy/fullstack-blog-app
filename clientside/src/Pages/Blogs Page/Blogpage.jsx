@@ -71,7 +71,7 @@ function Blogpage() {
         </div>
       ) : (
         filteredBlogs &&
-        filteredBlogs?.reverse().map((hpBlog) => {
+        [...filteredBlogs]?.reverse().map((hpBlog) => {
           return <BlogComponent key={hpBlog._id} hpBlog={hpBlog} />;
         })
       )}
