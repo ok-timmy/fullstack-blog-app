@@ -63,7 +63,8 @@ function Blogpage() {
         <div className="no-blog"> Something Went Wrong.....</div>
       ) : isLoading ? (
         <div className="loader"></div>
-      ) : filteredBlogs && filteredBlogs.length === 0 ? (
+      ) : filteredBlogs &&
+        (filteredBlogs.length === 0) ? (
         <div className="no-blog">
           {" "}
           There are No Blog posts for this category yet.

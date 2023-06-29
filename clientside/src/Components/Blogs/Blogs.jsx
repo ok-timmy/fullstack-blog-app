@@ -33,7 +33,7 @@ function Blogs() {
         <div className="blogs">
           {isLoading ? (
             <div className="loader"></div>
-          ) : !hpBlogs ? (
+          ) : (hpBlogs.length === 0) ? (
             <div>No Blog Post Created Yet</div>
           ) : (
             hpBlogs
