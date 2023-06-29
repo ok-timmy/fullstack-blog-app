@@ -113,7 +113,7 @@ function Header() {
   const [isMobileNav, setIsMobileNav] = useState(false);
   const node = useRef();
   const user = useSelector(setCurrentUser);
-  // console.log(user);
+  console.log(user);
 
   const onToggleMobileNav = useCallback(() => {
     if (!isMobileNav) {
@@ -160,7 +160,7 @@ function Header() {
         </HeaderCenter>
         <HeaderRight>
           <nav>
-            {(user !== null || user._id !== null) ? (
+            {user && (user !== null || user?._id !== null) ? (
               <ul>
                 <li>
                   {" "}
@@ -200,7 +200,7 @@ function Header() {
 
       <MobileNav isMobileNav={isMobileNav} ref={node}>
         <h3>Blog Project</h3>
-        {(user !== null || user._id !== null) ? (
+        {user && (user !== null || user?._id !== null) ? (
           <>
             <li>
               {" "}
