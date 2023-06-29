@@ -36,7 +36,6 @@ exports.createUser = async (req, res) => {
       status: 200,
       message: "User Created Successfully",
     });
-    
   } catch (error) {
     res.status(500).json(error.code);
     console.log(error);
@@ -51,9 +50,8 @@ exports.loginUser = async (req, res) => {
 
   try {
     const foundUser = await User.findOne({ email: req.body.email });
-    
-    if (foundUser) {
 
+    if (foundUser) {
       const validate = await bcrypt.compare(
         req.body.password,
         foundUser.password
@@ -78,11 +76,11 @@ exports.loginUser = async (req, res) => {
         res.cookie("jwt", accessToken, {
           httpOnly: true,
           maxAge: 1000 * 60 * 60 * 24,
-          // sameSite: "None",
-          // secure: true,  This has to be in production mode
+          sameSite: "None",
+          secure: true,
         });
 
-        const { _id ,email, firstName, secondName, userName, bio, image } =
+        const { _id, email, firstName, secondName, userName, bio, image } =
           foundUser;
 
         res.status(200).json({
@@ -99,11 +97,9 @@ exports.loginUser = async (req, res) => {
         res.status(401).json({ error: "Incorrect Password" });
       }
     } else {
-      
       res.status(401).send({ message: "User does not exist" });
     }
   } catch (error) {
-
     res.status(403).send({ message: error });
   }
 };
@@ -113,7 +109,6 @@ exports.getUserData = async (req, res) => {
     const foundUser = await User.findOne({ email: req.params.email });
     const { password, ...others } = foundUser._doc;
     res.status(200).json(others);
-
   } catch {
     console.log(error);
   }
@@ -128,10 +123,9 @@ exports.updateUserData = async (req, res) => {
     })
       .select("-password")
       .select("-refreshToken");
-  
+
     res.status(200).json(updatedUser);
   } catch (error) {
-
     res.status(403).send(error);
   }
 };

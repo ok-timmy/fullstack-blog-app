@@ -25,6 +25,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const PORT = process.env.PORT;
 
+app.use("/", (req, res)=>{
+  return res.status(200).json({
+    message: "Welcome to my Blog API"
+  })
+})
+
 app.use("/api/allPost", allPostsRoute);
 
 app.use("/api/auth", authRoute);
